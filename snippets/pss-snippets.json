@@ -1,0 +1,133 @@
+{
+  "component": {
+    "prefix": "component",
+    "description": "Declare a component",
+    "body": [
+      "component ${1:my_comp}_c {",
+      "\t$2",
+      "}"
+    ]
+  },
+  "action": {
+    "prefix": "action",
+    "description": "Declare an action",
+    "body": [
+      "action ${1:my_action}_a {",
+      "\t$2",
+      "}"
+    ]
+  },
+  "activity": {
+    "prefix": "activity",
+    "description": "Declare an activity",
+    "body": [
+      "activity {",
+      "\t$2",
+      "}"
+    ]
+  },
+  "package": {
+    "prefix": "package",
+    "description": "Declare a package",
+    "body": [
+      "package ${1:my}_pkg {",
+      "\t$2",
+      "}"
+    ]
+  },
+  "struct": {
+    "prefix": "struct",
+    "description": "Declare a struct",
+    "body": [
+      "struct ${1:my}_s {",
+      "\t$2",
+      "}"
+    ]
+  },
+  "exec post_solve": {
+    "prefix": "exec post_solve",
+    "description": "Declare an exec post-solve block",
+    "body": [
+      "exec post_solve {",
+      "\t$1",
+      "}"
+    ]
+  },
+  "exec pre_solve": {
+    "prefix": "exec pre_solve",
+    "description": "Declare an exec pre-solve block",
+    "body": [
+      "exec pre_solve {",
+      "\t$1",
+      "}"
+    ]
+  },
+  "exec init": {
+    "prefix": "exec init",
+    "description": "Declare an exec init block",
+    "body": [
+      "exec init {",
+      "\t$1",
+      "}"
+    ]
+  },
+  "exec init_down": {
+    "prefix": "exec init_down",
+    "description": "Declare an exec init_down block",
+    "body": [
+      "exec init_down {",
+      "\t$1",
+      "}"
+    ]
+  },
+  "exec body": {
+    "prefix": "exec body",
+    "description": "Declare an exec body block",
+    "body": [
+      "exec body {",
+      "\t$1",
+      "}"
+    ]
+  },
+  "exec file": {
+    "prefix": "exec file",
+    "description": "Declare an exec pre-solve",
+    "body": [
+      "exec file \"${1:my_file}\" = \"\"\"",
+      "\t$2",
+      "\"\"\";"
+    ]
+  },
+  "extend": {
+    "prefix": "extend",
+    "description": "Declare an extension of an object",
+    "body": [
+      "extend ${1:|component,action|} {",
+      "\t$2",
+      "}"
+    ]
+  },
+  "import": {
+    "prefix": "import",
+    "description": "Import a package",
+    "body": [
+      "import $1_pkg::${2:*}"
+    ]
+  },
+  "select": {
+    "prefix": "select",
+    "description": "Select between activities",
+    "body": [
+      "select {",
+      "\t$1",
+      "}"
+    ]
+  },
+  "import": {
+    "prefix": "import",
+    "description": "Import a package",
+    "body": [
+      "import $1_pkg::${2:*}"
+    ]
+  }
+}

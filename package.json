@@ -1,0 +1,90 @@
+{
+  "name": "dsp-vsc-pss",
+  "displayName": "PSS Language Support",
+  "description": "This extension provides Language Support for Portable Stimulus Standard's Domain Specific Language..",
+  "version": "0.1.0",
+  "publisher": "Darshan",
+  "icon": "media/icon.jpeg",
+  "engines": {
+    "vscode": "^1.95.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Snippets",
+    "Formatters"
+  ],
+  "activationEvents": [
+    "onLanguage:pss"
+  ],
+  "main": "./dist/extension.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thisisthedarshan/vscode-pss"
+  },
+  "bugs": {
+    "url": "https://github.com/thisisthedarshan/vscode-pss/issues"
+  },
+  "keywords": [
+    "portable stimulus",
+    "pss",
+    "accellera pss",
+    "pss 3.0"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "pss",
+        "aliases": [
+          "Portable Stimulus",
+          "pss"
+        ],
+        "extensions": [
+          ".pss"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "snippets": [
+      {
+        "language": "pss",
+        "path": "./snippets/pss-snippets.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "pss",
+        "scopeName": "source.pss",
+        "path": "./syntaxes/pss.tmLanguage.json",
+        "embeddedLanguages": {
+          "meta.embedded.block.c": "c",
+          "meta.embedded.block.sv": "sv"
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run build",
+    "watch": "webpack --watch",
+    "package": "npx vsce package",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.95.0",
+    "@types/mocha": "^10.0.9",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.10.0",
+    "@typescript-eslint/parser": "^8.7.0",
+    "eslint": "^9.13.0",
+    "typescript": "^5.6.3",
+    "ts-loader": "^9.5.1",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1"
+  }
+}

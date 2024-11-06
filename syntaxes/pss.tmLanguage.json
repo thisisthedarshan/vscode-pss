@@ -1,0 +1,192 @@
+{
+  "fileTypes": [
+    "pss"
+  ],
+  "name": "pss",
+  "tokenTypes": {
+    "keywords": [
+      "abstract",
+      "action",
+      "activity",
+      "assert",
+      "atomic",
+      "bind",
+      "body",
+      "break",
+      "buffer",
+      "chandle",
+      "class",
+      "compile",
+      "component",
+      "concat",
+      "const",
+      "constraint",
+      "continue",
+      "cover",
+      "covergroup",
+      "coverpoint",
+      "cross",
+      "declaration",
+      "default",
+      "disable",
+      "dist",
+      "do",
+      "dynamic",
+      "else",
+      "enum",
+      "eventually",
+      "exec",
+      "export",
+      "extend",
+      "false",
+      "file",
+      "float32",
+      "float64",
+      "forall",
+      "foreach",
+      "function",
+      "has",
+      "header",
+      "if",
+      "iff",
+      "ignore_bins",
+      "illegal_bins",
+      "import",
+      "in",
+      "init",
+      "init_down",
+      "init_up",
+      "inout",
+      "input",
+      "instance",
+      "int",
+      "join_branch",
+      "join_first",
+      "join_none",
+      "join_select",
+      "list",
+      "lock",
+      "map",
+      "match",
+      "monitor",
+      "null",
+      "output",
+      "override",
+      "package",
+      "parallel",
+      "pool",
+      "post_solve",
+      "pre_body",
+      "pre_solve",
+      "private",
+      "protected",
+      "public",
+      "pure",
+      "rand",
+      "randomize",
+      "ref",
+      "repeat",
+      "replicate",
+      "resource",
+      "return",
+      "run_end",
+      "run_start",
+      "schedule",
+      "select",
+      "sequence",
+      "set",
+      "share",
+      "solve",
+      "state",
+      "static",
+      "stream",
+      "string",
+      "struct",
+      "super",
+      "symbol",
+      "target",
+      "this",
+      "true",
+      "type",
+      "typedef",
+      "unique",
+      "void",
+      "while",
+      "with",
+      "yield"
+    ]
+  },
+  "patterns": [
+    {
+      "name": "keyword.control.pss",
+      "match": "\\b(abstract|activity|assert|bind|break|constraint|continue|default|disable|do|dynamic|else|eventually|exec|for|forall|foreach|has|if|iff|rand|randomize|repeat|replicate|return|while|with|yield)\\b"
+    },
+    {
+      "name": "storage.type.pss",
+      "match": "\\b(array|bool|buffer|class|const|enum|float32|float64|int|list|map|string|struct|typedef|void)\\b"
+    },
+    {
+      "name": "constant.language.pss",
+      "match": "\\b(true|false|null)\\b"
+    },
+    {
+      "name": "keyword.modifier.pss",
+      "match": "\\b(extend|inout|input|lock|private|protected|public|pure|output|override|set|static|type|unique)\\b"
+    },
+    {
+      "name": "support.function.pss",
+      "match": "\\b(concat|function|export|import|init|init_down|init_up|instance|match|schedule|select|sequence|run_end|run_start|post_solve|pre_body|pre_solve)\\b"
+    },
+    {
+      "name": "keyword.other.pss",
+      "match": "\\b(action|atomic|body|bins|bit|chandle|component|cover|covergroup|coverpoint|cross|declaration|dist|ignore_bins|illegal_bins|in|monitor|resource|share|solve|state|symbol)\\b"
+    },
+    {
+      "name": "variable.language.pss",
+      "match": "\\b(this|ref|super|self)\\b"
+    },
+    {
+      "name": "meta.environment.pss",
+      "match": "\\b(compile|file|header|pool|package|stream|target)\\b"
+    },
+    {
+      "name": "keyword.concurrent.pss",
+      "match": "\\b(parallel|join_branch|join_first|join_none|join_select)\\b"
+    },
+    {
+      "name": "comment.line.double-slash.pss",
+      "match": "//.*$"
+    },
+    {
+      "name": "comment.line.block.pss",
+      "begin": "/\\*",
+      "end": "\\*/",
+      "patterns": [
+        {
+          "name": "comment.block.documentation.pss",
+          "match": "\\*.*$"
+        }
+      ]
+    },
+    {
+      "name": "string.quoted.double.pss",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        {
+          "name": "constant.character.escape.pss",
+          "match": "\\\\."
+        }
+      ]
+    },
+    {
+      "name": "constant.numeric.pss",
+      "match": "\\b\\d+\\.?\\d*\\b"
+    },
+    {
+      "name": "punctuation.pss",
+      "match": "[{}()\\[\\],.;]"
+    }
+  ],
+  "scopeName": "source.pss"
+}
