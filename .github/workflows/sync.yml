@@ -10,10 +10,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout GitHub repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.2.2
       - name: Set up Git
         run: |
-          git config --global user.name "GitHUb Sync"
+          git config --global user.name "GitHub Sync"
           git config --global user.email "darshanp@vayavyalabs.com"
       
       # Add GitLab as a remote
