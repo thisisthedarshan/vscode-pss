@@ -1,0 +1,29 @@
+name: Sync GitHub to GitLab
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout GitHub repository
+        uses: actions/checkout@v3
+      - name: Set up Git
+        run: |
+          git config --global user.name "GitHUb Sync"
+          git config --global user.email "darshanp@vayavyalabs.com"
+      
+      # Add GitLab as a remote
+      - name: Add GitLab remote
+        run: |
+          git remote add gitlab https://$GITLAB_USERNAME:$GITLAB_TOKEN@$GITLAB_REPO.git
+          git fetch gitlab
+      
+      # Push to GitLab
+      - name: Push to GitLab
+        run: |
+          git push gitlab --all
+          git push gitlab --tags
