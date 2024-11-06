@@ -33,5 +33,6 @@ jobs:
       # Push to GitLab
       - name: Push to GitLab
         run: |
+          git pull
           git push gitlab --all
           git push gitlab --tags
