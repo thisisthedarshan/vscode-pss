@@ -28,7 +28,7 @@ jobs:
       - name: Add GitLab remote
         run: |
           git pull
-          git remote add gitlab https://$GITLAB_USERNAME:$GITLAB_TOKEN@$GITLAB_REPO
+          git remote add gitlab "https://$GITLAB_USERNAME:$GITLAB_TOKEN@$GITLAB_REPO"
           git fetch --unshallow gitlab
           git fetch --unshallow origin
 
