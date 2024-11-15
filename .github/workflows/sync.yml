@@ -25,15 +25,20 @@ jobs:
           git config --global user.email "$SYNC_MAIL"
 
       # Add GitLab as a remote
-      - name: Add GitLab remote
+      - name: Update Local
         run: |
           git pull
+          git fetch --unshallow
+
+      - name: Add remote
+        run: |
           git remote add gitlab "https://$GITLAB_USERNAME:$GITLAB_TOKEN@$GITLAB_REPO"
+      
+      - name: Update copy   
+        run: |
           git fetch --unshallow gitlab
-          git fetch --unshallow origin
+          
 
-
-      # Sync the branches
       - name: Sync branches and push to GitLab
         run: |
           git checkout main
