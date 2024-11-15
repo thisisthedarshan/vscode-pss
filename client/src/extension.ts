@@ -10,6 +10,7 @@ import {
 
 import {
 	extractFunctionName,
+	getActiveParameter,
 	getFunctionSignature,
 	isWithinCommentBlock
 } from './helper_functions';
@@ -98,7 +99,6 @@ export function activate(context: vscode.ExtensionContext) {
 		vscode.languages.registerSignatureHelpProvider('pss',
 			{
 				provideSignatureHelp(document, position, token, context) {
-					// Extract the function name and match it with the parameters list
 					const lineText = document.lineAt(position.line).text;
 					const functionName = extractFunctionName(lineText);
 
@@ -117,10 +117,16 @@ export function activate(context: vscode.ExtensionContext) {
 						signature.parameters.push(new vscode.ParameterInformation(param.label, param.documentation));
 					});
 
+					// Calculate active parameter based on cursor position
+					const activeParameter = getActiveParameter(lineText, position.character);
+					console.log("Cursor position:", position.character);
+					console.log("Active parameter:", activeParameter);
+
+					signatureHelp.activeSignature = 0;
+					signatureHelp.activeParameter = activeParameter;
+
 					// Add the signature to signatureHelp
 					signatureHelp.signatures.push(signature);
-					signatureHelp.activeSignature = 0;
-					signatureHelp.activeParameter = 0;
 
 					return signatureHelp;
 				}

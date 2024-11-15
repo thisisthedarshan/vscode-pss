@@ -1,6 +1,6 @@
 # Change Log
 
-All notable changes to the "dsp-vsc-pss" extension will be documented in this file.
+All notable changes to the PSS Support for VS Code extension will be documented in this file.
 
 Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how to structure this file, and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
@@ -10,7 +10,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Added language and syntax highlighting
 
-## [0.2.0] - 2024-11-07
+## [0.2.0] - 2024-11-15
 
 ### Added
 
@@ -20,8 +20,23 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Added completion for built-in functions
 - Made minor enhancements
 
+## [0.2.1] - 2024-11-15
+
+## Added
+
+- Added Syntax Highlighting for built-in functions
+- Added missing *chandle-type* `addr_handle_t`
+
+### Changed
+
+- Wrong date for release 0.2.0 in the Changelog
+
 ## [Unreleased]
 
 ### Added
 
+- version 0.2.2 Make the built-in function parameter highlighting to work properly.
+
 - version 0.3.0 Improve LSP - Try to make it work
+
+- version x.y.z Add custom color scheme (Just a proposal)

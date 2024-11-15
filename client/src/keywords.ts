@@ -1,6 +1,6 @@
 export const keywords = {
   list: [
-    "abstract", "action", "activity", "array", "as", "assert", "atomic", "bind", "bins", "bit",
+    "addr_handle_t", "abstract", "action", "activity", "array", "as", "assert", "atomic", "bind", "bins", "bit",
     "body", "bool", "break", "buffer", "chandle", "class", "compile", "component", "concat", "const",
     "constraint", "continue", "cover", "covergroup", "coverpoint", "cross", "declaration", "default",
     "disable", "dist", "do", "dynamic", "else", "enum", "eventually", "exec", "export", "extend", "false",
@@ -20,6 +20,7 @@ export const keywords = {
     "write_val_masked", "write_field", "write_fields", "get_offset_of_instance_array", "get_offset_of_path", "set_handle"
   ],
   descriptions: [
+    "Type definition for chandle, used for address related tasks.",
     "Defines an abstract class that cannot be instantiated directly.",
     "Defines an action, the basic executable unit in PSS.",
     "Defines a block of code describing activities within an action.",
