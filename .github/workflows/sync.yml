@@ -27,12 +27,17 @@ jobs:
       # Add GitLab as a remote
       - name: Add GitLab remote
         run: |
-          git remote add gitlab https://$GITLAB_USERNAME:$GITLAB_TOKEN@$GITLAB_REPO
-          git fetch gitlab
-
-      # Push to GitLab
-      - name: Push to GitLab
-        run: |
           git pull
-          git push gitlab --all
-          git push gitlab --tags
+          git remote add gitlab https://$GITLAB_USERNAME:$GITLAB_TOKEN@$GITLAB_REPO
+          git fetch --unshallow gitlab
+          git fetch --unshallow origin
+
+
+      # Sync the branches
+      - name: Sync branches and push to GitLab
+        run: |
+          git checkout main
+
+          git merge gitlab/main --no-edit || echo "Merge conflicts detected, skipping merge"
+
+          git push gitlab main

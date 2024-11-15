@@ -1,16 +1,28 @@
 {
-	"compilerOptions": {
-		"module": "Node16",
-		"target": "ES2022",
-		"lib": [
-			"ES2022"
-		],
-		"sourceMap": true,
-		"rootDir": "src",
-		"strict": true   /* enable all strict type-checking options */
-		/* Additional Checks */
-		// "noImplicitReturns": true, /* Report error when not all code paths in function return a value. */
-		// "noFallthroughCasesInSwitch": true, /* Report errors for fallthrough cases in switch statement. */
-		// "noUnusedParameters": true,  /* Report errors on unused parameters. */
-	}
+  "compilerOptions": {
+    "module": "commonjs", // Use CommonJS module format
+    "target": "es2020", // Target ES2020
+    "lib": [
+      "es2020"
+    ], // Include ES2020 library
+    "outDir": "dist", // Output all compiled code into the dist folder
+    "rootDir": ".", // Set the root directory to the root of the project (includes client and server)
+    "sourceMap": true, // Generate source maps for debugging
+    "composite": true // Enable project references (for large codebases)
+  },
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "node_modules", // Exclude node_modules folder
+    ".vscode-test" // Exclude VS Code test folder
+  ],
+  "references": [
+    {
+      "path": "./client" // Reference to client project
+    },
+    {
+      "path": "./server" // Reference to server project
+    }
+  ]
 }

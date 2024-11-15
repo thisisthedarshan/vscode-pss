@@ -5,7 +5,7 @@
     "body": [
       "component ${1:my_comp}_c {",
       "\t$2",
-      "}"
+      "} /* End of Component ${1:my_comp}_c */"
     ]
   },
   "action": {
@@ -14,7 +14,7 @@
     "body": [
       "action ${1:my_action}_a {",
       "\t$2",
-      "}"
+      "} /* End of Action ${1:my_action}_a */"
     ]
   },
   "activity": {
@@ -32,7 +32,7 @@
     "body": [
       "package ${1:my}_pkg {",
       "\t$2",
-      "}"
+      "} /* End of Package ${1:my}_pkg */"
     ]
   },
   "struct": {
@@ -41,7 +41,7 @@
     "body": [
       "struct ${1:my}_s {",
       "\t$2",
-      "}"
+      "} /* End of Struct ${1:my}_s */"
     ]
   },
   "exec post_solve": {
@@ -50,7 +50,7 @@
     "body": [
       "exec post_solve {",
       "\t$1",
-      "}"
+      "} /* End of exec post_solve */"
     ]
   },
   "exec pre_solve": {
@@ -59,7 +59,7 @@
     "body": [
       "exec pre_solve {",
       "\t$1",
-      "}"
+      "} /* End of exec pre_solve */"
     ]
   },
   "exec init": {
@@ -68,7 +68,7 @@
     "body": [
       "exec init {",
       "\t$1",
-      "}"
+      "} /* End of exec init */"
     ]
   },
   "exec init_down": {
@@ -77,7 +77,7 @@
     "body": [
       "exec init_down {",
       "\t$1",
-      "}"
+      "} /* End of exec init_down */"
     ]
   },
   "exec body": {
@@ -86,12 +86,12 @@
     "body": [
       "exec body {",
       "\t$1",
-      "}"
+      "} /* End of exec body */"
     ]
   },
   "exec file": {
     "prefix": "exec file",
-    "description": "Declare an exec pre-solve",
+    "description": "Declare an exec file block",
     "body": [
       "exec file \"${1:my_file}\" = \"\"\"",
       "\t$2",
@@ -102,16 +102,16 @@
     "prefix": "extend",
     "description": "Declare an extension of an object",
     "body": [
-      "extend ${1:|component,action|} {",
-      "\t$2",
-      "}"
+      "extend ${1:|component,action|} $2 {",
+      "\t$3",
+      "} /* End of extend ${1:|component,action|} block */"
     ]
   },
   "import": {
     "prefix": "import",
     "description": "Import a package",
     "body": [
-      "import $1_pkg::${2:*}"
+      "import $1_pkg::${2:*};"
     ]
   },
   "select": {
@@ -123,11 +123,13 @@
       "}"
     ]
   },
-  "import": {
-    "prefix": "import",
-    "description": "Import a package",
+  "buffer": {
+    "prefix": "buffer",
+    "description": "Define a buffer",
     "body": [
-      "import $1_pkg::${2:*}"
+      "buffer $1_buf {",
+      "\t$2",
+      "}  /* End of buffer $1_buf */"
     ]
   }
 }

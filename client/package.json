@@ -1,0 +1,26 @@
+{
+	"name": "dsp-vsc-pss",
+	"displayName": "PSS Language Support",
+	"description": "This extension provides Language Support for Portable Stimulus Standard's Domain Specific Language..",
+	"version": "0.2.0",
+	"publisher": "Darshan",
+	"author": {
+		"name": "Darshan"
+	},
+	"type": "module",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/thisisthedarshan/vscode-pss"
+	},
+	"engines": {
+		"vscode": "^1.75.0"
+	},
+	"dependencies": {
+		"vscode-languageclient": "^9.0.1"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.75.1",
+		"@vscode/test-electron": "^2.3.9"
+	}
+}

@@ -10,8 +10,18 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 - Added language and syntax highlighting
 
+## [0.2.0] - 2024-11-07
+
+### Added
+
+- Implemented a simple language server (using LSP) * ***[Work in Progress]***
+- Enhanced Auto-complete capabilities
+- Added closing comments
+- Added completion for built-in functions
+- Made minor enhancements
+
 ## [Unreleased]
 
 ### Added
 
-- version 0.1.0-alpha+2 Adding support for Language Server
+- version 0.3.0 Improve LSP - Try to make it work
