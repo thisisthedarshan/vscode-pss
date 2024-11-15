@@ -33,16 +33,9 @@ jobs:
       - name: Add remote
         run: |
           git remote add gitlab "https://$GITLAB_USERNAME:$GITLAB_TOKEN@$GITLAB_REPO"
-      
-      - name: Update copy   
-        run: |
-          git fetch --unshallow gitlab
           
 
       - name: Sync branches and push to GitLab
         run: |
           git checkout main
-
-          git merge gitlab/main --no-edit || echo "Merge conflicts detected, skipping merge"
-
           git push gitlab main
