@@ -2,7 +2,7 @@
   "name": "dsp-vsc-pss",
   "displayName": "PSS Language Support",
   "description": "This extension provides Language Support for Portable Stimulus Standard's Domain Specific Language..",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "publisher": "Darshan",
   "author": "Darshan",
   "icon": "media/icon.jpeg",
