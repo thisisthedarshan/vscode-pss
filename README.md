@@ -7,3 +7,7 @@ More info on the Portable Stimulus Standard can be found on the [Accellera Websi
 This extension is built on the [PSS 3.0 Language Reference Manual](https://www.accellera.org/images/downloads/standards/pss/Portable_Test_Stimulus_Standard_v3.0.pdf)
 
 > NOTE: THIS EXTENSION IS WORK IN PROGRESS SINCE ITS MY FIRST ONE.
+
+---
+
+You can find the extension on VS Code Marketplace
