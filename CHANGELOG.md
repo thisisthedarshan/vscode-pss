@@ -22,7 +22,7 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 
 ## [0.2.1] - 2024-11-15
 
-## Added
+### Added
 
 - Added Syntax Highlighting for built-in functions
 - Added missing *chandle-type* `addr_handle_t`
@@ -30,6 +30,13 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 ### Changed
 
 - Wrong date for release 0.2.0 in the Changelog
+
+## [0.2.2] - 2024-12-10
+
+### Added
+
+- Added MIT License
+- Highlighting for **_t** and **_e** objects - representing typedefs and enums respectively
 
 ## [Unreleased]
 
