@@ -9,18 +9,26 @@ import {
 } from 'vscode-languageclient/node';
 
 import {
+	countLeadingSpaces,
 	extractFunctionName,
 	getActiveParameter,
+	getCommentForKeyword,
 	getFunctionSignature,
-	isWithinCommentBlock
+	initializeCache,
+	isWithinCommentBlock,
+	updateCacheOnSaveOrOpen
 } from './helper_functions';
 
 import { keywords } from './keywords';
 
 let client: LanguageClient;
+let cache = {};
 
 export function activate(context: vscode.ExtensionContext) {
 	console.log("Started PSS Language Support Extension :D");
+
+	/* Create a cache from all open files */
+	cache = initializeCache();
 
 	/* Register formatter for multi-line comments */
 
@@ -73,18 +81,22 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	);
 
-	let comm = vscode.languages.registerOnTypeFormattingEditProvider('pss',
+	vscode.languages.registerOnTypeFormattingEditProvider('pss',
 		{
 			provideOnTypeFormattingEdits(document, position, ch, options, token) {
 				const line = document.lineAt(position.line).text.trim();
 
 				// Check if inside comment block
 				if (isWithinCommentBlock(document, position.line)) {
-					return [vscode.TextEdit.insert(position, '\n * ')];
+					const prevLine = document.lineAt(position.line - 1);
+					const indent = countLeadingSpaces(prevLine.text); // Count leading spaces
+					// Insert the new comment line with the correct indentation
+					return [vscode.TextEdit.insert(position, `\n${' '.repeat(indent)}* `)];
 				}
 				// Check if the line is exactly `/*`
 				else if (line === '/*' || line === '/**') {
-					return [vscode.TextEdit.insert(position, '\n * ')];
+					const indent = countLeadingSpaces(line); // Get the indentation of the current line
+					return [vscode.TextEdit.insert(position, `\n${indent} * `)];
 				} else if (line === '*/' || line === '**/') {
 					return [vscode.TextEdit.insert(position, '')];
 				}
@@ -95,6 +107,18 @@ export function activate(context: vscode.ExtensionContext) {
 		'\n'  // Trigger on Enter (newline character)
 	);
 
+	/* Register update cache functions */
+	context.subscriptions.push(
+		vscode.workspace.onDidSaveTextDocument((document) => { cache = updateCacheOnSaveOrOpen(document); console.log("Cache ", cache); }),
+		vscode.workspace.onDidOpenTextDocument((document) => { cache = updateCacheOnSaveOrOpen(document); console.log("Cache ", cache); }),
+		vscode.window.onDidChangeActiveTextEditor((editor) => {
+			if (editor && editor.document.languageId === 'pss') {
+				cache = updateCacheOnSaveOrOpen(editor.document);
+			}
+		})
+	);
+
+	/* Built-in function signature helper */
 	context.subscriptions.push(
 		vscode.languages.registerSignatureHelpProvider('pss',
 			{
@@ -151,16 +175,33 @@ export function activate(context: vscode.ExtensionContext) {
 			// Check if inside a /** comment block
 			if (lineText.startsWith('/**') || isWithinCommentBlock(editor.document, position.line)) {
 				// Insert '*' at the current line (position.line) where the cursor is
+				const prevLine = editor.document.lineAt(position.line);
+				const indent = countLeadingSpaces(prevLine.text); // Count leading spaces	
 				editor.edit(editBuilder => {
 					editBuilder.insert(
 						new vscode.Position(position.line + 1, 0),  // Insert at the beginning of the current line
-						' *'
+						`${' '.repeat(indent)}* `
 					);
 				});
 			}
 		})
 	);
+	context.subscriptions.push(
+		vscode.commands.registerCommand('extension.insertDocComment', function () {
+			const editor = vscode.window.activeTextEditor;
+			if (editor) {
+				const position = editor.selection.active;
+				editor.edit(editBuilder => {
+					editBuilder.insert(position, "/** */");
+				}).then(() => {
+					// Move cursor between `/**` and `*/`
+					const newPosition = position.with(position.line, position.character + 4);
+					editor.selection = new vscode.Selection(newPosition, newPosition);
+				});
+			}
+		}));
 
+	/* Add autocompletion for keywords */
 	context.subscriptions.push(
 		vscode.languages.registerCompletionItemProvider('pss', {
 			provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
@@ -178,21 +219,39 @@ export function activate(context: vscode.ExtensionContext) {
 		})
 	);
 
+	/* Add auto-complete for variables from cache */
 	context.subscriptions.push(
-		vscode.commands.registerCommand('extension.insertDocComment', function () {
-			const editor = vscode.window.activeTextEditor;
-			if (editor) {
-				const position = editor.selection.active;
-				editor.edit(editBuilder => {
-					editBuilder.insert(position, "/** */");
-				}).then(() => {
-					// Move cursor between `/**` and `*/`
-					const newPosition = position.with(position.line, position.character + 4);
-					editor.selection = new vscode.Selection(newPosition, newPosition);
-				});
-			}
-		}));
+		vscode.languages.registerCompletionItemProvider('pss', {
+			provideCompletionItems(document, position) {
+				const completionItems = [];
+				// Get variable names for the given document (from the cache)
+				const variables = Object.keys(cache).reduce((acc, keyword) => {
+					cache[keyword].forEach(({ variableName }) => {
+						const completionItem = new vscode.CompletionItem(variableName, vscode.CompletionItemKind.Variable);
+						completionItem.detail = cache[keyword][variableName];
+						acc.push(completionItem);
+					});
+					return acc;
+				}, []);
 
+				return variables;
+			}
+		})
+	);
+
+	/* Hover to display comments as message */
+	vscode.languages.registerHoverProvider('pss', {
+		async provideHover(document, position, token) {
+			const wordRange = document.getWordRangeAtPosition(position);
+			const word = document.getText(wordRange);
+			const comment = await getCommentForKeyword(word, cache);
+			if (comment) {
+				return new vscode.Hover(new vscode.MarkdownString(comment));
+			}
+		}
+	});
+
+	/*********		Server Part		********/
 	// The server is implemented in node
 	const serverModule = context.asAbsolutePath(
 		path.join('dist', 'server.js')
@@ -201,10 +260,10 @@ export function activate(context: vscode.ExtensionContext) {
 	// If the extension is launched in debug mode then the debug server options are used
 	// Otherwise the run options are used
 	const serverOptions: ServerOptions = {
-		run: { module: serverModule, transport: TransportKind.ipc },
+		run: { module: serverModule, transport: TransportKind.stdio },
 		debug: {
 			module: serverModule,
-			transport: TransportKind.ipc,
+			transport: TransportKind.stdio,
 		}
 	};
 
