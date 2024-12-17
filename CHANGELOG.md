@@ -38,12 +38,16 @@ Check [Keep a Changelog](http://keepachangelog.com/) for recommendations on how 
 - Added MIT License
 - Highlighting for **_t** and **_e** objects - representing typedefs and enums respectively
 
-## [Unreleased]
+## [0.3.0] - 2024-12-17
 
 ### Added
 
-- version 0.2.2 Make the built-in function parameter highlighting to work properly.
+- Custom color highlighting for all types of keywords.
+- Added Dark and Light Theme
+- Added "hover for info" for displaying comment on functions, keywords, definitions etc. This is just a rudimentary implementation which displays basic info (to some extent).
 
-- version 0.3.0 Improve LSP - Try to make it work
+### Changed
 
-- version x.y.z Add custom color scheme (Just a proposal)
+- Fixed issue with how comments were being interpreted.
+- Modified the snippets to drop extra comments at end of declarations like components, structs etc.
+- Modified the scopes of the different variables/keywords in the tmLanguage file
