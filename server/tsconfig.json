@@ -6,8 +6,10 @@
     ],
     "module": "commonjs",
     "moduleResolution": "node",
+    "types": [
+      "vscode"
+    ],
     "sourceMap": true,
-    "strict": true,
     "outDir": "../dist",
     "rootDir": "src"
   },
