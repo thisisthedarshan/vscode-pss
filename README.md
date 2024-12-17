@@ -10,4 +10,4 @@ This extension is built on the [PSS 3.0 Language Reference Manual](https://www.a
 
 ---
 
-You can find the extension on VS Code Marketplace
+You can find the extension on [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=Darshan.dsp-vsc-pss)
