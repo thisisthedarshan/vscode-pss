@@ -1,6 +1,6 @@
 {
   "name": "dsp-vsc-pss",
-  "displayName": "Support for Portable Stimulus Standard - PSS",
+  "displayName": "Portable Stimulus Standard - PSS Support for VS Code",
   "description": "This extension provides Language Support for Portable Stimulus Standard's Domain Specific Language..",
   "version": "0.3.0",
   "publisher": "Darshan",
