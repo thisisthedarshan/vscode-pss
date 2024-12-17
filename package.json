@@ -1,8 +1,8 @@
 {
   "name": "dsp-vsc-pss",
-  "displayName": "PSS Language Support",
+  "displayName": "Support for Portable Stimulus Standard - PSS",
   "description": "This extension provides Language Support for Portable Stimulus Standard's Domain Specific Language..",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "publisher": "Darshan",
   "author": "Darshan",
   "icon": "media/icon.jpeg",
@@ -53,6 +53,20 @@
         }
       }
     ],
+    "themes": [
+      {
+        "scopeName": "source.pss",
+        "label": "PSS Dark Theme",
+        "uiTheme": "vs-dark",
+        "path": "./themes/dark-theme.json"
+      },
+      {
+        "scopeName": "source.pss",
+        "label": "PSS Light Theme",
+        "uiTheme": "vs",
+        "path": "./themes/light-theme.json"
+      }
+    ],
     "snippets": [
       {
         "language": "pss",
@@ -97,8 +111,7 @@
   "scripts": {
     "vscode:prepublish": "",
     "compile": "tsc -b",
-    "watch": "tsc -b -w",
-    "postinstall": "cd client&&npm install&&cd ../server&&npm install&&npm run antlr4ts&&cd .."
+    "watch": "tsc -b -w"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.9",
