@@ -2,7 +2,7 @@
   "fileTypes": [
     "pss"
   ],
-  "name": "pss",
+  "about": "pss",
   "tokenTypes": {
     "keywords": [
       "abstract",
@@ -169,78 +169,120 @@
   },
   "patterns": [
     {
+      "about": "Data Types",
+      "name": "keyword.type.pss",
+      "match": "\\b(addr_handle_t|bit|bool|chandle|float32|float64|int|list|map|pool|string|struct|void)\\b"
+    },
+    {
+      "about": "Control Flow Keywords",
       "name": "keyword.control.pss",
-      "match": "\\b(abstract|activity|assert|bind|break|constraint|continue|default|disable|do|dynamic|else|eventually|exec|for|forall|foreach|has|if|iff|rand|randomize|repeat|replicate|return|while|with|yield)\\b"
+      "match": "\\b(break|continue|do|else|exec|foreach|for|if|iff|return|while|repeat|parallel|eventually|select|stream|with)\\b"
     },
     {
-      "name": "storage.type.pss",
-      "match": "\\b(array|bool|buffer|class|const|enum|float32|float64|int|list|map|package|string|struct|typedef|void|[a-zA-Z_][a-zA-Z0-9_]*_t|[a-zA-Z_][a-zA-Z0-9_]*_e)\\b"
+      "about": "Access Modifiers",
+      "name": "keyword.access.pss",
+      "match": "\\b(default|extend|private|protected|public|pure|randomize|ref|sequence|static|target|override|rand|const|unique)\\b"
     },
     {
-      "name": "constant.language.pss",
-      "match": "\\b(true|false|null)\\b"
+      "about": "Operators",
+      "name": "keyword.operator.pss",
+      "match": "\\b(as|in|has|bind|join_first|join_branch|join_none|join_select|match|replicate|solve|dist)\\b"
     },
     {
-      "name": "keyword.modifier.pss",
-      "match": "\\b(extend|inout|input|lock|private|protected|public|pure|output|override|set|static|type|unique)\\b"
+      "about": "Declarations",
+      "name": "keyword.declaration.pss",
+      "match": "\\b(abstract|action|activity|array|class|component|cover|covergroup|coverpoint|declaration|function|instance|package|type|state|resource|symbol|monitor|header|typedef|[a-zA-Z_][a-zA-Z0-9_]*_t|enum|[a-zA-Z_][a-zA-Z0-9_]*_e)\\b"
     },
     {
+      "about": "Assertions and Coverage",
+      "name": "keyword.assertion.pss",
+      "match": "\\b(assert|constraint|ignore_bins|illegal_bins|bins|cross|super|this)\\b"
+    },
+    {
+      "about": "Functions and I/O",
       "name": "support.function.pss",
-      "match": "\\b(concat|function|export|import|init|init_down|init_up|instance|match|schedule|select|sequence|run_end|run_start|post_solve|pre_body|pre_solve|format|print|message|file_open|file_close|file_exists|file_write|file_read|file_write_lines|file_read_lines|error|fatal|urandom|urandom_range|float_mantissa|float_exponent|float_sign|to_float|make_handle_from_claim|make_handle_from_handle|addr_value|addr_value_solve|get_tag|read8|write8|get_offset_of_instance|log|pow|addr_value_abs|read16|read32|read64|write16|write32|write64|read_bytes|write_bytes|read_struct|write_struct|read|write|read_val|write_val|write_masked|write_val_masked|write_field|write_fields|get_offset_of_instance_array|get_offset_of_path|set_handle)\\b"
+      "match": "\\b(file|format|inout|input|print|log|output|pow|message|file_open|file_close|file_exists|file_write|file_read|file_write_lines|file_read_lines|error|fatal|urandom|urandom_range)\\b"
     },
     {
+      "about": "Execution and Concurrency",
+      "name": "keyword.execution.pss",
+      "match": "\\b(atomic|dynamic|schedule|run_start|run_end|post_solve|pre_solve|pre_body|join_branch)\\b"
+    },
+    {
+      "about": "Handle Functions",
+      "name": "support.function.handle.pss",
+      "match": "\\b(make_handle_from_claim|make_handle_from_handle|set_handle)\\b"
+    },
+    {
+      "about": "Memory and Address Handling",
+      "name": "support.function.memory.pss",
+      "match": "\\b(addr_value|addr_value_solve|addr_value_abs|get_tag|get_offset_of_instance|get_offset_of_instance_array|get_offset_of_path)\\b"
+    },
+    {
+      "about": "Read/Write Functions",
+      "name": "support.function.rw.pss",
+      "match": "\\b(read|write|read_val|write_val|read8|write8|read16|write16|read32|write32|read64|write64|read_bytes|write_bytes|read_struct|write_struct|write_masked|write_val_masked|write_field|write_fields)\\b"
+    },
+    {
+      "about": "Initialization Keywords",
+      "name": "keyword.initialization.pss",
+      "match": "\\b(init|init_up|init_down)\\b"
+    },
+    {
+      "about": "Special Values and Floats",
+      "name": "support.constant.pss",
+      "match": "\\b(float_mantissa|float_exponent|float_sign|to_float)\\b"
+    },
+    {
+      "about": "Miscellaneous Keywords",
       "name": "keyword.other.pss",
-      "match": "\\b(action|atomic|body|bins|bit|chandle|component|cover|covergroup|coverpoint|cross|declaration|dist|ignore_bins|illegal_bins|in|monitor|resource|share|solve|state|symbol)\\b"
+      "match": "\\b(null|import|true|false|body|buffer|concat|disable|export|forall|lock|map|yield|share|compile)\\b"
     },
     {
-      "name": "variable.language.pss",
-      "match": "\\b(this|ref|super|self)\\b"
+      "about": "Single-line comments starting with //",
+      "match": "//.*$",
+      "name": "comment.line.double-slash.pss"
     },
     {
-      "name": "meta.environment.pss",
-      "match": "\\b(compile|file|header|pool|stream|target)\\b"
-    },
-    {
-      "name": "keyword.concurrent.pss",
-      "match": "\\b(parallel|join_branch|join_first|join_none|join_select)\\b"
-    },
-    {
-      "name": "comment.line.double-slash.pss",
-      "match": "//.*$"
-    },
-    {
-      "name": "comment.line.block.pss",
+      "about": "Block comments enclosed by /* and */",
       "begin": "/\\*",
       "end": "\\*/",
       "patterns": [
         {
-          "name": "comment.block.documentation.pss",
-          "match": "(?<=/\\*\\*)[\\s\\S]*?(?=\\*/)"
+          "about": "Documentation comments starting with /**",
+          "match": "/\\*\\*(?:[\\s\\S]*?)?\\*/",
+          "name": "comment.block.documentation.pss"
         },
         {
-          "name": "comment.block.pss",
-          "match": "\\*.*$"
+          "about": "General block comments starting with /*",
+          "match": "/\\*[^*]*\\*+([^/*][^*]*\\*+)*/",
+          "name": "comment.block.pss"
         }
-      ]
+      ],
+      "name": "comment.block.pss"
     },
     {
-      "name": "string.quoted.double.pss",
+      "about": "Double-quoted string literals",
       "begin": "\"",
       "end": "\"",
       "patterns": [
         {
-          "name": "constant.character.escape.pss",
-          "match": "\\\\."
+          "about": "Escape sequences in double-quoted strings",
+          "match": "\\\\.",
+          "name": "constant.character.escape.pss"
         }
-      ]
+      ],
+      "name": "string.quoted.double.pss"
     },
     {
-      "name": "constant.numeric.pss",
-      "match": "\\b([+-]?(?:(0[bB][01_]+)|(0[oO][0-7_]+)|(0[xX][0-9a-fA-F_]+(?:[hH])?)|(0[0-9_]*(?:\\.[0-9_]+)?(?:[eE][+-]?[0-9_]+)?)|([1-9][0-9_]*(?:\\.[0-9_]+)?(?:[eE][+-]?[0-9_]+)?)|(\\[[1-9][0-9_]*\\]\\s*['sS][bB][01_]+)|(\\[[1-9][0-9_]*\\]\\s*['sS][oO][0-7_]+)|(\\[[1-9][0-9_]*\\]\\s*['sS][dD][0-9_]+)|(\\[[1-9][0-9_]*\\]\\s*['sS][hH][0-9a-fA-F_]+)|(-?['sS][bB][01_]+)|(-?['sS][oO][0-7_]+)|(-?['sS][dD][0-9_]+)|(-?['sS][hH][0-9a-fA-F_]+)))\\b"
+      "about": "Numeric constants (binary, octal, decimal, hexadecimal)",
+      "match": "\\b([+-]?(?:(0[bB][01_]+)|(0[oO][0-7_]+)|(0[xX][0-9a-fA-F_]+(?:[hH])?)|(0[0-9_]*(?:\\.[0-9_]+)?(?:[eE][+-]?[0-9_]+)?)|([1-9][0-9_]*(?:\\.[0-9_]+)?(?:[eE][+-]?[0-9_]+)?)|(\\[[1-9][0-9_]*\\]\\s*['sS][bB][01_]+)|(\\[[1-9][0-9_]*\\]\\s*['sS][oO][0-7_]+)|(\\[[1-9][0-9_]*\\]\\s*['sS][dD][0-9_]+)|(\\[[1-9][0-9_]*\\]\\s*['sS][hH][0-9a-fA-F_]+)|(-?['sS][bB][01_]+)|(-?['sS][oO][0-7_]+)|(-?['sS][dD][0-9_]+)|(-?['sS][hH][0-9a-fA-F_]+)))\\b",
+      "name": "constant.numeric.pss"
     },
     {
-      "name": "punctuation.pss",
-      "match": "[{}()\\[\\],.;]"
+      "about": "Punctuation and special characters",
+      "match": "[{}()\\[\\],.;]",
+      "name": "punctuation.pss"
     }
   ],
   "scopeName": "source.pss"
