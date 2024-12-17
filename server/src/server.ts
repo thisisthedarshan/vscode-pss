@@ -19,7 +19,8 @@ import {
   TextDocument
 } from 'vscode-languageserver-textdocument';
 
-const vscode = require('vscode');
+import * as vscode from 'vscode';
+
 const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
