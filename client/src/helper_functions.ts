@@ -77,39 +77,95 @@ function parseDocumentBlock(doc: string, functionName: string): string {
   const lines = doc.split('\n');
   let description = '';
   const paramsDescription: { [key: string]: string } = {};
+  let returnDescription = '';
+  let currentParam: string | null = null;
+  let currentDescription: string = '';
 
-  // Parse the JSDoc comment to extract description and param details
-  lines.forEach(line => {
-    line = line.trim();
-    // Replace comment blocks
-    line.replace('/*', '');
-    line.replace('*/', '');
+  // Check if the doc starts with /** for JSDoc-style comments
+  if (lines[0].trim().startsWith('/**')) {
+    // Parsing logic for JSDoc-style comments
+    let parsingBlock = '';  // To store the current block being parsed
 
-    // Match and process @brief
-    const briefMatch = line.match(/^\*\s?@brief/);
-    if (briefMatch) {
-      description = line.replace(briefMatch[0], '').trim();
-    }
+    lines.forEach(line => {
+      line = line.trim();
 
-    // Match and process @param
-    const paramMatch = line.match(/^\*\s?@param/);
-    if (paramMatch) {
-      console.log("Param Matched: ", line);
-      const paramParts = line.replace(paramMatch[0], '').trim().split(' ');
-      const paramName = paramParts[0];
-      const paramDesc = paramParts.slice(1).join(' ').trim() || "";
-      console.log("Param Name: ", paramName, "Param Description: ", paramDesc);
-      if (paramName) {
-        paramsDescription[paramName] = paramDesc;
+      // Match and process @brief
+      const briefMatch = line.match(/^\*\s?@brief/);
+      if (briefMatch) {
+        // Continue appending to description as @brief might span multiple lines
+        description += line.replace(briefMatch[0], '').trim() + ' ';
       }
-    }
-  });
 
+      // Match and process @param
+      const paramMatch = line.match(/^\*\s?@param/);
+      if (paramMatch) {
+        // Extract the parameter details
+        if (currentParam) {
+          // If a parameter block was previously being processed, store it
+          paramsDescription[currentParam] = currentDescription.trim();
+        }
+
+        // Reset and start capturing for the new parameter
+        const paramParts = line.replace(paramMatch[0], '').trim().split(' ');
+        const paramName = paramParts[0];
+        const paramDesc = paramParts.slice(1).join(' ').trim() || "";
+
+        currentParam = paramName;
+        currentDescription = paramDesc + ' ';
+      }
+
+      // Match and process @return or @returns
+      const returnMatch = line.match(/^\*\s?@(return|returns)/);
+      if (returnMatch) {
+        returnDescription += line.replace(returnMatch[0], '').trim() + ' ';
+      }
+
+      // If no more @param or @return symbols, continue appending to the current description block
+      if (!briefMatch && !paramMatch && !returnMatch) {
+        if (currentParam) {
+          // If we're processing a parameter, append the line to its description
+          currentDescription += line.replace('*', '').trim() + ' ';
+        } else if (returnDescription !== '') {
+          // If returnDescription is non-empty, continue appending lines to return text
+          returnDescription += line.replace('*', '').trim() + ' ';
+        } else if (description !== '') {
+          // If we're in the description block, append the line to the description
+          description += line.replace('*', '').trim() + ' ';
+        }
+      }
+    });
+
+    // If a param block is still being processed at the end, store it
+    if (currentParam) {
+      paramsDescription[currentParam] = currentDescription.trim();
+    }
+  } else {
+    // If the doc doesn't start with /**, remove the comment marks but preserve the content
+    let isFirstLine = true;
+    doc.split('\n').forEach(line => {
+      line = line.trim();
+
+      // Remove /* from the first line
+      if (isFirstLine && line.startsWith('/*')) {
+        line = line.replace('/*', '').trim();
+        isFirstLine = false;  // Set isFirstLine to false after the first line is processed
+      } else if (line.startsWith('*')) {
+        // Remove * from the beginning of subsequent lines
+        line = line.replace(/^\*\s?/, ''); // Remove leading * from each line
+      }
+      // Add the cleaned line to the description
+      description += line + '\n';
+    });
+  }
 
   // Generate markdown for function signature
-  let markdown = `## ${functionName}\n\n`;
-  markdown += `**Description**\n${description || 'No description available.'}\n\n`;
-  //markdown += `**Signature**\n\n\`\`\`py\n${functionName}(${params.join(', ')})\n\`\`\`\n\n`;
+  let markdown = `### ${functionName}\n\n`;
+  markdown += `${description || 'No description available.'}\n\n`;
+
+  // Append return description
+  if (returnDescription) {
+    markdown += `**Return**\n${returnDescription.trim() || 'No return description available.'}\n\n`;
+  }
 
   // Append parameter descriptions
   if (Object.keys(paramsDescription).length > 0) {
@@ -123,6 +179,7 @@ function parseDocumentBlock(doc: string, functionName: string): string {
 
   return markdown;
 }
+
 
 
 /**

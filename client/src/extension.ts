@@ -27,9 +27,6 @@ let cache = {};
 export function activate(context: vscode.ExtensionContext) {
 	console.log("Started PSS Language Support Extension :D");
 
-	/* Create a cache from all open files */
-	cache = initializeCache();
-
 	/* Register formatter for multi-line comments */
 
 	vscode.languages.registerDocumentFormattingEditProvider(
@@ -240,16 +237,20 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 
 	/* Hover to display comments as message */
-	vscode.languages.registerHoverProvider('pss', {
-		async provideHover(document, position, token) {
-			const wordRange = document.getWordRangeAtPosition(position);
-			const word = document.getText(wordRange);
-			const comment = await getCommentForKeyword(word, cache);
-			if (comment) {
-				return new vscode.Hover(new vscode.MarkdownString(comment));
+	context.subscriptions.push(
+		vscode.languages.registerHoverProvider('pss', {
+			async provideHover(document, position, token) {
+				const wordRange = document.getWordRangeAtPosition(position);
+				const word = document.getText(wordRange);
+				const comment = await getCommentForKeyword(word, cache);
+				if (comment) {
+					return new vscode.Hover(new vscode.MarkdownString(comment));
+				}
 			}
-		}
-	});
+		}));
+
+	/* Create a cache for variables from all open files */
+	cache = initializeCache();
 
 	/*********		Server Part		********/
 	// The server is implemented in node
