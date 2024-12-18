@@ -11,3 +11,5 @@ This extension is built on the [PSS 3.0 Language Reference Manual](https://www.a
 ---
 
 You can find the extension on [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=Darshan.dsp-vsc-pss)
+
+Check the [Install Guide](https://github.com/thisisthedarshan/vscode-pss/blob/main/INSTALL.md) for more ways to install the extension.
