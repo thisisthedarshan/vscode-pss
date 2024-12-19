@@ -5,8 +5,7 @@
 		"lib": [
 			"es2020"
 		],
-		"moduleResolution": "node",
-		"outDir": "../dist",
+		"outDir": "out",
 		"rootDir": "src",
 		"sourceMap": true
 	},

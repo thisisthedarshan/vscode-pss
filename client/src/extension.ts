@@ -240,6 +240,7 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		vscode.languages.registerHoverProvider('pss', {
 			async provideHover(document, position, token) {
+				console.log("Hover provider triggered");
 				const wordRange = document.getWordRangeAtPosition(position);
 				const word = document.getText(wordRange);
 				const comment = await getCommentForKeyword(word, cache);

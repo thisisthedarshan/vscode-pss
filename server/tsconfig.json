@@ -1,17 +1,13 @@
 {
   "compilerOptions": {
+    "module": "commonjs",
     "target": "es2020",
     "lib": [
       "es2020"
     ],
-    "module": "commonjs",
-    "moduleResolution": "node",
-    "types": [
-      "vscode"
-    ],
-    "sourceMap": true,
-    "outDir": "../dist",
-    "rootDir": "src"
+    "outDir": "out",
+    "rootDir": "src",
+    "sourceMap": true
   },
   "include": [
     "src"

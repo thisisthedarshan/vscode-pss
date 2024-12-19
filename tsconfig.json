@@ -8,7 +8,10 @@
     "outDir": "dist", // Output all compiled code into the dist folder
     "rootDir": ".", // Set the root directory to the root of the project (includes client and server)
     "sourceMap": true, // Generate source maps for debugging
-    "composite": true // Enable project references (for large codebases)
+    "types": [
+      "node",
+      "vscode"
+    ], // Add node and vscode types
   },
   "include": [
     "src"
