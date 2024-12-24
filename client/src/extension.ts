@@ -11,6 +11,7 @@ import {
 import {
 	countLeadingSpaces,
 	extractFunctionName,
+	formatDocument,
 	getActiveParameter,
 	getCommentForKeyword,
 	getFunctionSignature,
@@ -33,46 +34,22 @@ export function activate(context: vscode.ExtensionContext) {
 		{ scheme: 'file', language: 'pss' },
 		{
 			provideDocumentFormattingEdits(document) {
-				const edits = [];
-				const maxLineLength = 81;
+				const edits: vscode.TextEdit[] = [];
 
-				for (let i = 0; i < document.lineCount; i++) {
-					let line = document.lineAt(i).text;
+				// Fetch the document text
+				const documentText = document.getText();
 
-					// Format comments to be single-line
-					if (line.trim().startsWith("//") || line.trim().startsWith("/*")) {
-						line = line.replace(/\s+/g, ' ');  // Condense whitespace in comments
-						if (line.length > maxLineLength) {
-							line = line.slice(0, maxLineLength - 3) + "...";  // Trim and add ellipsis if too long
-						}
-					} else {
-						// Wrap non-comment lines to the max length
-						if (line.length > maxLineLength) {
-							const words = line.split(' ');
-							line = '';
-							let currentLine = '';
+				// Format the document using custom rules
+				const formattedText = formatDocument(documentText);
 
-							words.forEach(word => {
-								if ((currentLine + word).length <= maxLineLength) {
-									currentLine += (currentLine ? ' ' : '') + word;
-								} else {
-									line += currentLine + '\n';
-									currentLine = word;
-								}
-							});
-							line += currentLine;
-						}
-					}
+				// Define a range that covers the entire document
+				const fullRange = new vscode.Range(
+					document.positionAt(0),
+					document.positionAt(documentText.length)
+				);
 
-					// Apply edits for each line
-					edits.push(
-						vscode.TextEdit.replace(
-							document.lineAt(i).range,
-							line
-						)
-					);
-				}
-
+				// Replace the existing text with the formatted text
+				edits.push(vscode.TextEdit.replace(fullRange, formattedText));
 				return edits;
 			}
 		}
@@ -183,20 +160,6 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 		})
 	);
-	context.subscriptions.push(
-		vscode.commands.registerCommand('extension.insertDocComment', function () {
-			const editor = vscode.window.activeTextEditor;
-			if (editor) {
-				const position = editor.selection.active;
-				editor.edit(editBuilder => {
-					editBuilder.insert(position, "/** */");
-				}).then(() => {
-					// Move cursor between `/**` and `*/`
-					const newPosition = position.with(position.line, position.character + 4);
-					editor.selection = new vscode.Selection(newPosition, newPosition);
-				});
-			}
-		}));
 
 	/* Add autocompletion for keywords */
 	context.subscriptions.push(
@@ -256,16 +219,16 @@ export function activate(context: vscode.ExtensionContext) {
 	/*********		Server Part		********/
 	// The server is implemented in node
 	const serverModule = context.asAbsolutePath(
-		path.join('dist', 'server.js')
+		path.join('dist', 'server', 'server.js')
 	);
 
 	// If the extension is launched in debug mode then the debug server options are used
 	// Otherwise the run options are used
 	const serverOptions: ServerOptions = {
-		run: { module: serverModule, transport: TransportKind.stdio },
+		run: { module: serverModule, transport: TransportKind.ipc },
 		debug: {
 			module: serverModule,
-			transport: TransportKind.stdio,
+			transport: TransportKind.ipc,
 		}
 	};
 

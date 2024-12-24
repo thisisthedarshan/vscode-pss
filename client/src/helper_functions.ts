@@ -1,8 +1,8 @@
 import { builtInSignatures } from "./functions_builtin";
 import * as vscode from 'vscode';
 import { keywords } from "./keywords";
-const fs = require('fs');
-const path = require('path');
+import * as fs from 'fs';
+import * as path from 'path';
 
 export function isWithinCommentBlock(document, lineNumber) {
   for (let i = lineNumber; i >= 0; i--) {
@@ -342,4 +342,86 @@ export function updateCacheOnSaveOrOpen(document) {
 
   const fileContent = document.getText();
   return extractVariableNamesFromFile(fileContent);
+}
+
+export function formatDocument(text: string): string {
+  let lines = text.split('\n');
+  const formattedLines: string[] = [];
+
+  let indentLevel = 0;
+  let isInBlockComment = false;
+
+  for (let line of lines) {
+    line = line.trim();
+
+    // Handle closing braces
+    if (line.startsWith('}')) {
+      indentLevel = Math.max(indentLevel - 1, 0);
+    }
+
+    // Check if comment block is encountered
+    if (line.startsWith("/*")) {
+      isInBlockComment = true;
+    }
+    if (line.endsWith("*/")) {
+      isInBlockComment = false;
+      if (!line.startsWith("/*")) {
+        line = line.replace(/^(?!.*\/\*).*?\*\/$/, (match) => match.replace(/(\*\/)/, ' $1'));
+      }
+    }
+
+    // Check if still in comment
+    if (isInBlockComment) {
+      if (line.startsWith("*")) {
+        line = ` ${line}`; // Add an extra space
+      }
+    }
+
+    // Add indentation
+    const indentedLine = `${'    '.repeat(indentLevel)}${line}`;
+    formattedLines.push(indentedLine);
+
+    // Handle opening braces
+    if (line.endsWith('{')) {
+      indentLevel++;
+    }
+
+    // Format specific syntax
+    line = formatBraces(line);
+    line = formatOperators(line);
+    line = formatComments(line);
+  }
+
+  return formattedLines.join('\n');
+}
+
+function formatBraces(line: string): string {
+  // Ensure opening braces stay on the same line
+  line = line.replace(/\s*{\s*$/, ' {');
+
+  // Ensure closing braces followed by `else` remain on the same line
+  line = line.replace(/}\s*else/, '} else');
+
+  // Move standalone closing braces to their own line
+  line = line.replace(/([^{}])\s*}\s*$/, '$1\n}');
+
+  // Ensure braces wrap code properly (e.g., `hello;}` -> `hello;\n}`)
+  line = line.replace(/;\s*}\s*$/, ';\n}');
+
+  return line;
+}
+
+function formatOperators(line: string): string {
+  // Add spaces around operators
+  return line.replace(/([^\s])([+\-*/%^=<>!&|])([^\s])/g, '$1 $2 $3');
+}
+
+function formatComments(line: string): string {
+  // Ensure single-line comments have a space after the //
+  line = line.replace(/\/\/(?! )/, '// ');
+
+  // Align block comments
+  line = line.replace(/\/\*(.+)\*\//g, '/* $1 */');
+
+  return line;
 }
