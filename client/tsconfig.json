@@ -5,7 +5,7 @@
 		"lib": [
 			"es2020"
 		],
-		"outDir": "out",
+		"outDir": "../dist/client/",
 		"rootDir": "src",
 		"sourceMap": true
 	},
