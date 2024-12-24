@@ -164,7 +164,10 @@
       "write_fields",
       "get_offset_of_instance_array",
       "get_offset_of_path",
-      "set_handle"
+      "set_handle",
+      "std_pkg",
+      "executor_pkg",
+      "executor_pkg"
     ]
   },
   "patterns": [
@@ -191,7 +194,7 @@
     {
       "about": "Declarations",
       "name": "keyword.declaration.pss",
-      "match": "\\b(abstract|action|activity|array|class|component|cover|covergroup|coverpoint|declaration|function|instance|package|type|state|resource|symbol|monitor|header|typedef|[a-zA-Z_][a-zA-Z0-9_]*_t|enum|[a-zA-Z_][a-zA-Z0-9_]*_e)\\b"
+      "match": "\\b(abstract|action|activity|array|class|component|cover|covergroup|coverpoint|declaration|function|instance|package|type|state|resource|symbol|monitor|header|typedef|[a-zA-Z_][a-zA-Z0-9_]*_t|enum|[a-zA-Z_][a-zA-Z0-9_]*_e|std_pkg|executor_pkg|executor_pkg)\\b"
     },
     {
       "about": "Assertions and Coverage",
@@ -211,7 +214,7 @@
     {
       "about": "Handle Functions",
       "name": "support.function.handle.pss",
-      "match": "\\b(make_handle_from_claim|make_handle_from_handle|set_handle)\\b"
+      "match": "\\b(make_handle_from_claim|make_handle_from_handle|addr_value(_solve|_abs)?|get_tag|read(8|16|32|64|_bytes|_struct|_val)?|write(8|16|32|64|_bytes|_struct|_val(_masked)?|_field(s)?)?|write_masked|get_offset_of_(instance(_array)?|path)|set_handle)\\b"
     },
     {
       "about": "Memory and Address Handling",

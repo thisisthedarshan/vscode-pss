@@ -17,7 +17,8 @@ export const keywords = {
     "make_handle_from_handle", "addr_value", "addr_value_solve", "get_tag", "read8", "write8", "get_offset_of_instance",
     "log", "pow", "addr_value_abs", "read16", "read32", "read64", "write16", "write32", "write64", "read_bytes",
     "write_bytes", "read_struct", "write_struct", "read", "write", "read_val", "write_val", "write_masked",
-    "write_val_masked", "write_field", "write_fields", "get_offset_of_instance_array", "get_offset_of_path", "set_handle"
+    "write_val_masked", "write_field", "write_fields", "get_offset_of_instance_array", "get_offset_of_path", "set_handle",
+    "std_pkg", "executor_pkg", "executor_pkg"
   ],
   descriptions: [
     "Type definition for chandle, used for address related tasks.",
@@ -183,6 +184,9 @@ export const keywords = {
     "Writes values to multiple fields within a register by names.",
     "Retrieves the 64-bit offset of an instance in an array by its name and index within a register group.",
     "Retrieves the 64-bit offset along a specified path within a register group.",
-    "Sets the address handle for a register group."
+    "Sets the address handle for a register group.",
+    "This package provides standard data types, utility functions, and common constructs used for building reusable and portable stimulus models in the PSS framework.",
+    "This package manages the execution of scenarios by providing utilities for resource allocation, scheduling, and concurrency control, enabling efficient coordination of actions within verification models.",
+    "This package facilitates the modeling and verification of addressable resources, such as memory-mapped registers and devices, providing constructs to describe address layouts, register access, and related operations in PSS."
   ]
 } as const;
