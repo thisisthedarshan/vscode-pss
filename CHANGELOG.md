@@ -1,5 +1,17 @@
 # Change Log
 
+## [0.3.2] - 2024-12-24
+
+### Added
+
+- Highlighting for Standard packages
+- Missing highlighting for some built-in functions
+
+### Changed
+
+- Code formatter logic - Improved the formatter
+- Packaging structure and logic
+
 ## [0.3.1] - 2024-12-18
 
 ### Changed
