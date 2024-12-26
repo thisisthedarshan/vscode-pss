@@ -138,11 +138,42 @@ function formatMultilineComments(documentText: string): string {
 
 
 function formatOperators(input: string): string {
-  return input.replace(/\(([^()]+)\)/g, (match, innerContent) => {
-    // Format the content inside the parentheses
-    const formattedContent = innerContent.replace(/([^\s])([+\-*/%^=<>!&|])([^\s])/g, '$1 $2 $3');
-    return `(${formattedContent})`;
-  });
+  const operatorRegex = /([^\s])([+\-*/%^=<>!&|])([^\s])/g;
+  const excludedOperators = /[+\-*/%^=<>!&|]{2,}/; // Exclude repeated/multiple operators like ++, --, **, etc.
+
+  function formatExpression(expression: string): string {
+    return expression.replace(operatorRegex, (match, left, op, right) => {
+      // Ignore multiple operators in a row
+      if (excludedOperators.test(op)) {
+        return match;
+      }
+      return `${left} ${op} ${right}`;
+    });
+  }
+
+  function formatNested(content: string): string {
+    let previousContent;
+    do {
+      previousContent = content;
+      content = content.replace(/\(([^()]+)\)/g, (match, innerContent) => {
+        return `(${formatExpression(innerContent)})`;
+      });
+    } while (content !== previousContent); // Stop when no more changes are made
+
+    // Format the remaining expression outside parentheses
+    return formatExpression(content);
+  }
+
+  return input.replace(/\/[*][\s\S]*?[*]\//g, match => match) // Ignore multiline comments
+    .replace(/\/\/[^\n]*/g, match => match) // Ignore single-line comments
+    .replace(/['"`][^'"`]*['"`]/g, match => match) // Ignore strings
+    .replace(/[^\s()]+/g, token => {
+      // Only format valid expressions
+      if (excludedOperators.test(token)) {
+        return token;
+      }
+      return formatNested(token);
+    });
 }
 
 
