@@ -1,6 +1,6 @@
-import { builtInSignatures } from "./functions_builtin";
+import { builtInSignatures } from "./definitions/builtinFunctions";
 import * as vscode from 'vscode';
-import { keywords } from "./keywords";
+import { keywords } from "./definitions/keywords";
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -59,7 +59,7 @@ function extractFunctionParameters(lineText) {
   const paramText = lineText.slice(paramStart + 1, paramEnd).trim();
 
   // If there are no parameters, return an empty array
-  if (paramText === "") return [];
+  if (paramText === "") { return []; }
 
   // Split parameters by commas
   return paramText.split(',').map(param => param.trim());
@@ -200,9 +200,7 @@ export async function getCommentForKeyword(variableName, cache) {
 
   if (foundComment === null) {
     for (let keyword in cache) {
-      console.log("Key From GetComment: ", keyword);
       for (let entry of cache[keyword]) {
-        console.log("Entry From GetComment: ", entry);
         // Compare the variableName to entry.variableName, not to keyword
         if (entry.variableName === variableName) {
           return entry.comment;
@@ -232,7 +230,6 @@ function findCommentForVariable(lines, lineNumber, variable) {
   // Look backwards for multi-line comments or single-line comments
   for (let i = lineNumber - 1; i >= 0; i--) {
     let line = lines[i].trim();
-    console.log("Working with: ", line);
     if (line.startsWith('//')) {
       startLine = i;
       if (endLine === -1) {
@@ -271,9 +268,6 @@ function findCommentForVariable(lines, lineNumber, variable) {
   else {
     parsedResult = comment.replace(/^\s*\/\/\s*/gm, '');
   }
-  console.log("Comment: \n", comment);
-
-  console.log("Parsed: \n", parsedResult);
 
   return parsedResult;
 }
@@ -294,7 +288,6 @@ function extractVariableNamesFromFile(fileContent) {
       const keyword = match[1];
       const varName = match[2];
       let commentString = '';
-      console.log("Found Keyword: ", varName);
 
       // Look for comments preceding the variable
       commentString = findCommentForVariable(lines, lineNumber, varName);
@@ -344,84 +337,3 @@ export function updateCacheOnSaveOrOpen(document) {
   return extractVariableNamesFromFile(fileContent);
 }
 
-export function formatDocument(text: string): string {
-  let lines = text.split('\n');
-  const formattedLines: string[] = [];
-
-  let indentLevel = 0;
-  let isInBlockComment = false;
-
-  for (let line of lines) {
-    line = line.trim();
-
-    // Handle closing braces
-    if (line.startsWith('}')) {
-      indentLevel = Math.max(indentLevel - 1, 0);
-    }
-
-    // Check if comment block is encountered
-    if (line.startsWith("/*")) {
-      isInBlockComment = true;
-    }
-    if (line.endsWith("*/")) {
-      isInBlockComment = false;
-      if (!line.startsWith("/*")) {
-        line = line.replace(/^(?!.*\/\*).*?\*\/$/, (match) => match.replace(/(\*\/)/, ' $1'));
-      }
-    }
-
-    // Check if still in comment
-    if (isInBlockComment) {
-      if (line.startsWith("*")) {
-        line = ` ${line}`; // Add an extra space
-      }
-    }
-
-    // Add indentation
-    const indentedLine = `${'    '.repeat(indentLevel)}${line}`;
-    formattedLines.push(indentedLine);
-
-    // Handle opening braces
-    if (line.endsWith('{')) {
-      indentLevel++;
-    }
-
-    // Format specific syntax
-    line = formatBraces(line);
-    line = formatOperators(line);
-    line = formatComments(line);
-  }
-
-  return formattedLines.join('\n');
-}
-
-function formatBraces(line: string): string {
-  // Ensure opening braces stay on the same line
-  line = line.replace(/\s*{\s*$/, ' {');
-
-  // Ensure closing braces followed by `else` remain on the same line
-  line = line.replace(/}\s*else/, '} else');
-
-  // Move standalone closing braces to their own line
-  line = line.replace(/([^{}])\s*}\s*$/, '$1\n}');
-
-  // Ensure braces wrap code properly (e.g., `hello;}` -> `hello;\n}`)
-  line = line.replace(/;\s*}\s*$/, ';\n}');
-
-  return line;
-}
-
-function formatOperators(line: string): string {
-  // Add spaces around operators
-  return line.replace(/([^\s])([+\-*/%^=<>!&|])([^\s])/g, '$1 $2 $3');
-}
-
-function formatComments(line: string): string {
-  // Ensure single-line comments have a space after the //
-  line = line.replace(/\/\/(?! )/, '// ');
-
-  // Align block comments
-  line = line.replace(/\/\*(.+)\*\//g, '/* $1 */');
-
-  return line;
-}

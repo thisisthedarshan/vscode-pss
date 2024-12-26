@@ -11,7 +11,6 @@ import {
 import {
 	countLeadingSpaces,
 	extractFunctionName,
-	formatDocument,
 	getActiveParameter,
 	getCommentForKeyword,
 	getFunctionSignature,
@@ -20,7 +19,8 @@ import {
 	updateCacheOnSaveOrOpen
 } from './helper_functions';
 
-import { keywords } from './keywords';
+import { keywords } from './definitions/keywords';
+import { formatDocument } from './providers/formattingProvider';
 
 let client: LanguageClient;
 let cache = {};
@@ -28,8 +28,10 @@ let cache = {};
 export function activate(context: vscode.ExtensionContext) {
 	console.log("Started PSS Language Support Extension :D");
 
-	/* Register formatter for multi-line comments */
+	/* Create a cache for variables from all open files */
+	cache = initializeCache();
 
+	/* Register formatter for whole document */
 	vscode.languages.registerDocumentFormattingEditProvider(
 		{ scheme: 'file', language: 'pss' },
 		{
@@ -41,6 +43,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 				// Format the document using custom rules
 				const formattedText = formatDocument(documentText);
+
+				console.log("Formatted Document: ", document.fileName);
 
 				// Define a range that covers the entire document
 				const fullRange = new vscode.Range(
@@ -55,6 +59,7 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	);
 
+	/*
 	vscode.languages.registerOnTypeFormattingEditProvider('pss',
 		{
 			provideOnTypeFormattingEdits(document, position, ch, options, token) {
@@ -71,7 +76,7 @@ export function activate(context: vscode.ExtensionContext) {
 				else if (line === '/*' || line === '/**') {
 					const indent = countLeadingSpaces(line); // Get the indentation of the current line
 					return [vscode.TextEdit.insert(position, `\n${indent} * `)];
-				} else if (line === '*/' || line === '**/') {
+				} else if (line === '* /' || line === '** /') { // update these
 					return [vscode.TextEdit.insert(position, '')];
 				}
 
@@ -80,6 +85,7 @@ export function activate(context: vscode.ExtensionContext) {
 		},
 		'\n'  // Trigger on Enter (newline character)
 	);
+*/
 
 	/* Register update cache functions */
 	context.subscriptions.push(
@@ -134,7 +140,7 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 
 	/* Add an auto-complete for comments */
-	context.subscriptions.push(
+	/*context.subscriptions.push(
 		vscode.workspace.onDidChangeTextDocument(event => {
 			const editor = vscode.window.activeTextEditor;
 			if (!editor || event.document !== editor.document) { return; }
@@ -159,7 +165,7 @@ export function activate(context: vscode.ExtensionContext) {
 				});
 			}
 		})
-	);
+	);*/
 
 	/* Add autocompletion for keywords */
 	context.subscriptions.push(
@@ -203,7 +209,6 @@ export function activate(context: vscode.ExtensionContext) {
 	context.subscriptions.push(
 		vscode.languages.registerHoverProvider('pss', {
 			async provideHover(document, position, token) {
-				console.log("Hover provider triggered");
 				const wordRange = document.getWordRangeAtPosition(position);
 				const word = document.getText(wordRange);
 				const comment = await getCommentForKeyword(word, cache);
@@ -212,9 +217,6 @@ export function activate(context: vscode.ExtensionContext) {
 				}
 			}
 		}));
-
-	/* Create a cache for variables from all open files */
-	cache = initializeCache();
 
 	/*********		Server Part		********/
 	// The server is implemented in node
