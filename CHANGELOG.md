@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.3.3] - 2024-12-26
+
+### Changed
+
+- Formatter logic for brackets
+- Re-organized the files in a proper structure
+
 ## [0.3.2] - 2024-12-24
 
 ### Added
