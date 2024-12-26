@@ -89,8 +89,8 @@ export function activate(context: vscode.ExtensionContext) {
 
 	/* Register update cache functions */
 	context.subscriptions.push(
-		vscode.workspace.onDidSaveTextDocument((document) => { cache = updateCacheOnSaveOrOpen(document); console.log("Cache ", cache); }),
-		vscode.workspace.onDidOpenTextDocument((document) => { cache = updateCacheOnSaveOrOpen(document); console.log("Cache ", cache); }),
+		vscode.workspace.onDidSaveTextDocument((document) => { cache = updateCacheOnSaveOrOpen(document); }),
+		vscode.workspace.onDidOpenTextDocument((document) => { cache = updateCacheOnSaveOrOpen(document); }),
 		vscode.window.onDidChangeActiveTextEditor((editor) => {
 			if (editor && editor.document.languageId === 'pss') {
 				cache = updateCacheOnSaveOrOpen(editor.document);
