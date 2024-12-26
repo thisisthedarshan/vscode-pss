@@ -83,10 +83,10 @@ function addNewlinesAfterSemicolons(input: string): string {
 
 function formatMultilineComments(documentText: string): string {
   return documentText.replace(
-    /\/\*+(\*?)\s*([\s\S]*?)\*\//g,
-    (match, docBlock, commentBody) => {
-      // Retain the opening block (`/*` or `/**`)
-      const opening = docBlock ? '/**' : '/*';
+    /(\/\*\*?)([\s\S]*?)\*\//g,
+    (match, openingBlock, commentBody) => {
+      // Preserve the opening block exactly as it is
+      const opening = openingBlock;
 
       // If the comment body is empty or just contains stars, return the comment as is
       if (!commentBody.trim()) {
@@ -103,7 +103,7 @@ function formatMultilineComments(documentText: string): string {
       const lines = commentBody.split('\n');
 
       // Process each line of the comment
-      const formattedLines = lines.map((line, index) => {
+      const formattedLines = lines.map((line) => {
         const trimmedLine = line.trim();
 
         // Skip empty or '*' only lines
