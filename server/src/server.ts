@@ -19,27 +19,22 @@ import {
   TextDocument
 } from 'vscode-languageserver-textdocument';
 
-import * as vscode from 'vscode';
-
-const fs = require('fs');
-const path = require('path');
-const readline = require('readline');
-
+// Create a connection for the server, using Node's IPC as a transport.
+// Also include all preview / proposed LSP features.
 const connection = createConnection(ProposedFeatures.all);
-const documents = new TextDocuments(TextDocument);
 
-const scannedPackages = new Set(); // Store unique package names
-const outputChannel = vscode.window.createOutputChannel('PSS Language Server Logs');
+// Create a simple text document manager.
+const documents = new TextDocuments(TextDocument);
 
 let hasConfigurationCapability = false;
 let hasWorkspaceFolderCapability = false;
 let hasDiagnosticRelatedInformationCapability = false;
 
-let workspaceRoot: string; // WIll hold path of the workspace
-
 connection.onInitialize((params: InitializeParams) => {
-  console.log("Initializing server...");
   const capabilities = params.capabilities;
+
+  // Does the client support the `workspace/configuration` request?
+  // If not, we fall back using global settings.
   hasConfigurationCapability = !!(
     capabilities.workspace && !!capabilities.workspace.configuration
   );
@@ -51,11 +46,6 @@ connection.onInitialize((params: InitializeParams) => {
     capabilities.textDocument.publishDiagnostics &&
     capabilities.textDocument.publishDiagnostics.relatedInformation
   );
-
-  workspaceRoot = params.workspaceFolders ? path.normalize(params.workspaceFolders.toString()) : "";
-  outputChannel.appendLine(workspaceRoot);
-  console.log("Workspace:", workspaceRoot);
-  outputChannel.show();
 
   const result: InitializeResult = {
     capabilities: {
@@ -80,58 +70,7 @@ connection.onInitialize((params: InitializeParams) => {
   return result;
 });
 
-
-// Function to scan `.pss` files and extract packages
-function extractPackageNamesFromFile(filePath: any) {
-  const fileStream = fs.createReadStream(filePath, 'utf8');
-  const rl = readline.createInterface({
-    input: fileStream,
-    crlfDelay: Infinity
-  });
-
-  rl.on('line', (line: string) => {
-    // Match 'package' keyword followed by the package name
-    const match = line.match(/\bpackage\s+([a-zA-Z0-9_]+)\b/);
-    if (match && match[1]) {
-      scannedPackages.add(match[1]);  // Add the package name to the set
-    }
-  });
-
-  rl.on('close', () => {
-    console.log(`Finished scanning ${filePath}`);
-  });
-}
-
-// Function to scan all `.pss` files in the workspace
-function scanFilesForPackages() {
-  if (!workspaceRoot || workspaceRoot === "") {
-    console.log("Invalid WorkspaceRot");
-    return; // No workspace root is available
-  }
-
-  console.log("Scanning files for import statements");
-
-  fs.readdir(workspaceRoot, (err: any, files: string[]) => {
-    if (err) {
-      console.error('Error reading directory:', err);
-      return;
-    }
-
-    files.forEach((file: string) => {
-      const filePath = path.join(workspaceRoot, file);
-      if (file.endsWith('.pss')) {
-        // Scan each `.pss` file for package names
-        extractPackageNamesFromFile(filePath);
-      }
-    });
-  });
-}
-
-scanFilesForPackages();
-
-
 connection.onInitialized(() => {
-  connection.console.log(workspaceRoot);
   if (hasConfigurationCapability) {
     // Register for all configuration changes.
     connection.client.register(DidChangeConfigurationNotification.type, undefined);
@@ -139,20 +78,23 @@ connection.onInitialized(() => {
   if (hasWorkspaceFolderCapability) {
     connection.workspace.onDidChangeWorkspaceFolders(_event => {
       connection.console.log('Workspace folder change event received.');
-      scanFilesForPackages();
     });
   }
 });
 
-interface pssSettings {
+// The example settings
+interface ExampleSettings {
   maxNumberOfProblems: number;
 }
 
-const defaultSettings: pssSettings = { maxNumberOfProblems: 1000 };
-let globalSettings: pssSettings = defaultSettings;
+// The global settings, used when the `workspace/configuration` request is not supported by the client.
+// Please note that this is not the case when using this server with the client provided in this example
+// but could happen with other clients.
+const defaultSettings: ExampleSettings = { maxNumberOfProblems: 1000 };
+let globalSettings: ExampleSettings = defaultSettings;
 
 // Cache the settings of all open documents
-const documentSettings = new Map<string, Thenable<pssSettings>>();
+const documentSettings = new Map<string, Thenable<ExampleSettings>>();
 
 connection.onDidChangeConfiguration(change => {
   if (hasConfigurationCapability) {
@@ -160,7 +102,7 @@ connection.onDidChangeConfiguration(change => {
     documentSettings.clear();
   } else {
     globalSettings = (
-      (change.settings.lspPSS || defaultSettings)
+      (change.settings.languageServerExample || defaultSettings)
     );
   }
   // Refresh the diagnostics since the `maxNumberOfProblems` could have changed.
@@ -169,7 +111,7 @@ connection.onDidChangeConfiguration(change => {
   connection.languages.diagnostics.refresh();
 });
 
-function getDocumentSettings(resource: string): Thenable<pssSettings> {
+function getDocumentSettings(resource: string): Thenable<ExampleSettings> {
   if (!hasConfigurationCapability) {
     return Promise.resolve(globalSettings);
   }
@@ -211,7 +153,6 @@ connection.languages.diagnostics.on(async (params) => {
 // when the text document first opened or when its content has changed.
 documents.onDidChangeContent(change => {
   validateTextDocument(change.document);
-  scanFilesForPackages();
 });
 
 async function validateTextDocument(textDocument: TextDocument): Promise<Diagnostic[]> {
@@ -262,24 +203,26 @@ async function validateTextDocument(textDocument: TextDocument): Promise<Diagnos
 connection.onDidChangeWatchedFiles(_change => {
   // Monitored files have change in VSCode
   connection.console.log('We received a file change event');
-  scanFilesForPackages();
 });
 
 // This handler provides the initial list of the completion items.
 connection.onCompletion(
   (_textDocumentPosition: TextDocumentPositionParams): CompletionItem[] => {
-    const importSuggestions: CompletionItem[] | { label: string; insertText: string; kind: any; }[] = [];
-
-    // Add completion items for each package found
-    scannedPackages.forEach(packageName => {
-      importSuggestions.push({
-        label: `import ${packageName} :: *;`,
-        insertText: `import ${packageName} :: *;`,
-        kind: CompletionItemKind.Reference
-      });
-    });
-
-    return importSuggestions;
+    // The pass parameter contains the position of the text document in
+    // which code complete got requested. For the example we ignore this
+    // info and always provide the same completion items.
+    return [
+      {
+        label: 'TypeScript',
+        kind: CompletionItemKind.Text,
+        data: 1
+      },
+      {
+        label: 'JavaScript',
+        kind: CompletionItemKind.Text,
+        data: 2
+      }
+    ];
   }
 );
 
