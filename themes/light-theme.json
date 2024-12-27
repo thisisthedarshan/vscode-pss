@@ -138,6 +138,72 @@
       "settings": {
         "foreground": "#9BD1E5"
       }
+    },
+    {
+      "scope": "entity.name.namespace.pss",
+      "settings": {
+        "foreground": "#007ACC"
+      }
+    },
+    {
+      "scope": "entity.name.type.pss",
+      "settings": {
+        "foreground": "#0451A5"
+      }
+    },
+    {
+      "scope": "storage.type.struct.pss",
+      "settings": {
+        "foreground": "#AF5F00"
+      }
+    },
+    {
+      "scope": "entity.name.type.enum.pss",
+      "settings": {
+        "foreground": "#811F8F"
+      }
+    },
+    {
+      "scope": "entity.name.type.class.pss",
+      "settings": {
+        "foreground": "#007ACC"
+      }
+    },
+    {
+      "scope": "entity.name.function.pss",
+      "settings": {
+        "foreground": "#0000FF"
+      }
+    },
+    {
+      "scope": "variable.other.readwrite.pss",
+      "settings": {
+        "foreground": "#A31515"
+      }
+    },
+    {
+      "scope": "variable.other.constant.pss",
+      "settings": {
+        "foreground": "#098658"
+      }
+    },
+    {
+      "scope": "variable.parameter.pss",
+      "settings": {
+        "foreground": "#0451A5"
+      }
+    },
+    {
+      "scope": "entity.name.label.pss",
+      "settings": {
+        "foreground": "#AF5F00"
+      }
+    },
+    {
+      "scope": "entity.name.function.operator.pss",
+      "settings": {
+        "foreground": "#0000FF"
+      }
     }
   ]
 }
