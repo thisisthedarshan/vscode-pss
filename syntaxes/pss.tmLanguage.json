@@ -2,6 +2,7 @@
   "fileTypes": [
     "pss"
   ],
+  "scopeName": "source.pss",
   "about": "pss",
   "tokenTypes": {
     "keywords": [
@@ -266,8 +267,8 @@
     },
     {
       "about": "Double-quoted string literals",
-      "begin": "\"",
-      "end": "\"",
+      "begin": "\"(?!\"\")",
+      "end": "\"(?!\")",
       "patterns": [
         {
           "about": "Escape sequences in double-quoted strings",
@@ -281,44 +282,26 @@
       "about": "Triple-quoted or curly brace literals with embedded language support (C and SystemVerilog)",
       "patterns": [
         {
-          "about": "Triple-quoted strings for exec body/header",
-          "begin": "(?i)exec\\s+(body|header)\\s+(c|sv)\\s*=\\s*\"\"\"",
+          "about": "Triple-quoted strings for embedded C and SV",
+          "begin": "\"\"\"\\s*//\\s*(c|sv)\\s*",
           "end": "\"\"\"\\s*;",
+          "name": "string.quoted.triple.pss",
           "patterns": [
             {
               "about": "Embedded C language block",
-              "begin": "(?i)(?<=exec\\s+(body|header)\\s+c\\s*=\\s*\"\"\")",
-              "end": "(?=\"\"\"\\s*;)",
-              "name": "meta.embedded.block.c"
+              "match": "(?i)^//\\s*c\\s*",
+              "contentName": "meta.embedded.block.c",
+              "include": "source.c",
+              "scopeName": "source.c"
             },
             {
               "about": "Embedded SystemVerilog language block",
-              "begin": "(?i)(?<=exec\\s+(body|header)\\s+sv\\s*=\\s*\"\"\")",
-              "end": "(?=\"\"\"\\s*;)",
-              "name": "meta.embedded.block.sv"
+              "match": "(?i)^//\\s*sv\\s*",
+              "contentName": "meta.embedded.block.sv",
+              "include": "source.sv",
+              "scopeName": "source.sv"
             }
-          ],
-          "name": "string.quoted.triple.pss"
-        },
-        {
-          "about": "Curly brace strings for exec body/header",
-          "begin": "(?i)exec\\s+(body|header)\\s+(c|sv)\\s*=\\s*\\{",
-          "end": "\\}\\s*;",
-          "patterns": [
-            {
-              "about": "Embedded C language block",
-              "begin": "(?i)(?<=exec\\s+(body|header)\\s+c\\s*=\\s*\\{)",
-              "end": "(?=\\}\\s*;)",
-              "name": "meta.embedded.block.c"
-            },
-            {
-              "about": "Embedded SystemVerilog language block",
-              "begin": "(?i)(?<=exec\\s+(body|header)\\s+sv\\s*=\\s*\\{)",
-              "end": "(?=\\}\\s*;)",
-              "name": "meta.embedded.block.sv"
-            }
-          ],
-          "name": "string.quoted.curly.pss"
+          ]
         }
       ]
     },
@@ -365,6 +348,5 @@
         }
       }
     }
-  ],
-  "scopeName": "source.pss"
+  ]
 }
