@@ -179,7 +179,7 @@ function formatOperators(input: string): string {
 
 function formatSingleLineComments(line: string): string {
   // Ensure single-line comments have a space after the //
-  line = line.replace(/\/\/(?! )/, '// ');
+  line = line.replace(/\/\/(?! )/, ' // ');
 
   return line;
 }
