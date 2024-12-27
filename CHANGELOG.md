@@ -1,5 +1,14 @@
 # Change Log
 
+## [0.3.4] - 2024-12-27
+
+### Added
+
+- Highlighting for scope resolution operator ( :: )
+- Highlighting for Template-types ( < > )
+- Highlighting for derived types - inheritance ( x : y)
+- Highlighting for embedded languages
+
 ## [0.3.3] - 2024-12-26
 
 ### Changed

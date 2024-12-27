@@ -278,6 +278,51 @@
       "name": "string.quoted.double.pss"
     },
     {
+      "about": "Triple-quoted or curly brace literals with embedded language support (C and SystemVerilog)",
+      "patterns": [
+        {
+          "about": "Triple-quoted strings for exec body/header",
+          "begin": "(?i)exec\\s+(body|header)\\s+(c|sv)\\s*=\\s*\"\"\"",
+          "end": "\"\"\"\\s*;",
+          "patterns": [
+            {
+              "about": "Embedded C language block",
+              "begin": "(?i)(?<=exec\\s+(body|header)\\s+c\\s*=\\s*\"\"\")",
+              "end": "(?=\"\"\"\\s*;)",
+              "name": "meta.embedded.block.c"
+            },
+            {
+              "about": "Embedded SystemVerilog language block",
+              "begin": "(?i)(?<=exec\\s+(body|header)\\s+sv\\s*=\\s*\"\"\")",
+              "end": "(?=\"\"\"\\s*;)",
+              "name": "meta.embedded.block.sv"
+            }
+          ],
+          "name": "string.quoted.triple.pss"
+        },
+        {
+          "about": "Curly brace strings for exec body/header",
+          "begin": "(?i)exec\\s+(body|header)\\s+(c|sv)\\s*=\\s*\\{",
+          "end": "\\}\\s*;",
+          "patterns": [
+            {
+              "about": "Embedded C language block",
+              "begin": "(?i)(?<=exec\\s+(body|header)\\s+c\\s*=\\s*\\{)",
+              "end": "(?=\\}\\s*;)",
+              "name": "meta.embedded.block.c"
+            },
+            {
+              "about": "Embedded SystemVerilog language block",
+              "begin": "(?i)(?<=exec\\s+(body|header)\\s+sv\\s*=\\s*\\{)",
+              "end": "(?=\\}\\s*;)",
+              "name": "meta.embedded.block.sv"
+            }
+          ],
+          "name": "string.quoted.curly.pss"
+        }
+      ]
+    },
+    {
       "about": "Numeric constants (binary, octal, decimal, hexadecimal)",
       "match": "\\b([+-]?(?:(0[bB][01_]+)|(0[oO][0-7_]+)|(0[xX][0-9a-fA-F_]+(?:[hH])?)|(0[0-9_]*(?:\\.[0-9_]+)?(?:[eE][+-]?[0-9_]+)?)|([1-9][0-9_]*(?:\\.[0-9_]+)?(?:[eE][+-]?[0-9_]+)?)|(\\[[1-9][0-9_]*\\]\\s*['sS][bB][01_]+)|(\\[[1-9][0-9_]*\\]\\s*['sS][oO][0-7_]+)|(\\[[1-9][0-9_]*\\]\\s*['sS][dD][0-9_]+)|(\\[[1-9][0-9_]*\\]\\s*['sS][hH][0-9a-fA-F_]+)|(-?['sS][bB][01_]+)|(-?['sS][oO][0-7_]+)|(-?['sS][dD][0-9_]+)|(-?['sS][hH][0-9a-fA-F_]+)))\\b",
       "name": "constant.numeric.pss"
@@ -286,6 +331,39 @@
       "about": "Punctuation and special characters",
       "match": "[{}()\\[\\],.;]",
       "name": "punctuation.pss"
+    },
+    {
+      "about": "Scope resolution operator (::) and preceding text highlighting",
+      "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*::",
+      "captures": {
+        "1": {
+          "name": "keyword.type.pss"
+        },
+        "0": {
+          "name": "keyword.operator.pss"
+        }
+      }
+    },
+    {
+      "about": "Inheritance syntax highlighting (:)",
+      "match": "\\s*:\\s*([a-zA-Z_][a-zA-Z0-9_]*)",
+      "captures": {
+        "0": {
+          "name": "keyword.operator.pss"
+        },
+        "1": {
+          "name": "keyword.type.pss"
+        }
+      }
+    },
+    {
+      "about": "Highlight template blocks (<>)",
+      "match": "<.*?>",
+      "captures": {
+        "0": {
+          "name": "keyword.operator.pss"
+        }
+      }
     }
   ],
   "scopeName": "source.pss"
