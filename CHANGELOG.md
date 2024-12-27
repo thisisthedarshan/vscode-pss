@@ -1,5 +1,13 @@
 # Change Log
 
+## [0.3.5] - 2024-12-27
+
+### Changed
+
+- Updated highlighting for embedded languages.
+- Updated themes
+- Updated formatter to ignore extra newlines.
+
 ## [0.3.4] - 2024-12-27
 
 ### Added
