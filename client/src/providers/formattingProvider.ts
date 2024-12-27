@@ -15,6 +15,12 @@ export function formatDocument(text: string): string {
 
 
   for (let line of lines) {
+    // Keep empty newlines as it is
+    if (line.trim() === '') {
+      formattedLines.push(line); // Keep the empty line as-is
+      continue;
+    }
+
     line = line.trim();
 
     // Format specific syntax
@@ -75,11 +81,10 @@ function formatCurlyBraces(input: string): string {
 }
 
 function addNewlinesAfterSemicolons(input: string): string {
-  // Add a newline after every `;` if it doesn't already have one
-  input = input.replace(/;\s*(?!\n)/g, ';\n');
-  return input.trim();
+  // Add a newline after every `;` if it doesn't already have one or more newlines after it, excluding comments
+  input = input.replace(/;(?!\s*\n)(?!\s*(\/\/|\*\/))/g, ';\n');
+  return input; // No need for .trim() to avoid stripping empty lines
 }
-
 
 function formatMultilineComments(documentText: string): string {
   return documentText.replace(
@@ -178,8 +183,9 @@ function formatOperators(input: string): string {
 
 
 function formatSingleLineComments(line: string): string {
-  // Ensure single-line comments have a space after the //
-  line = line.replace(/\/\/(?! )/, ' // ');
+  // Ensure there is a space before and after the //
+  line = line.replace(/(\S)(\/\/)(?! )/, '$1 // '); // Add a space before //
+  line = line.replace(/\/\/(?! )/, '// '); // Ensure a space after //
 
   return line;
 }
