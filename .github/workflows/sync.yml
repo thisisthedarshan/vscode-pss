@@ -39,3 +39,4 @@ jobs:
         run: |
           git checkout main
           git push gitlab main
+          git push gitlab --tags
