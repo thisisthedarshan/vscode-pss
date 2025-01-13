@@ -74,15 +74,25 @@ function formatCurlyBraces(input: string): string {
   // Ensure there is always a newline after the opening `{`
   input = input.replace(/({)\s*/g, '$1\n');
 
-  // Ensure the closing `}` is on its own line and followed by a newline
-  input = input.replace(/\s*}\s*/g, '\n}\n');
+  console.log(input);
+  // Ensure `}` is on its own line and add a newline before it if needed
+  input = input.replace(/([^\n])(\s*})(?!\n)/g, '$1\n$2');
+
+  console.log(input);
+
+  // Add a newline after `}` only if there is no newline already
+  input = input.replace(/}(?!\n)(?!\s*\n)/g, '}\n');
+
+  console.log(input);
+
+
 
   return input.trim();
 }
 
 function addNewlinesAfterSemicolons(input: string): string {
   // Add a newline after every `;` if it doesn't already have one or more newlines after it, excluding comments
-  input = input.replace(/;(?!\s*\n)(?!\s*(\/\/|\*\/))/g, ';\n');
+  input = input.replace(/;(?!\s*(?:\n|\/\/|\*\/|\*))/g, ';\n');
   return input; // No need for .trim() to avoid stripping empty lines
 }
 
@@ -172,6 +182,7 @@ function formatOperators(input: string): string {
   return input.replace(/\/[*][\s\S]*?[*]\//g, match => match) // Ignore multiline comments
     .replace(/\/\/[^\n]*/g, match => match) // Ignore single-line comments
     .replace(/['"`][^'"`]*['"`]/g, match => match) // Ignore strings
+    .replace(/\bhttps?:\/\/[^\s)]+/g, match => match) // Ignore URLs
     .replace(/[^\s()]+/g, token => {
       // Only format valid expressions
       if (excludedOperators.test(token)) {
