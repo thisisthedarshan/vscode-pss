@@ -9,13 +9,11 @@ import {
 } from 'vscode-languageclient/node';
 
 import {
-	countLeadingSpaces,
 	extractFunctionName,
 	getActiveParameter,
 	getCommentForKeyword,
 	getFunctionSignature,
 	initializeCache,
-	isWithinCommentBlock,
 	updateCacheOnSaveOrOpen
 } from './helper_functions';
 
