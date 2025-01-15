@@ -283,23 +283,31 @@
       "patterns": [
         {
           "about": "Triple-quoted strings for embedded C and SV",
-          "begin": "\"\"\"\\s*//\\s*(c|sv)\\s*",
+          "begin": "(?i)(c|sv)\\s*=\\s*\"\"\"",
+          "beginCaptures": {
+            "1": {
+              "name": "storage.type.language.pss"
+            }
+          },
           "end": "\"\"\"\\s*;",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.definition.string.end.pss"
+            }
+          },
           "name": "string.quoted.triple.pss",
           "patterns": [
             {
               "about": "Embedded C language block",
-              "match": "(?i)^//\\s*c\\s*",
+              "match": "(?i)c\\s*=\\s*\"\"\"",
               "contentName": "meta.embedded.block.c",
-              "include": "source.c",
-              "scopeName": "source.c"
+              "include": "source.c"
             },
             {
               "about": "Embedded SystemVerilog language block",
-              "match": "(?i)^//\\s*sv\\s*",
+              "match": "(?i)sv\\s*=\\s*\"\"\"",
               "contentName": "meta.embedded.block.sv",
-              "include": "source.sv",
-              "scopeName": "source.sv"
+              "include": "source.sv"
             }
           ]
         }
