@@ -1,5 +1,12 @@
 # Change Log
 
+## [0.3.6] - 2025-01-15
+
+### Changed
+
+- Fixed an issue with the formatter where it didn't respect extra newlines and incorrectly added unnecessary newlines before closing curly braces.
+- Updated highlighting for embedded languages.
+
 ## [0.3.5] - 2024-12-27
 
 ### Changed
