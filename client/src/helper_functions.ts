@@ -4,20 +4,6 @@ import { keywords } from "./definitions/keywords";
 import * as fs from 'fs';
 import * as path from 'path';
 
-export function isWithinCommentBlock(document, lineNumber) {
-  for (let i = lineNumber; i >= 0; i--) {
-    const lineText = document.lineAt(i).text.trim();
-
-    if ((lineText.startsWith('/*') || lineText.startsWith("/**")) && !lineText.endsWith('*/')) {
-      return true;  // Found the start of an unclosed block comment
-    }
-    if (lineText.endsWith('*/')) {
-      return false;  // Found the end of the block comment
-    }
-  }
-  return false;
-}
-
 // Helper function to extract the function name from the text
 export function extractFunctionName(lineText) {
   const match = lineText.match(/(\w+)\s*\(/);
@@ -27,7 +13,6 @@ export function extractFunctionName(lineText) {
 export function getFunctionSignature(functionName) {
   return builtInSignatures[functionName] || null;
 }
-
 
 export function getActiveParameter(lineText, cursorPosition) {
   const params = extractFunctionParameters(lineText);  // Extract the parameters as before
@@ -213,7 +198,6 @@ export async function getCommentForKeyword(variableName, cache) {
 
   return foundComment;
 }
-
 
 function getFilesInFolder(folderPath) {
   return fs.readdirSync(folderPath).filter(file => {
