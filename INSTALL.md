@@ -13,9 +13,13 @@ In VS Code, *Launch VS Code Quick Open* (using **Ctrl+P**) and paste the followi
 
 ## 3. Through release
 
-- Go to [GitHub Releases](https://github.com/thisisthedarshan/vscode-pss/releases)
-- Click on the Assets Dropdown on the latest version
-- Click on the **release-pss-vsc.vsix** file and it should be downloaded
+- Get the release file
+  - Option 1 :
+    - Directly download the [latest release-pss-vsc.vsix](<https://github.com/thisisthedarshan/vscode-pss/releases/latest/download/release-pss-vsc.vsix>)
+  - Option 2 :
+    - Go to [Latest GitHub Release](https://github.com/thisisthedarshan/vscode-pss/releases/latest)
+    - Click on the Assets Dropdown
+    - Click on the **release-pss-vsc.vsix** file to download it
 - Run the command ```code --install-extension release-pss-vsc.vsix``` to install the downloaded extension
 
 ## 4. From Source
@@ -26,4 +30,4 @@ In VS Code, *Launch VS Code Quick Open* (using **Ctrl+P**) and paste the followi
 - Run ``npm install``
 - Install the [vsce](https://www.npmjs.com/package/vsce) node package using ``npm install @vscode/vsce``
 - Run ``vsce package`` to create the **.vsix** file.
-- Install the package using ``code --install-extension generated-vsix-file-name.vsix``
+- Install the package using ``code --install-extension dsp-vsc-pss-<release-version>.vsix``
