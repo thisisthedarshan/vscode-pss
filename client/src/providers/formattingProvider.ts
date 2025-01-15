@@ -1,10 +1,10 @@
 export function formatDocument(text: string): string {
   // Start by formatting curly braces
   let doc = formatCurlyBraces(text);
-  // Then format semicolons
-  doc = addNewlinesAfterSemicolons(doc);
   // Format multi-line comments:
   doc = formatMultilineComments(doc);
+  // Then format semicolons
+  doc = addNewlinesAfterSemicolons(doc);
 
   // The make it process line by line
   let lines = doc.split('\n');
@@ -91,8 +91,8 @@ function formatCurlyBraces(input: string): string {
 }
 
 function addNewlinesAfterSemicolons(input: string): string {
-  // Add a newline after every `;` if it doesn't already have one or more newlines after it, excluding comments
-  input = input.replace(/;(?!\s*(?:\n|\/\/|\*\/|\*))/g, ';\n');
+  // Step 1: Add newline after semicolon if not followed by newline or comment (single-line or multi-line)
+  input = input.replace(/;(?!\s*(?:\n|\/\/|\/\*[^*]*\*\/))(?=\s*(?!\n))(?=\s*(?![^*]*\*\/)[^]*\n)/g, ';\n');
   return input; // No need for .trim() to avoid stripping empty lines
 }
 
