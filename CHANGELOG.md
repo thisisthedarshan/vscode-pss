@@ -1,5 +1,11 @@
 # Change Log
 
+## [Unreleased]
+
+### Changed
+
+- Fixed a bug where the formatter adds a newline after a semicolon even if a comment block present immediately follows it
+
 ## [0.3.6] - 2025-01-15
 
 ### Changed
