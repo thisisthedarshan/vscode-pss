@@ -71,8 +71,8 @@ function formatCurlyBraces(input: string): string {
   // Ensure there is exactly 1 space before the opening `{`
   input = input.replace(/\s*{/g, ' {');
 
-  // Ensure there is always a newline after the opening `{`
-  input = input.replace(/({)\s*/g, '$1\n');
+  // Ensure there is always a newline after the opening `{` without removing existing newlines
+  input = input.replace(/({)(?!\n)/g, '$1\n');
 
   // Ensure `}` is on its own line and add a newline before it if needed
   input = input.replace(/([^\n])(\s*})(?!\n)/g, '$1\n$2');
