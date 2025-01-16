@@ -83,6 +83,20 @@
           "meta.embedded.block.sv": "systemverilog"
         }
       }
+    ],
+    "commands": [
+      {
+        "command": "pss.addFileHeader",
+        "title": "Add/Update File Header"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "pss.addFileHeader",
+        "key": "ctrl+shift+h",
+        "mac": "cmd+shift+h",
+        "when": "editorTextFocus"
+      }
     ]
   },
   "devDependencies": {

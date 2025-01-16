@@ -3,6 +3,7 @@ import * as vscode from 'vscode';
 import { keywords } from "./definitions/keywords";
 import * as fs from 'fs';
 import * as path from 'path';
+import * as fsp from 'fs/promises';
 
 // Helper function to extract the function name from the text
 export function extractFunctionName(lineText) {
@@ -321,3 +322,13 @@ export function updateCacheOnSaveOrOpen(document) {
   return extractVariableNamesFromFile(fileContent);
 }
 
+
+export async function getCreationDate(filePath: string): Promise<Date> {
+  try {
+    const stats = await fsp.stat(filePath); // Get file metadata
+    return stats.birthtime; // Return the creation date
+  } catch (error) {
+    console.error('Failed to get file creation date:', error);
+    throw new Error('Could not retrieve creation date');
+  }
+}

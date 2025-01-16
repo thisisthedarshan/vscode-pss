@@ -199,3 +199,37 @@ function formatSingleLineComments(line: string): string {
   line = line.replace(/\/\/(?! )(?!\/|[a-zA-Z]+:)/, '// '); // Ensure a space after `//` only if it's not part of a URL
   return line;
 }
+
+
+export function formatFileHeader(content: string, fileName: string, creationDate: string, lastModifiedDate: string): string {
+  const headerRegex = /^\/\*\*[\s\S]*?\*\/\n?/; // Match the header block only at the top of the file
+  const lastModifiedRegex = /(Last Modified on: ).*/;
+
+  // If a header already exists, update "Last Modified on:"
+  if (headerRegex.test(content)) {
+    return content.replace(headerRegex, (header) => {
+      // Update or add the "Last Modified on:" field in the existing header
+      if (lastModifiedRegex.test(header)) {
+        return header.replace(lastModifiedRegex, `$1${lastModifiedDate}`);
+      } else {
+        // Add "Last Modified on:" if it doesn't exist
+        const headerLines = header.split('\n');
+        headerLines.splice(headerLines.length - 1, 0, ` * Last Modified on: ${lastModifiedDate}`);
+        return headerLines.join('\n');
+      }
+    });
+  }
+
+  // If no header exists, add a new one at the top
+  const newHeader = `/**
+ * @file ${fileName}
+ * @author 
+ * @brief 
+ * @date ${creationDate}
+ * Last Modified on: ${lastModifiedDate}
+ */
+
+
+`;
+  return newHeader + content;
+}

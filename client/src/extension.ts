@@ -12,13 +12,14 @@ import {
 	extractFunctionName,
 	getActiveParameter,
 	getCommentForKeyword,
+	getCreationDate,
 	getFunctionSignature,
 	initializeCache,
 	updateCacheOnSaveOrOpen
 } from './helper_functions';
 
 import { keywords } from './definitions/keywords';
-import { formatDocument } from './providers/formattingProvider';
+import { formatDocument, formatFileHeader } from './providers/formattingProvider';
 
 let client: LanguageClient;
 let cache = {};
@@ -216,6 +217,42 @@ export function activate(context: vscode.ExtensionContext) {
 			}
 		}));
 
+
+	/* Command to add header to current file */
+	context.subscriptions.push(
+		vscode.commands.registerCommand('pss.addFileHeader', async () => {
+			const editor = vscode.window.activeTextEditor;
+
+			if (!editor) {
+				vscode.window.showErrorMessage('No active editor found.');
+				return;
+			}
+
+			const document = editor.document;
+			const fileName = document.fileName.split('/').pop() || 'unknown';
+			const content = document.getText();
+
+			// Fetch file metadata
+			let creationDate: string;
+			try {
+				const creationDateObj = await getCreationDate(document.fileName);
+				creationDate = creationDateObj.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+			} catch (error) {
+				creationDate = new Date().toISOString().split('T')[0]; // Fallback to current date
+			}
+
+			const lastModifiedDate = new Date().toISOString().split('T')[0];
+
+			// Format the content with the updated header
+			const updatedContent = formatFileHeader(content, fileName, creationDate, lastModifiedDate);
+
+			// Replace the content of the file
+			const fullRange = new vscode.Range(document.positionAt(0), document.positionAt(content.length));
+			editor.edit((editBuilder) => {
+				editBuilder.replace(fullRange, updatedContent);
+			});
+		})
+	);
 	/*********		Server Part		********/
 	// The server is implemented in node
 	const serverModule = context.asAbsolutePath(
