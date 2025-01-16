@@ -2,7 +2,7 @@ export function formatDocument(text: string): string {
   // Start by formatting curly braces
   let doc = formatCurlyBraces(text);
   // Then add spaces after commas
-  doc = formatCommas(text);
+  doc = formatCommas(doc);
   // Format multi-line comments:
   doc = formatMultilineComments(doc);
   // Then format semicolons
