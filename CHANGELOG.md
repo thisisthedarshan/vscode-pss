@@ -1,5 +1,11 @@
 # Change Log
 
+# [Unreleased]
+
+### Changed
+
+- Fixed the formatting of urls issue
+
 ## [0.3.7] - 2025-01-16
 
 ### Added

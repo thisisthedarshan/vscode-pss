@@ -192,14 +192,14 @@ function formatOperators(input: string): string {
     });
 }
 
-
 function formatSingleLineComments(line: string): string {
-  // Ensure there is a space before and after `//`, excluding URLs (http:// or https://)
-  line = line.replace(/(\S)(\/\/)(?! )(?!(\/|[a-zA-Z]+:))/, '$1 // '); // Add a space before `//` only if it's not part of a URL
-  line = line.replace(/\/\/(?! )(?!\/|[a-zA-Z]+:)/, '// '); // Ensure a space after `//` only if it's not part of a URL
+  // Ensure there is a space before `//`, but ignore URLs starting with `://`
+  line = line.replace(/([^:])\/\/(?! )/g, '$1 // '); // Add a space before `//` if not preceded by a colon
+  // Ensure there is a space after `//`, but ignore if it's part of a URL (contains colon before `//`)
+  line = line.replace(/([^:])\/\/(?! )/g, '$1 // '); // Ensures space after `//` if not already present and not part of a URL
+
   return line;
 }
-
 
 export function formatFileHeader(content: string, fileName: string, creationDate: string, lastModifiedDate: string): string {
   const headerRegex = /^\/\*\*[\s\S]*?\*\/\n?/; // Match the header block only at the top of the file
@@ -228,7 +228,6 @@ export function formatFileHeader(content: string, fileName: string, creationDate
  * @date ${creationDate}
  * Last Modified on: ${lastModifiedDate}
  */
-
 
 `;
   return newHeader + content;
