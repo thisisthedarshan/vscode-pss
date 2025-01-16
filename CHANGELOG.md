@@ -6,7 +6,8 @@
 
 - Fixed a bug where the formatter adds a newline after a semicolon even if a comment block present immediately follows it.
 - Updated auto-closing for block comments
-- Updated formatter to skip adding newlines to closing curly braces when a semicolon is present after it, and to ignore extra newlines after the opening curly brace
+- Updated formatter to skip adding newlines to closing curly braces when a semicolon is present after it, and to ignore extra newlines after the opening curly brace.
+- Line comment formatter now ignores URLs
 
 ## [0.3.6] - 2025-01-15
 

@@ -187,9 +187,8 @@ function formatOperators(input: string): string {
 
 
 function formatSingleLineComments(line: string): string {
-  // Ensure there is a space before and after the //
-  line = line.replace(/(\S)(\/\/)(?! )/, '$1 // '); // Add a space before //
-  line = line.replace(/\/\/(?! )/, '// '); // Ensure a space after //
-
+  // Ensure there is a space before and after `//`, excluding URLs (http:// or https://)
+  line = line.replace(/(\S)(\/\/)(?! )(?!(\/|[a-zA-Z]+:))/, '$1 // '); // Add a space before `//` only if it's not part of a URL
+  line = line.replace(/\/\/(?! )(?!\/|[a-zA-Z]+:)/, '// '); // Ensure a space after `//` only if it's not part of a URL
   return line;
 }
