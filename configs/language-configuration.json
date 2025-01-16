@@ -61,14 +61,14 @@
       ]
     },
     {
-      "open": "/** ",
+      "open": "/**",
       "close": " */",
       "notIn": [
         "string"
       ]
     },
     {
-      "open": "/* ",
+      "open": "/*",
       "close": " */",
       "notIn": [
         "string"
