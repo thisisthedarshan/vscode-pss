@@ -1,6 +1,11 @@
 # Change Log
 
-## [Unreleased]
+## [0.3.7] - 2025-01-16
+
+### Added
+
+- Formatter now adds spaces after commas for cleaner look.
+- Added command for adding/updating file header (Shortcut => Ctrl/Cmd+Shift+h)
 
 ### Changed
 
@@ -8,8 +13,6 @@
 - Updated auto-closing for block comments
 - Updated formatter to skip adding newlines to closing curly braces when a semicolon is present after it, and to ignore extra newlines after the opening curly brace.
 - Line comment formatter now ignores URLs
-- Formatter now adds spaces after commas for cleaner look.
-- Added command for adding/updating file header (Shortcut => Ctrl/Cmd+Shift+h)
 
 ## [0.3.6] - 2025-01-15
 
