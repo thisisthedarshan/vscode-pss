@@ -74,18 +74,11 @@ function formatCurlyBraces(input: string): string {
   // Ensure there is always a newline after the opening `{`
   input = input.replace(/({)\s*/g, '$1\n');
 
-  console.log(input);
   // Ensure `}` is on its own line and add a newline before it if needed
   input = input.replace(/([^\n])(\s*})(?!\n)/g, '$1\n$2');
 
-  console.log(input);
-
   // Add a newline after `}` only if there is no newline already
-  input = input.replace(/}(?!\n)(?!\s*\n)/g, '}\n');
-
-  console.log(input);
-
-
+  input = input.replace(/}(?!\n)(?!\s*\n)(?!;)/g, '}\n');
 
   return input.trim();
 }
