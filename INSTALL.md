@@ -26,7 +26,7 @@ In VS Code, *Launch VS Code Quick Open* (using **Ctrl+P**) and paste the followi
 
 - Ensure that you have [NodeJS]() installed.
 - Clone the repository on your system.
-- Explore the source code (that's why we)
+- Explore the source code (that's why we're here!)
 - Run ``npm install``
 - Install the [vsce](https://www.npmjs.com/package/vsce) node package using ``npm install @vscode/vsce``
 - Run ``vsce package`` to create the **.vsix** file.
