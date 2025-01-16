@@ -4,7 +4,8 @@
 
 ### Changed
 
-- Fixed a bug where the formatter adds a newline after a semicolon even if a comment block present immediately follows it
+- Fixed a bug where the formatter adds a newline after a semicolon even if a comment block present immediately follows it.
+- Updated auto-closing for block comments
 
 ## [0.3.6] - 2025-01-15
 
