@@ -1,6 +1,8 @@
 export function formatDocument(text: string): string {
   // Start by formatting curly braces
   let doc = formatCurlyBraces(text);
+  // Then add spaces after commas
+  doc = formatCommas(text);
   // Format multi-line comments:
   doc = formatMultilineComments(doc);
   // Then format semicolons
@@ -80,13 +82,18 @@ function formatCurlyBraces(input: string): string {
   // Add a newline after `}` only if there is no newline already
   input = input.replace(/}(?!\n)(?!\s*\n)(?!;)/g, '}\n');
 
-  return input.trim();
+  return input;
 }
 
 function addNewlinesAfterSemicolons(input: string): string {
   // Step 1: Add newline after semicolon if not followed by newline or comment (single-line or multi-line)
   input = input.replace(/;(?!\s*(?:\n|\/\/|\/\*[^*]*\*\/))(?=\s*(?!\n))(?=\s*(?![^*]*\*\/)[^]*\n)/g, ';\n');
   return input; // No need for .trim() to avoid stripping empty lines
+}
+
+function formatCommas(input: string): string {
+  // Add a space after every comma if there isn't already one
+  return input.replace(/,(?!\s)/g, ', ');
 }
 
 function formatMultilineComments(documentText: string): string {
