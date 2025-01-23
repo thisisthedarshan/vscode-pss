@@ -77,7 +77,11 @@ function formatCurlyBraces(input: string): string {
   input = input.replace(/({)(?!\n)/g, '$1\n');
 
   // Ensure `}` is on its own line and add a newline before it if needed
-  input = input.replace(/([^\n])(\s*})(?!\n)/g, '$1\n$2');
+  input = input.replace(/([^\n])(\s*})(?!\n)/g, (match, p1, p2) => {
+    // Only add newline if there isn't already a newline before the closing brace
+    return /\n/.test(match) ? match : p1 + '\n' + p2;
+  });
+
 
   // Add a newline after `}` only if there is no newline already
   input = input.replace(/}(?!\n)(?!\s*\n)(?!;)/g, '}\n');
