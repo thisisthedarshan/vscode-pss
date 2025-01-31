@@ -173,74 +173,133 @@
   },
   "patterns": [
     {
-      "about": "Data Types",
-      "name": "keyword.type.pss",
-      "match": "\\b(addr_handle_t|bit|bool|chandle|float32|float64|int|list|map|pool|string|struct|void)\\b"
-    },
-    {
-      "about": "Control Flow Keywords",
+      "about": "Control Flow",
       "name": "keyword.control.pss",
-      "match": "\\b(break|continue|do|else|exec|foreach|for|if|iff|return|while|repeat|parallel|eventually|select|stream|with)\\b"
+      "match": "\\b(break|continue|do|else|if|join_branch|join_first|join_none|join_select|parallel|repeat|return|select|with|while|yield)\\b"
     },
     {
-      "about": "Access Modifiers",
-      "name": "keyword.access.pss",
-      "match": "\\b(default|extend|private|protected|public|pure|randomize|ref|sequence|static|target|override|rand|const|unique)\\b"
+      "about": "Storage and Data Types",
+      "name": "storage.type.pss",
+      "match": "\\b(addr_handle_t|buffer|chandle|class|component|enum|file|float32|float64|int|list|map|pool|resource|state|static|string|struct|typedef|type|stream|symbol)\\b"
     },
     {
-      "about": "Operators",
-      "name": "keyword.operator.pss",
-      "match": "\\b(as|in|has|bind|join_first|join_branch|join_none|join_select|match|replicate|solve|dist)\\b"
+      "about": "Storage Modifiers",
+      "name": "storage.modifier.pss",
+      "match": "\\b(abstract|const|dynamic|export|extend|init|init_down|init_up|in|inout|input|instance|lock|output|override|package|private|protected|public|pure|rand|ref|replicate|schedule|share|solve|static|target|this|unique)\\b"
     },
     {
-      "about": "Declarations",
-      "name": "keyword.declaration.pss",
-      "match": "\\b(abstract|action|activity|array|class|component|cover|covergroup|coverpoint|declaration|function|instance|package|type|state|resource|symbol|monitor|header|typedef|[a-zA-Z_][a-zA-Z0-9_]*_t|enum|[a-zA-Z_][a-zA-Z0-9_]*_e|std_pkg|executor_pkg|addr_reg_pkg)\\b"
+      "about": "Assertions and Constraints",
+      "name": "keyword.control.pss",
+      "match": "\\b(assert|constraint|cover|covergroup|coverpoint|cross|dist|ignore_bins|illegal_bins|solve|default)\\b"
     },
     {
-      "about": "Assertions and Coverage",
-      "name": "keyword.assertion.pss",
-      "match": "\\b(assert|constraint|ignore_bins|illegal_bins|bins|cross|super|this)\\b"
+      "about": "Entity Declarations ",
+      "name": "entity.name.type.pss",
+      "match": "\\b(action|activity|bind|body|declaration|exec|extend|header|instance|sequence|component)\\b"
     },
     {
-      "about": "Functions and I/O",
+      "about": "Entity Definitions",
+      "name": "entity.name.function.pss",
+      "match": "\\b(function|pre_body|post_solve|pre_solve|init|run_start|run_end)\\b"
+    },
+    {
+      "about": "Coverage and Monitoring",
+      "name": "keyword.other.pss",
+      "match": "\\b(cover|covergroup|coverpoint|cross|monitor)\\b"
+    },
+    {
+      "about": "Import and Export",
+      "name": "keyword.other.pss",
+      "match": "\\b(import|export)\\b"
+    },
+    {
+      "about": "Mathematical and Utility Functions",
       "name": "support.function.pss",
-      "match": "\\b(file|format|inout|input|print|log|output|pow|message|file_open|file_close|file_exists|file_write|file_read|file_write_lines|file_read_lines|error|fatal|urandom|urandom_range)\\b"
+      "match": "\\b(format|log|pow|urandom|urandom_range|float_mantissa, float_exponent|float_sign|to_float|addr_value_abs|addr_value_solve|float_mantissa|float_exponent|randomize)\\b"
     },
     {
-      "about": "Execution and Concurrency",
-      "name": "keyword.execution.pss",
-      "match": "\\b(atomic|dynamic|schedule|run_start|run_end|post_solve|pre_solve|pre_body|join_branch)\\b"
+      "about": "Standard Functions for File I/O and Operations",
+      "name": "support.function.pss",
+      "match": "\\b(file_open|file_close|file_exists|file_write|file_read|file_write_lines|file_read_lines|read|write|read8|read16|read32|read64|write8|write16|write32|write64|read_bytes|write_bytes|read_struct|write_struct|read_val|write_val|write_masked|write_val_masked|write_field|write_fields)\\b"
     },
     {
-      "about": "Handle Functions",
-      "name": "support.function.handle.pss",
-      "match": "\\b(make_handle_from_claim|make_handle_from_handle|addr_value(_solve|_abs)?|get_tag|read(8|16|32|64|_bytes|_struct|_val)?|write(8|16|32|64|_bytes|_struct|_val(_masked)?|_field(s)?)?|write_masked|get_offset_of_(instance(_array)?|path)|set_handle)\\b"
+      "about": "Error Handling Functions",
+      "name": "support.function.pss",
+      "match": "\\b(error|fatal|message|print)\\b"
     },
     {
-      "about": "Memory and Address Handling",
-      "name": "support.function.memory.pss",
-      "match": "\\b(addr_value|addr_value_solve|addr_value_abs|get_tag|get_offset_of_instance|get_offset_of_instance_array|get_offset_of_path)\\b"
+      "about": "Memory and Address-Related Functions",
+      "name": "support.function.pss",
+      "match": "\\b(make_handle_from_claim|make_handle_from_handle|addr_value|addr_value_abs|get_tag|get_offset_of_instance|get_offset_of_instance_array|get_offset_of_path|set_handle)\\b"
     },
     {
-      "about": "Read/Write Functions",
-      "name": "support.function.rw.pss",
-      "match": "\\b(read|write|read_val|write_val|read8|write8|read16|write16|read32|write32|read64|write64|read_bytes|write_bytes|read_struct|write_struct|write_masked|write_val_masked|write_field|write_fields)\\b"
+      "about": "Miscellaneous Execution and Synchronization Keywords",
+      "name": "keyword.other.pss",
+      "match": "\\b(atomic|forall|foreach|schedule|concat|compile|share)\\b"
     },
     {
-      "about": "Initialization Keywords",
-      "name": "keyword.initialization.pss",
-      "match": "\\b(init|init_up|init_down)\\b"
+      "about": "Package Keywords",
+      "name": "support.class.pss",
+      "match": "\\b(std_pkg|executor_pkg|addr_reg_pkg)\\b"
     },
     {
-      "about": "Special Values and Floats",
-      "name": "support.constant.pss",
-      "match": "\\b(float_mantissa|float_exponent|float_sign|to_float)\\b"
+      "about": "Assertions and Event Control",
+      "name": "keyword.control.pss",
+      "match": "\\b(eventually|match|iff)\\b"
+    },
+    {
+      "about": "Access Specifiers",
+      "name": "keyword.other.pss",
+      "match": "\\b(has)\\b"
+    },
+    {
+      "about": "Special Operators and Keywords",
+      "name": "keyword.operator.pss",
+      "match": "\\b(default|disable|match)\\b"
+    },
+    {
+      "about": "Synchronization and Timing",
+      "name": "keyword.control.pss",
+      "match": "\\b(join_first|eventually)\\b"
+    },
+    {
+      "about": "Language Specific Constants",
+      "name": "constant.language.pss",
+      "match": "\\b(null|true|false|disable|void|super)\\b"
     },
     {
       "about": "Miscellaneous Keywords",
       "name": "keyword.other.pss",
-      "match": "\\b(null|import|true|false|body|buffer|concat|disable|export|forall|lock|map|yield|share|compile)\\b"
+      "match": "\\b(import|body|buffer|concat|export|forall|lock|map|yield|share|compile)\\b"
+    },
+    {
+      "about": "User-Defined Enums and Typedefs",
+      "name": "entity.name.type.user-defined.pss",
+      "match": "\\b\\w+_e\\b|\\b\\w+_t\\b"
+    },
+    {
+      "about": "User-Defined Functions",
+      "name": "meta.function.user-defined.pss",
+      "match": "\\b(\\w+)(\\s*\\(\\s*)([^)]*)(\\))",
+      "captures": {
+        "1": {
+          "name": "entity.name.function.user-defined.pss"
+        },
+        "2": {
+          "name": "punctuation.definition.parameters.begin.pss"
+        },
+        "3": {
+          "name": "meta.function.definition.parameter.pss",
+          "patterns": [
+            {
+              "include": "source.pss"
+            }
+          ]
+        },
+        "4": {
+          "name": "punctuation.definition.parameters.end.pss"
+        }
+      }
     },
     {
       "about": "Single-line comments starting with //",
@@ -329,25 +388,31 @@
     },
     {
       "about": "Scope resolution operator (::) and preceding text highlighting",
-      "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*::",
+      "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\s*::\\s*(\\*|[a-zA-Z_][a-zA-Z0-9_]*)\\s*",
       "captures": {
-        "1": {
-          "name": "keyword.type.pss"
-        },
         "0": {
-          "name": "keyword.operator.pss"
+          "name": "entity.other.inherited-class.keyword.pss"
+        },
+        "1": {
+          "name": "entity.name.type.package.pss"
+        },
+        "2": {
+          "name": "entity.other.attribute-name.keyword.pss"
         }
       }
     },
     {
       "about": "Inheritance syntax highlighting (:)",
-      "match": "\\s*:\\s*([a-zA-Z_][a-zA-Z0-9_]*)",
+      "match": "\\s*([a-zA-Z_][a-zA-Z0-9_]*):\\s*([a-zA-Z_][a-zA-Z0-9_]*)",
       "captures": {
         "0": {
-          "name": "keyword.operator.pss"
+          "name": "entity.name.type.object.pss"
         },
         "1": {
-          "name": "keyword.type.pss"
+          "name": "entity.name.type.object.pss"
+        },
+        "2": {
+          "name": "entity.other.attribute-name.object.pss"
         }
       }
     },

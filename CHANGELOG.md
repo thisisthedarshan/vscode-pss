@@ -6,6 +6,8 @@
 
 - Fixed issue where an unnecessary newline was being added before closing curly braces.
 - Added highlighting for document blocks and doxygen comments
+- Changed scopes for all keywords to enable syntax highlighting on different themes.
+- Updated highlighting for scope resolution and inheritance operators.
 
 ### Removed
 
