@@ -5,6 +5,7 @@
 ### Changed
 
 - Fixed issue where an unnecessary newline was being added before closing curly braces.
+- Added highlighting for document blocks and doxygen comments
 
 # [0.3.8] - 2025-01-16
 

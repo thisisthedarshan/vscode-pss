@@ -168,7 +168,7 @@
       "set_handle",
       "std_pkg",
       "executor_pkg",
-      "executor_pkg"
+      "addr_reg_pkg"
     ]
   },
   "patterns": [
@@ -195,7 +195,7 @@
     {
       "about": "Declarations",
       "name": "keyword.declaration.pss",
-      "match": "\\b(abstract|action|activity|array|class|component|cover|covergroup|coverpoint|declaration|function|instance|package|type|state|resource|symbol|monitor|header|typedef|[a-zA-Z_][a-zA-Z0-9_]*_t|enum|[a-zA-Z_][a-zA-Z0-9_]*_e|std_pkg|executor_pkg|executor_pkg)\\b"
+      "match": "\\b(abstract|action|activity|array|class|component|cover|covergroup|coverpoint|declaration|function|instance|package|type|state|resource|symbol|monitor|header|typedef|[a-zA-Z_][a-zA-Z0-9_]*_t|enum|[a-zA-Z_][a-zA-Z0-9_]*_e|std_pkg|executor_pkg|addr_reg_pkg)\\b"
     },
     {
       "about": "Assertions and Coverage",
@@ -248,21 +248,23 @@
       "name": "comment.line.double-slash.pss"
     },
     {
-      "about": "Block comments enclosed by /* and */",
-      "begin": "/\\*",
+      "begin": "/\\*\\*",
       "end": "\\*/",
+      "name": "comment.block.documentation.doxygen.pss",
       "patterns": [
         {
-          "about": "Documentation comments starting with /**",
-          "match": "/\\*\\*(?:[\\s\\S]*?)?\\*/",
-          "name": "comment.block.documentation.pss"
-        },
-        {
-          "about": "General block comments starting with /*",
-          "match": "/\\*[^*]*\\*+([^/*][^*]*\\*+)*/",
-          "name": "comment.block.pss"
+          "match": "^\\s*\\*?\\s*([@\\\\]\\w+)\\b",
+          "captures": {
+            "1": {
+              "name": "keyword.documentation.doxygen.pss"
+            }
+          }
         }
-      ],
+      ]
+    },
+    {
+      "begin": "/\\*",
+      "end": "\\*/",
       "name": "comment.block.pss"
     },
     {
