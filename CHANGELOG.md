@@ -1,6 +1,6 @@
 # Change Log
 
-# [0.3.9] - 2025-01-31
+## [0.3.9] - 2025-01-31
 
 ### Added
 
@@ -17,7 +17,7 @@
 
 - The built-in themes specific to this extension were dropped. This is to let user have the ability to use custom themes and still get good experience.
 
-# [0.3.8] - 2025-01-16
+## [0.3.8] - 2025-01-16
 
 ### Changed
 
