@@ -13,6 +13,7 @@ node_modules/
 **/*.md
 client/**
 server/**
+themes/**
 
 # But not these
 !**/LICENSE
