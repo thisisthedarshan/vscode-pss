@@ -53,20 +53,6 @@
         }
       }
     ],
-    "themes": [
-      {
-        "scopeName": "source.pss",
-        "label": "PSS Dark Theme",
-        "uiTheme": "vs-dark",
-        "path": "./themes/dark-theme.json"
-      },
-      {
-        "scopeName": "source.pss",
-        "label": "PSS Light Theme",
-        "uiTheme": "vs",
-        "path": "./themes/light-theme.json"
-      }
-    ],
     "snippets": [
       {
         "language": "pss",

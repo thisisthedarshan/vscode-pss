@@ -7,6 +7,10 @@
 - Fixed issue where an unnecessary newline was being added before closing curly braces.
 - Added highlighting for document blocks and doxygen comments
 
+### Removed
+
+- The built-in themes specific to this extension were dropped. This is to let user have the ability to use custom themes and still get good experience.
+
 # [0.3.8] - 2025-01-16
 
 ### Changed
