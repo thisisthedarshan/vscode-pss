@@ -166,6 +166,9 @@ function formatOperators(input: string): string {
       if (excludedOperators.test(op)) {
         return match;
       }
+      if (right === ';') {
+        return match;
+      }
       return `${left} ${op} ${right}`;
     });
   }

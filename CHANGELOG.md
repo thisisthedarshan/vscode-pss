@@ -1,13 +1,17 @@
 # Change Log
 
-# Unreleased
+# [0.3.9] - 2025-01-31
+
+### Added
+
+- Added highlighting for document blocks and doxygen comments
 
 ### Changed
 
 - Fixed issue where an unnecessary newline was being added before closing curly braces.
-- Added highlighting for document blocks and doxygen comments
 - Changed scopes for all keywords to enable syntax highlighting on different themes.
 - Updated highlighting for scope resolution and inheritance operators.
+- Updated logic to ignore operator formatting when it ends with semicolon. This fixes issues where it formatter wrongly formatter statement like `import myPackage_pkg::*;`
 
 ### Removed
 
