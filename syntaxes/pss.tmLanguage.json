@@ -248,6 +248,7 @@
       "name": "comment.line.double-slash.pss"
     },
     {
+      "about": "Multi-line document-block comments starting with /**",
       "begin": "/\\*\\*",
       "end": "\\*/",
       "name": "comment.block.documentation.doxygen.pss",
@@ -263,6 +264,7 @@
       ]
     },
     {
+      "about": "Multi-line block comments starting with /**",
       "begin": "/\\*",
       "end": "\\*/",
       "name": "comment.block.pss"
