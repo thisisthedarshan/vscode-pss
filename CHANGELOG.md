@@ -1,5 +1,16 @@
 # Change Log
 
+## Unreleased
+
+### Added
+
+- Syntax highlighting for comparison operators
+
+### Changed
+
+- Syntax highlighting for template types, and inheritances
+- Updated highlighting for function variables
+
 ## [0.3.9] - 2025-01-31
 
 ### Added
