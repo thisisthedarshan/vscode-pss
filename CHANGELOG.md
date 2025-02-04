@@ -5,12 +5,12 @@
 ### Added
 
 - Syntax highlighting for comparison operators
+- Added scope highlighting for "comp" keyword
 
 ### Changed
 
 - Syntax highlighting for template types, and inheritances
 - Updated highlighting for function variables
-- Added scope highlighting for "comp" keyword
 
 ## [0.3.9] - 2025-01-31
 
