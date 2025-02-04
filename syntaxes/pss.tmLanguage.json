@@ -18,6 +18,7 @@
       "buffer",
       "chandle",
       "class",
+      "comp",
       "compile",
       "component",
       "concat",
@@ -195,7 +196,7 @@
     {
       "about": "Entity Declarations ",
       "name": "entity.name.type.pss",
-      "match": "\\b(action|activity|bind|body|declaration|exec|extend|header|instance|sequence|component)\\b"
+      "match": "\\b(action|activity|bind|body|comp|declaration|exec|extend|header|instance|sequence|component)\\b"
     },
     {
       "about": "Entity Definitions",
