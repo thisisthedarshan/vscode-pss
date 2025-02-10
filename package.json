@@ -83,7 +83,26 @@
         "mac": "cmd+shift+h",
         "when": "editorTextFocus"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "PSS Config",
+      "properties": {
+        "PSS.tabspaces": {
+          "scope": "resource",
+          "type": "number",
+          "default": 4,
+          "maximum": 9,
+          "minimum": 1,
+          "description": "Define the number of tab-spaces to use for indentation when formatting the document."
+        },
+        "PSS.fileAuthor": {
+          "scope": "resource",
+          "type": "string",
+          "default": "",
+          "description": "The author name to be used in automated file headers"
+        }
+      }
+    }
   },
   "devDependencies": {
     "@types/mocha": "^10.0.9",

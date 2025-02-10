@@ -9,6 +9,8 @@
 - Added missing data types - bit, bool
 - Added syntax highlighting for buffer types (ending with \_b) and structs (ending with \_s)
 - Added the ability to auto-add "*" when commenting in multiline and document comment blocks.
+- Added settings option let user decide the tab-space for formatter's indentation.
+- Added settings option to let user decide author name for file.
 
 ### Changed
 
