@@ -107,6 +107,7 @@
   "onEnterRules": [
     {
       "beforeText": "^\\s*/\\*\\*.*$",
+      "afterText": "\\*/",
       "action": {
         "indent": "indentOutdent",
         "appendText": " * "
@@ -115,6 +116,7 @@
     },
     {
       "beforeText": "^\\s*\\* .*$",
+      "afterText": "\\*/",
       "action": {
         "indent": "none",
         "appendText": "* "
@@ -123,6 +125,7 @@
     },
     {
       "beforeText": "^\\s*/\\*.*$",
+      "afterText": "\\*/",
       "action": {
         "indent": "indentOutdent",
         "appendText": " * "
