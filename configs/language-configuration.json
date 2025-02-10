@@ -61,13 +61,6 @@
       ]
     },
     {
-      "open": "/**",
-      "close": " */",
-      "notIn": [
-        "string"
-      ]
-    },
-    {
       "open": "/*",
       "close": " */",
       "notIn": [
@@ -116,7 +109,7 @@
       "beforeText": "^\\s*/\\*\\*.*$",
       "action": {
         "indent": "indentOutdent",
-        "appendText": "* "
+        "appendText": " * "
       },
       "scope": "comment.block.documentation.doxygen.pss"
     },
@@ -132,7 +125,7 @@
       "beforeText": "^\\s*/\\*.*$",
       "action": {
         "indent": "indentOutdent",
-        "appendText": "* "
+        "appendText": " * "
       },
       "scope": "comment.block.pss"
     }
