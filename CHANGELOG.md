@@ -4,13 +4,16 @@
 
 ### Added
 
-- Syntax highlighting for comparison operators
-- Added scope highlighting for "comp" keyword
+- Syntax highlighting for comparison operators.
+- Added scope highlighting for "comp" keyword.
+- Added missing data types - bit, bool
+- Added syntax highlighting for buffer types (ending with \_b) and structs (ending with \_s)
 
 ### Changed
 
 - Syntax highlighting for template types, and inheritances
 - Updated highlighting for function variables
+- Updated document blocks to use specific doxygen commands (currently limited to @attention, @author, @bug, @brief, @copyright, @date, @deprecated, @details, @emoji, @example, @extends, @file, @package, @param, @return, @returns, @see, @short, @todo, @version)
 
 ## [0.3.9] - 2025-01-31
 

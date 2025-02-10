@@ -110,5 +110,31 @@
   "indentationRules": {
     "increaseIndentPattern": "^((?!\\/\\/).)*(\\{[^}\"'`]*|\\([^)\"'`]*|\\[[^\\]\"'`]*)$",
     "decreaseIndentPattern": "^((?!.*?\\/\\*).*\\*/)?\\s*[\\)\\}\\]].*$"
-  }
+  },
+  "onEnterRules": [
+    {
+      "beforeText": "^\\s*/\\*\\*.*$",
+      "action": {
+        "indent": "indentOutdent",
+        "appendText": "* "
+      },
+      "scope": "comment.block.documentation.doxygen.pss"
+    },
+    {
+      "beforeText": "^\\s*\\* .*$",
+      "action": {
+        "indent": "none",
+        "appendText": "* "
+      },
+      "scope": "comment.block.documentation.doxygen.pss"
+    },
+    {
+      "beforeText": "^\\s*/\\*.*$",
+      "action": {
+        "indent": "indentOutdent",
+        "appendText": "* "
+      },
+      "scope": "comment.block.pss"
+    }
+  ]
 }
