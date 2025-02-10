@@ -1,5 +1,11 @@
 # Change Log
 
+## Unreleased
+
+### Changed
+
+- Added release generation script
+
 ## [0.3.11] - 2025-02-10
 
 ### Changed

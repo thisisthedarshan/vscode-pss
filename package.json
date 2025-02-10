@@ -129,6 +129,7 @@
     "compile": "tsc -b",
     "clean": "rm -fr ./dist/*",
     "rebuild": "npm run clean && npm run compile",
-    "vscode:prepublish": "npm run rebuild"
+    "vscode:prepublish": "npm run rebuild",
+    "gen-release": "rm -f release-pss-vsc.vsix && vsce package && cp $(ls -t *.vsix | head -n 1) release-pss-vsc.vsix && echo Release created"
   }
 }

@@ -29,6 +29,7 @@ In VS Code, *Launch VS Code Quick Open* (using **Ctrl+P**) and paste the followi
 - Explore the source code (that's why we're here!)
 - Run ``npm install``
 - Install the [vsce](https://www.npmjs.com/package/vsce) node package using ``npm install @vscode/vsce``
-- Run ``vsce package`` to create the **.vsix** file.
-- Install the package using ``code --install-extension dsp-vsc-pss-<release-version>.vsix``. The
+- Run ``npm run gen-release`` to create the **.vsix** file.
+- Install the package using ``code --install-extension release-pss-vsc.vsix``.
+
 ![Latest Release](https://img.shields.io/github/v/tag/thisisthedarshan/vscode-pss?style=for-the-badge&label=Latest%20Release)
