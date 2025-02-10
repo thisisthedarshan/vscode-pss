@@ -8,6 +8,7 @@
 - Added scope highlighting for "comp" keyword.
 - Added missing data types - bit, bool
 - Added syntax highlighting for buffer types (ending with \_b) and structs (ending with \_s)
+- Added the ability to auto-add "*" when commenting in multiline and document comment blocks.
 
 ### Changed
 

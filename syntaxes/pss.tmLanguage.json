@@ -13,6 +13,7 @@
       "assert",
       "atomic",
       "bind",
+      "bit",
       "body",
       "break",
       "buffer",
@@ -176,7 +177,7 @@
     {
       "about": "User-Defined Enums and Typedefs",
       "name": "entity.name.type.user-defined.pss",
-      "match": "\\b\\w+_e\\b|\\b\\w+_t\\b"
+      "match": "\\b\\w+_e\\b|\\b\\w+_t\\b|\\b\\w+_s\\b|\\b\\w+_b\\b"
     },
     {
       "about": "User-Defined Functions",
@@ -214,7 +215,18 @@
       "name": "comment.block.documentation.doxygen.pss",
       "patterns": [
         {
-          "match": "^\\s*\\*?\\s*([@\\\\]\\w+)\\b",
+          "match": "^\\s*\\*?\\s*([@\\\\]param)\\b\\s*(\\w+)",
+          "captures": {
+            "1": {
+              "name": "keyword.documentation.doxygen.pss"
+            },
+            "2": {
+              "name": "variable.parameter.pss"
+            }
+          }
+        },
+        {
+          "match": "([@\\\\](?:file|brief|returns?|author|date|see|deprecated|todo|example|version|attention))\\b",
           "captures": {
             "1": {
               "name": "keyword.documentation.doxygen.pss"
@@ -345,7 +357,7 @@
     {
       "about": "Storage and Data Types",
       "name": "storage.type.pss",
-      "match": "\\b(addr_handle_t|buffer|chandle|class|component|enum|file|float32|float64|int|list|map|pool|resource|state|static|string|struct|typedef|type|stream|symbol)\\b"
+      "match": "\\b(addr_handle_t|bit|buffer|bool|chandle|class|component|enum|file|float32|float64|int|list|map|pool|resource|state|static|string|struct|typedef|type|stream|symbol)\\b"
     },
     {
       "about": "Storage Modifiers",
