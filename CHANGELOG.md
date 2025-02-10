@@ -5,6 +5,7 @@
 ### Changed
 
 - Updated doxygen syntax highlighting to include *details* command
+- Updated the Display name in settings
 
 ## [0.3.10] - 2025-02-10
 

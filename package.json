@@ -85,7 +85,7 @@
       }
     ],
     "configuration": {
-      "title": "PSS Config",
+      "title": "PSS Support",
       "properties": {
         "PSS.tabspaces": {
           "scope": "resource",
