@@ -1,5 +1,11 @@
 # Change Log
 
+## Unreleased
+
+### Changed
+
+- Updated doxygen syntax highlighting to include *details* command
+
 ## [0.3.10] - 2025-02-10
 
 ### Added

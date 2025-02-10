@@ -226,7 +226,7 @@
           }
         },
         {
-          "match": "([@\\\\](?:file|brief|returns?|author|date|see|deprecated|todo|example|version|attention))\\b",
+          "match": "([@\\\\](?:file|brief|returns?|author|date|see|deprecated|details|todo|example|version|attention))\\b",
           "captures": {
             "1": {
               "name": "keyword.documentation.doxygen.pss"
