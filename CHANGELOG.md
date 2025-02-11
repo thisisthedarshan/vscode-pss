@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- The build system is updated to bundle the extension using `esbuild`
+
 ### Changed
 
 - Added release generation script

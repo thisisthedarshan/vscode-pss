@@ -111,6 +111,7 @@
     "@typescript-eslint/eslint-plugin": "^8.10.0",
     "@typescript-eslint/parser": "^8.7.0",
     "@vscode/test-cli": "^0.0.10",
+    "esbuild": "^0.25.0",
     "eslint": "^9.13.0",
     "ts-loader": "^9.5.1",
     "typescript": "^5.7.2"
@@ -119,17 +120,19 @@
     "@types/node": "20.x",
     "@types/vscode": "^1.95.0",
     "@vscode/vsce": "^3.2.1",
-    "path": "^0.12.7",
     "glob": "^11.0.0",
+    "path": "^0.12.7",
     "vscode-languageclient": "^9.0.1",
     "vscode-languageserver": "^9.0.1",
     "vscode-languageserver-textdocument": "^1.0.12"
   },
   "scripts": {
-    "compile": "tsc -b",
+    "compile": "npm run check-types && node esbuild.js",
+    "check-types": "tsc --noEmit",
     "clean": "rm -fr ./dist/*",
     "rebuild": "npm run clean && npm run compile",
-    "vscode:prepublish": "npm run rebuild",
+    "prod": "npm run clean && npm run check-types && node esbuild.js --production",
+    "vscode:prepublish": "npm run prod",
     "gen-release": "rm -f release-pss-vsc.vsix && vsce package && cp $(ls -t *.vsix | head -n 1) release-pss-vsc.vsix && echo Release created"
   }
 }
