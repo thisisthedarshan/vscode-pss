@@ -15,6 +15,7 @@
 - Moved the client source directly into client directory instead of client/src directory
 - Updated client's tsconfig file
 - Added old build command to script
+- Updated esbuild script to output extension in a specific format. Updated the entry point in Package JSON.
 
 ### Removed
 

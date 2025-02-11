@@ -5,7 +5,7 @@ const watch = process.argv.includes('--watch');
 
 async function main() {
   const ctx = await esbuild.context({
-    entryPoints: ['client/extension.ts', 'server/src/server.ts'],
+    entryPoints: { "client": 'client/extension.ts', "server": 'server/src/server.ts' },
     bundle: true,
     format: 'cjs',
     minify: production,
@@ -13,6 +13,7 @@ async function main() {
     sourcesContent: false,
     platform: 'node',
     outdir: 'dist/',
+    outbase: './',
     external: ['vscode'],
     logLevel: 'warning',
     plugins: [
