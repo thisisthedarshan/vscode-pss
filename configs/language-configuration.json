@@ -107,30 +107,24 @@
   "onEnterRules": [
     {
       "beforeText": "^\\s*/\\*\\*.*$",
-      "afterText": "\\*/",
       "action": {
         "indent": "indentOutdent",
         "appendText": " * "
-      },
-      "scope": "comment.block.documentation.doxygen.pss"
+      }
     },
     {
       "beforeText": "^\\s*\\* .*$",
-      "afterText": "\\*/",
       "action": {
         "indent": "none",
         "appendText": "* "
-      },
-      "scope": "comment.block.documentation.doxygen.pss"
+      }
     },
     {
       "beforeText": "^\\s*/\\*.*$",
-      "afterText": "\\*/",
       "action": {
         "indent": "indentOutdent",
         "appendText": " * "
-      },
-      "scope": "comment.block.pss"
+      }
     }
   ]
 }

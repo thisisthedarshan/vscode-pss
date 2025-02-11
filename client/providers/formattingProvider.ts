@@ -133,11 +133,8 @@ function formatMultilineComments(documentText: string): string {
         // Keep the line as it is, but ensure only one star at the start
         let formattedLine = trimmedLine;
 
-        // If the line doesn't start with a star, add one
-        if (!formattedLine.startsWith('*')) {
-          formattedLine = `* ${formattedLine}`;
-        } else {
-          // Otherwise, just ensure a single star at the beginning
+        // Format spacing after "*" ensuring it is spaced properly
+        if (formattedLine.startsWith('*')) {
           formattedLine = `* ${formattedLine.slice(1).trim()}`;
         }
 

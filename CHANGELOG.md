@@ -16,11 +16,12 @@
 - Updated client's tsconfig file
 - Added old build command to script
 - Updated esbuild script to output extension in a specific format. Updated the entry point in Package JSON.
-- Dropped unnecessary exports in client/extension.ts file
+- Updated logic for adding "*" when formatting multiline comments - this may cause unwanted outcomes so dropped it. Instead, the updated language-config should handle this internally.
 
 ### Removed
 
 - Old and unused package.json and package-lock.json from client directory
+- Dropped unnecessary exports in client/extension.ts file
 
 ## [0.3.11] - 2025-02-10
 
