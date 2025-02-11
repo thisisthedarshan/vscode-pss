@@ -58,34 +58,6 @@ export function activate(context: vscode.ExtensionContext) {
 		}
 	);
 
-	/*
-	vscode.languages.registerOnTypeFormattingEditProvider('pss',
-		{
-			provideOnTypeFormattingEdits(document, position, ch, options, token) {
-				const line = document.lineAt(position.line).text.trim();
-
-				// Check if inside comment block
-				if (isWithinCommentBlock(document, position.line)) {
-					const prevLine = document.lineAt(position.line - 1);
-					const indent = countLeadingSpaces(prevLine.text); // Count leading spaces
-					// Insert the new comment line with the correct indentation
-					return [vscode.TextEdit.insert(position, `\n${' '.repeat(indent)}* `)];
-				}
-				// Check if the line is exactly `/*`
-				else if (line === '/*' || line === '/**') {
-					const indent = countLeadingSpaces(line); // Get the indentation of the current line
-					return [vscode.TextEdit.insert(position, `\n${indent} * `)];
-				} else if (line === '* /' || line === '** /') { // update these
-					return [vscode.TextEdit.insert(position, '')];
-				}
-
-				return [vscode.TextEdit.insert(position, '\n DDD ')];
-			}
-		},
-		'\n'  // Trigger on Enter (newline character)
-	);
-*/
-
 	/* Register update cache functions */
 	context.subscriptions.push(
 		vscode.workspace.onDidSaveTextDocument((document) => { cache = updateCacheOnSaveOrOpen(document); }),
@@ -138,33 +110,6 @@ export function activate(context: vscode.ExtensionContext) {
 		)
 	);
 
-	/* Add an auto-complete for comments */
-	/*context.subscriptions.push(
-		vscode.workspace.onDidChangeTextDocument(event => {
-			const editor = vscode.window.activeTextEditor;
-			if (!editor || event.document !== editor.document) { return; }
-
-			// Check for changes that include a newline
-			const change = event.contentChanges[0];
-			if (!change || !change.text.includes('\n')) { return; }
-
-			const position = change.range.start;
-			const lineText = editor.document.lineAt(position.line - 1).text.trim();
-
-			// Check if inside a /** comment block
-			if (lineText.startsWith('/**') || isWithinCommentBlock(editor.document, position.line)) {
-				// Insert '*' at the current line (position.line) where the cursor is
-				const prevLine = editor.document.lineAt(position.line);
-				const indent = countLeadingSpaces(prevLine.text); // Count leading spaces	
-				editor.edit(editBuilder => {
-					editBuilder.insert(
-						new vscode.Position(position.line + 1, 0),  // Insert at the beginning of the current line
-						`${' '.repeat(indent)}* `
-					);
-				});
-			}
-		})
-	);*/
 
 	/* Add autocompletion for keywords */
 	context.subscriptions.push(
@@ -256,16 +201,16 @@ export function activate(context: vscode.ExtensionContext) {
 	/*********		Server Part		********/
 	// The server is implemented in node
 	const serverModule = context.asAbsolutePath(
-		path.join('dist', 'server', 'server.js')
+		path.join('dist', 'server.js')
 	);
 
 	// If the extension is launched in debug mode then the debug server options are used
 	// Otherwise the run options are used
 	const serverOptions: ServerOptions = {
-		run: { module: serverModule, transport: TransportKind.ipc },
+		run: { module: serverModule, transport: TransportKind.stdio },
 		debug: {
 			module: serverModule,
-			transport: TransportKind.ipc,
+			transport: TransportKind.stdio,
 		}
 	};
 
@@ -274,8 +219,8 @@ export function activate(context: vscode.ExtensionContext) {
 		// Register the server for plain text documents
 		documentSelector: [{ scheme: 'file', language: 'pss' }],
 		synchronize: {
-			// Notify the server about file changes to '.clientrc files contained in the workspace
-			fileEvents: vscode.workspace.createFileSystemWatcher('**/.clientrc')
+			// Notify the server about file changes to '.psswatcher files contained in the workspace
+			fileEvents: vscode.workspace.createFileSystemWatcher('**/.psswatcher')
 		}
 	};
 

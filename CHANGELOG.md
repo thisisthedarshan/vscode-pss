@@ -17,11 +17,13 @@
 - Added old build command to script
 - Updated esbuild script to output extension in a specific format. Updated the entry point in Package JSON.
 - Updated logic for adding "*" when formatting multiline comments - this may cause unwanted outcomes so dropped it. Instead, the updated language-config should handle this internally.
+- Made minor changes to server invocation code to prepare for later changes
 
 ### Removed
 
 - Old and unused package.json and package-lock.json from client directory
 - Dropped unnecessary exports in client/extension.ts file
+- Dropped unnecessary commented code in extension.ts
 
 ## [0.3.11] - 2025-02-10
 
