@@ -128,6 +128,7 @@
   },
   "scripts": {
     "compile": "npm run check-types && node esbuild.js",
+    "compile-old": "tsc -b",
     "check-types": "tsc --noEmit",
     "clean": "rm -fr ./dist/*",
     "rebuild": "npm run clean && npm run compile",
