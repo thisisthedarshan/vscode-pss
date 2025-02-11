@@ -6,14 +6,7 @@
 			"es2020"
 		],
 		"outDir": "../dist/client/",
-		"rootDir": "src",
+		"rootDir": ".",
 		"sourceMap": true
-	},
-	"include": [
-		"src"
-	],
-	"exclude": [
-		"node_modules",
-		".vscode-test"
-	]
+	}
 }

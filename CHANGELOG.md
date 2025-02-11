@@ -8,6 +8,12 @@
 - Updated logic to detect functions, excluding logic blocks.
 - Updated syntax for inheritance operator.
 - Updated formatter to exclude counting commented "{" for determining tabspace
+- Moved the client source directly into client directory instead of client/src directory
+- Updated client's tsconfig file
+
+### Removed
+
+- Old and unused package.json and package-lock.json from client directory
 
 ## [0.3.11] - 2025-02-10
 
