@@ -16,6 +16,7 @@
 - Updated client's tsconfig file
 - Added old build command to script
 - Updated esbuild script to output extension in a specific format. Updated the entry point in Package JSON.
+- Dropped unnecessary exports in client/extension.ts file
 
 ### Removed
 

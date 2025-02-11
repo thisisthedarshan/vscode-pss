@@ -297,8 +297,3 @@ export function deactivate(): Thenable<void> | undefined {
 	}
 	return client.stop();
 }
-
-module.exports = {
-	activate,
-	deactivate
-};
