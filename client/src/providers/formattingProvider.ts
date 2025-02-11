@@ -57,7 +57,7 @@ export function formatDocument(text: string): string {
     formattedLines.push(indentedLine);
 
     // Handle opening braces
-    if (line.endsWith('{')) {
+    if (line.endsWith('{') && !isInBlockComment && !(/\/\/|\/\*/.test(line))) {
       indentLevel++;
     }
 

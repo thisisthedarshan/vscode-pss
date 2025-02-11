@@ -177,7 +177,7 @@
     {
       "about": "User-Defined Enums and Typedefs",
       "name": "entity.name.type.user-defined.pss",
-      "match": "\\b\\w+_e\\b|\\b\\w+_t\\b|\\b\\w+_s\\b|\\b\\w+_b\\b"
+      "match": "\\b(?!(if|while|foreach|for|switch|return|do|else|case|default)\\b)\\b\\w+_e\\b|\\b\\w+_t\\b|\\b\\w+_s\\b|\\b\\w+_b\\b"
     },
     {
       "about": "User-Defined Functions",
@@ -308,8 +308,12 @@
       "about": "Inheritance syntax highlighting (:)",
       "match": "\\s*([a-zA-Z_][a-zA-Z0-9_]*?)\\s*:\\s*([a-zA-Z_][a-zA-Z0-9_]*)",
       "captures": {
-        "0": {},
-        "1": {},
+        "0": {
+          "name": "entity.other.inherited-class.keyword.pss"
+        },
+        "1": {
+          "name": "entity.name.type.package.pss"
+        },
         "2": {
           "name": "entity.other.attribute-name.object.pss"
         }

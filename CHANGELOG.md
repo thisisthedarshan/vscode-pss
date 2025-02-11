@@ -5,6 +5,9 @@
 ### Changed
 
 - Added release generation script
+- Updated logic to detect functions, excluding logic blocks.
+- Updated syntax for inheritance operator.
+- Updated formatter to exclude counting commented "{" for determining tabspace
 
 ## [0.3.11] - 2025-02-10
 
