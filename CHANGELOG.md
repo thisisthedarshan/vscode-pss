@@ -24,6 +24,7 @@
 - Old and unused package.json and package-lock.json from client directory
 - Dropped unnecessary exports in client/extension.ts file
 - Dropped unnecessary commented code in extension.ts
+- Dropped unwanted log statement in getComment logic.
 
 ## [0.3.11] - 2025-02-10
 

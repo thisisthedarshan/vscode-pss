@@ -195,7 +195,7 @@ export async function getCommentForKeyword(variableName, cache) {
     }
   }
 
-  console.log("Found comment for variableName:", variableName, " as ", foundComment);
+  // console.log("Found comment for variableName:", variableName, " as ", foundComment);
 
   return foundComment;
 }
