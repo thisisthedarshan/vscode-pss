@@ -30,7 +30,7 @@ export function formatDocument(text: string): string {
     line = formatSingleLineComments(line);
 
     // Handle closing braces
-    if (line.startsWith('}')) {
+    if (line.startsWith('}') && !isInBlockComment && !(/\/\//.test(line))) {
       indentLevel = Math.max(indentLevel - 1, 0);
     }
 

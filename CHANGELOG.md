@@ -1,5 +1,11 @@
 # Change Log
 
+## [0.4.1] - 2025-02-12
+
+### Changed
+
+- Fixed the formatter bug which un-intentionally used a commented closing brace "}" to identify indentation width.
+
 ## [0.4.0] - 2025-02-11
 
 ### Added
