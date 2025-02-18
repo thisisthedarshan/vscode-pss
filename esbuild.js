@@ -5,7 +5,7 @@ const watch = process.argv.includes('--watch');
 
 async function main() {
   const ctx = await esbuild.context({
-    entryPoints: { "client": 'client/extension.ts', "server": 'server/src/server.ts' },
+    entryPoints: { "client": 'client/extension.ts', "server": 'server/src/pss-langserver.ts' },
     bundle: true,
     format: 'cjs',
     minify: production,

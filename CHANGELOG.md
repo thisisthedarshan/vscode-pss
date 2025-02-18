@@ -1,5 +1,11 @@
 # Change Log
 
+## Unreleased
+
+### Changed
+
+- Updated eslint to reflect new server code
+
 ## [0.4.1] - 2025-02-12
 
 ### Changed
