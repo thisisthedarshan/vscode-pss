@@ -1,3 +1,5 @@
+// Copyright (c) 2024-25 Darshan(@thisisthedarshan)
+// Licensed under the MIT License. See LICENSE file for details.
 export const keywords = {
   list: [
     "addr_handle_t", "abstract", "action", "activity", "array", "as", "assert", "atomic", "bind", "bins", "bit",

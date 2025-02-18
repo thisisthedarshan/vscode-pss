@@ -1,3 +1,5 @@
+// Copyright (c) 2024-25 Darshan(@thisisthedarshan)
+// Licensed under the MIT License. See LICENSE file for details.
 export function formatDocument(text: string): string {
   // Start by formatting curly braces
   let doc = formatCurlyBraces(text);

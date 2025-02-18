@@ -1,1 +1,9 @@
-{"root":["./src/extension.ts","./src/functions_builtin.ts","./src/helper_functions.ts","./src/keywords.ts"],"version":"5.7.2"}
+{
+  "root": [
+    "./src/extension.ts",
+    "./src/functions_builtin.ts",
+    "./src/helper_functions.ts",
+    "./src/keywords.ts"
+  ],
+  "version": "5.7.2"
+}

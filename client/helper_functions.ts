@@ -1,3 +1,5 @@
+// Copyright (c) 2024-25 Darshan(@thisisthedarshan)
+// Licensed under the MIT License. See LICENSE file for details.
 import { builtInSignatures } from "./definitions/builtinFunctions";
 import * as vscode from 'vscode';
 import { keywords } from "./definitions/keywords";
