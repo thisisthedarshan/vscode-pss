@@ -106,6 +106,7 @@
     "documentFormattingProvider": true
   },
   "devDependencies": {
+    "@types/fs-extra": "^11.0.4",
     "@types/mocha": "^10.0.9",
     "@types/node": "20.x",
     "@types/vscode": "^1.95.0",
@@ -114,6 +115,7 @@
     "@vscode/test-cli": "^0.0.10",
     "esbuild": "^0.25.0",
     "eslint": "^9.13.0",
+    "fs-extra": "^11.3.0",
     "ts-loader": "^9.5.1",
     "typescript": "^5.7.2"
   },
@@ -129,12 +131,12 @@
     "vscode-languageserver-textdocument": "^1.0.12"
   },
   "scripts": {
-    "compile": "npm run check-types && node esbuild.js",
-    "compile-old": "tsc -b",
+    "compile-elsbuild": "npm run check-types && node esbuild.js",
+    "compile": "tsc -b && cp -r ./server/dist/* ./dist/",
     "check-types": "tsc --noEmit",
-    "clean": "rm -fr ./dist/*",
+    "clean": "rm -fr ./dist/* ",
     "rebuild": "npm run clean && npm run compile",
-    "prod": "npm run clean && npm run check-types && node esbuild.js --production",
+    "prod": "npm run clean && npm run check-types && npm run compile",
     "vscode:prepublish": "npm run prod",
     "gen-release": "rm -f release-pss-vsc.vsix && vsce package && cp $(ls -t *.vsix | head -n 1) release-pss-vsc.vsix && echo Release created"
   }
