@@ -102,7 +102,8 @@
           "description": "The author name to be used in automated file headers"
         }
       }
-    }
+    },
+    "documentFormattingProvider": true
   },
   "devDependencies": {
     "@types/mocha": "^10.0.9",
