@@ -10,18 +10,7 @@ import {
 	TransportKind
 } from 'vscode-languageclient/node';
 
-import {
-	extractFunctionName,
-	getActiveParameter,
-	getCommentForKeyword,
-	getCreationDate,
-	getFunctionSignature,
-	initializeCache,
-	updateCacheOnSaveOrOpen
-} from './helper_functions';
-
-import { keywords } from './definitions/keywords';
-import { formatDocument, formatFileHeader } from './providers/formattingProvider';
+import { getCreationDate, formatFileHeader } from './providers/formattingProvider';
 
 let client: LanguageClient;
 
@@ -67,7 +56,7 @@ export function activate(context: vscode.ExtensionContext) {
 	/*********		Server Part		********/
 	// The server is implemented in node
 	const serverModule = context.asAbsolutePath(
-		path.join('dist', 'server.js')
+		path.join('dist', 'pss-langserver.js')
 	);
 
 	// If the extension is launched in debug mode then the debug server options are used
