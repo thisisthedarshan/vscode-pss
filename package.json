@@ -17,7 +17,7 @@
   "activationEvents": [
     "onLanguage:pss"
   ],
-  "main": "./dist/client",
+  "main": "./dist/extension",
   "repository": {
     "type": "git",
     "url": "https://github.com/thisisthedarshan/vscode-pss"
