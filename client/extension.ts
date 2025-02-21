@@ -24,145 +24,9 @@ import { keywords } from './definitions/keywords';
 import { formatDocument, formatFileHeader } from './providers/formattingProvider';
 
 let client: LanguageClient;
-let cache = {};
 
 export function activate(context: vscode.ExtensionContext) {
 	console.log("Started PSS Language Support Extension :D");
-
-	/* Create a cache for variables from all open files */
-	cache = initializeCache();
-
-	/* Register formatter for whole document */
-	vscode.languages.registerDocumentFormattingEditProvider(
-		{ scheme: 'file', language: 'pss' },
-		{
-			provideDocumentFormattingEdits(document) {
-				const edits: vscode.TextEdit[] = [];
-
-				// Fetch the document text
-				const documentText = document.getText();
-
-				// Format the document using custom rules
-				const formattedText = formatDocument(documentText);
-
-				console.log("Formatted Document: ", document.fileName);
-
-				// Define a range that covers the entire document
-				const fullRange = new vscode.Range(
-					document.positionAt(0),
-					document.positionAt(documentText.length)
-				);
-
-				// Replace the existing text with the formatted text
-				edits.push(vscode.TextEdit.replace(fullRange, formattedText));
-				return edits;
-			}
-		}
-	);
-
-	/* Register update cache functions */
-	context.subscriptions.push(
-		vscode.workspace.onDidSaveTextDocument((document) => { cache = updateCacheOnSaveOrOpen(document); }),
-		vscode.workspace.onDidOpenTextDocument((document) => { cache = updateCacheOnSaveOrOpen(document); }),
-		vscode.window.onDidChangeActiveTextEditor((editor) => {
-			if (editor && editor.document.languageId === 'pss') {
-				cache = updateCacheOnSaveOrOpen(editor.document);
-			}
-		})
-	);
-
-	/* Built-in function signature helper */
-	context.subscriptions.push(
-		vscode.languages.registerSignatureHelpProvider('pss',
-			{
-				provideSignatureHelp(document, position, token, context) {
-					const lineText = document.lineAt(position.line).text;
-					const functionName = extractFunctionName(lineText);
-
-					// Check if the function name is in the built-in libraries
-					const signatureInfo = getFunctionSignature(functionName);
-					if (!signatureInfo) {
-						return null; // No signature found
-					}
-
-					// Construct Signature Information
-					const signatureHelp = new vscode.SignatureHelp();
-					const signature = new vscode.SignatureInformation(signatureInfo.signature, signatureInfo.documentation);
-
-					// Add each parameter as a Parameter Information
-					signatureInfo.parameters.forEach(param => {
-						signature.parameters.push(new vscode.ParameterInformation(param.label, param.documentation));
-					});
-
-					// Calculate active parameter based on cursor position
-					const activeParameter = getActiveParameter(lineText, position.character);
-					console.log("Cursor position:", position.character);
-					console.log("Active parameter:", activeParameter);
-
-					signatureHelp.activeSignature = 0;
-					signatureHelp.activeParameter = activeParameter;
-
-					// Add the signature to signatureHelp
-					signatureHelp.signatures.push(signature);
-
-					return signatureHelp;
-				}
-			},
-			'(', ','  // Trigger on `(` and `,` for function call and parameter separators
-		)
-	);
-
-
-	/* Add autocompletion for keywords */
-	context.subscriptions.push(
-		vscode.languages.registerCompletionItemProvider('pss', {
-			provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
-				const lineText = document.lineAt(position).text;
-				const completionItems: vscode.CompletionItem[] = [];
-				// Loop through the keywords and create CompletionItems for each one
-				for (let i = 0; i < keywords.list.length; i++) {
-					const completionItem = new vscode.CompletionItem(keywords.list[i], vscode.CompletionItemKind.Keyword);
-					completionItem.detail = keywords.descriptions[i];
-					completionItems.push(completionItem);
-				}
-
-				return completionItems;
-			}
-		})
-	);
-
-	/* Add auto-complete for variables from cache */
-	context.subscriptions.push(
-		vscode.languages.registerCompletionItemProvider('pss', {
-			provideCompletionItems(document, position) {
-				const completionItems = [];
-				// Get variable names for the given document (from the cache)
-				const variables = Object.keys(cache).reduce((acc, keyword) => {
-					cache[keyword].forEach(({ variableName }) => {
-						const completionItem = new vscode.CompletionItem(variableName, vscode.CompletionItemKind.Variable);
-						completionItem.detail = cache[keyword][variableName];
-						acc.push(completionItem);
-					});
-					return acc;
-				}, []);
-
-				return variables;
-			}
-		})
-	);
-
-	/* Hover to display comments as message */
-	context.subscriptions.push(
-		vscode.languages.registerHoverProvider('pss', {
-			async provideHover(document, position, token) {
-				const wordRange = document.getWordRangeAtPosition(position);
-				const word = document.getText(wordRange);
-				const comment = await getCommentForKeyword(word, cache);
-				if (comment) {
-					return new vscode.Hover(new vscode.MarkdownString(comment));
-				}
-			}
-		}));
 
 
 	/* Command to add header to current file */
@@ -228,14 +92,16 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Create the language client and start the client.
 	client = new LanguageClient(
-		'lspPSS',
+		'PSS',
 		'Portable Stimulus Language Server',
 		serverOptions,
 		clientOptions
 	);
 
 	// Start the client. This will also launch the server
-	//client.start();
+	client.start().catch(error => {
+		console.error('Failed to start language client:', error);
+	});
 }
 
 export function deactivate(): Thenable<void> | undefined {
