@@ -120,6 +120,7 @@
     "@types/node": "20.x",
     "@types/vscode": "^1.95.0",
     "@vscode/vsce": "^3.2.1",
+    "antlr4": "^4.13.2",
     "glob": "^11.0.0",
     "path": "^0.12.7",
     "vscode-languageclient": "^9.0.1",
