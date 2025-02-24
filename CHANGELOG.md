@@ -1,5 +1,22 @@
 # Change Log
 
+## [1.1.5] - 2025-02-24
+
+### Changed
+
+- Updated the formatter to ignore empty lines and drop any spaces in it.
+- Fixed diagnostics popup issue
+
+## [1.1.3] - 2025-02-24
+
+### Added
+
+- Signature provider was introduced for built-in functions
+
+### Changed
+
+- The formatter was updated in the server
+
 ## [1.1.1] - 2025-02-24
 
 ### Changed
