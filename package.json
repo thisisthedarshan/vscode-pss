@@ -115,7 +115,6 @@
     "@vscode/test-cli": "^0.0.10",
     "esbuild": "^0.25.0",
     "eslint": "^9.13.0",
-    "fs-extra": "^11.3.0",
     "ts-loader": "^9.5.1",
     "typescript": "^5.7.2"
   },
@@ -124,6 +123,7 @@
     "@types/vscode": "^1.95.0",
     "@vscode/vsce": "^3.2.1",
     "antlr4": "^4.13.2",
+    "fs-extra": "^11.3.0",
     "glob": "^11.0.0",
     "path": "^0.12.7",
     "vscode-languageclient": "^9.0.1",
@@ -131,9 +131,9 @@
     "vscode-languageserver-textdocument": "^1.0.12"
   },
   "scripts": {
-    "update-server": "git submodule update --init --remote",
+    "update-server": "git submodule init && git submodule update --remote",
     "compile-elsbuild": "npm run check-types && node esbuild.js",
-    "compile": "tsc -b && cp -r ./server/dist/* ./dist/ && rm -fr ./server/dist/* && cp -r node_modules/vscode-languageserver* dist/",
+    "compile": "tsc -b && cp -r ./server/dist/* ./dist/ && rm -fr ./server/dist/* ",
     "check-types": "tsc --noEmit",
     "clean": "rm -fr ./dist/* && rm -fr ./server/dist/*",
     "rebuild": "npm run update-server && npm run clean && npm run compile",
