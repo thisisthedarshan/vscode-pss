@@ -133,7 +133,7 @@
   "scripts": {
     "update-server": "git submodule update --init --remote",
     "compile-elsbuild": "npm run check-types && node esbuild.js",
-    "compile": "tsc -b && cp -r ./server/dist/* ./dist/ && rm -fr ./server/dist/*",
+    "compile": "tsc -b && cp -r ./server/dist/* ./dist/ && rm -fr ./server/dist/* && cp -r node_modules/vscode-languageserver* dist/",
     "check-types": "tsc --noEmit",
     "clean": "rm -fr ./dist/* && rm -fr ./server/dist/*",
     "rebuild": "npm run update-server && npm run clean && npm run compile",

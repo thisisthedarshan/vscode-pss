@@ -14,14 +14,12 @@ node_modules/
 client/**
 server/**
 themes/**
+dist/
 
 # But not these
 !**/LICENSE
 !node_modules/vscode-jsonrpc/**/*.j*
 !node_modules/vscode-languageclient/**/*.j*
-!node_modules/vscode-languageserver-protocol/**/*.j*
-!node_modules/vscode-languageserver-types/**/*.j*
 !node_modules/{minimatch,brace-expansion,concat-map,balanced-match}/**/*.j*
 !node_modules/{semver,lru-cache,yallist}/**/*.j*
-!node_modules/vscode-languageserver/**
-!node_modules/vscode-languageserver-textdocument/**
+!dist/**/*.js
