@@ -1,8 +1,18 @@
 # Change Log
 
-## Unreleased
+## [1.1.1] - 2025-02-24
 
 ### Changed
+
+- The options for client were updated to provide formatting and workspace details to server
+
+## [1.1.0] - 2025-02-21
+
+### Added
+
+- The LSP from a new project - [pss-langserver](https://github.com/thisisthedarshan/pss-langserver.git). This LSP will now be the backend of the whole extension.
+
+### Updated
 
 - Updated eslint to reflect new server code
 - Removed old server code
