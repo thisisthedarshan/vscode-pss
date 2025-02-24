@@ -53,6 +53,7 @@ export function activate(context: vscode.ExtensionContext) {
 			});
 		})
 	);
+
 	/*********		Server Part		********/
 	// The server is implemented in node
 	const serverModule = context.asAbsolutePath(
@@ -71,15 +72,22 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Options to control the language client
 	const clientOptions: LanguageClientOptions = {
-		// Register the server for plain text documents
+		/* Set workspace capabilities */
+		/* Register the server for pss code files */
 		documentSelector: [{ scheme: 'file', language: 'pss' }],
+		workspaceFolder: vscode.workspace.workspaceFolders?.[0],
 		synchronize: {
-			// Notify the server about file changes to '.psswatcher files contained in the workspace
+			/* Notify the server about file changes to '.psswatcher files contained in the workspace */
 			fileEvents: vscode.workspace.createFileSystemWatcher('**/.psswatcher')
+		},
+		middleware: {
+			provideDocumentFormattingEdits: (document, options, token, next) => {
+				return next(document, options, token);
+			}
 		}
 	};
 
-	// Create the language client and start the client.
+	/* Create the language client and start the client. */
 	client = new LanguageClient(
 		'PSS',
 		'Portable Stimulus Language Server',
