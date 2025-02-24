@@ -131,12 +131,13 @@
     "vscode-languageserver-textdocument": "^1.0.12"
   },
   "scripts": {
+    "update-server": "git submodule update --init --remote",
     "compile-elsbuild": "npm run check-types && node esbuild.js",
     "compile": "tsc -b && cp -r ./server/dist/* ./dist/ && rm -fr ./server/dist/*",
     "check-types": "tsc --noEmit",
     "clean": "rm -fr ./dist/* && rm -fr ./server/dist/*",
-    "rebuild": "npm run clean && npm run compile",
-    "prod": "npm run clean && npm run check-types && npm run compile",
+    "rebuild": "npm run update-server && npm run clean && npm run compile",
+    "prod": "npm run update-server && npm run clean && npm run check-types && npm run compile",
     "vscode:prepublish": "npm run prod",
     "gen-release": "rm -f release-pss-vsc.vsix && vsce package && cp $(ls -t *.vsix | head -n 1) release-pss-vsc.vsix && echo Release created"
   }
