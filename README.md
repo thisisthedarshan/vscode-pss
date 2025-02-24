@@ -1,7 +1,10 @@
 # PSS Support for VS Code
 
 [![VS Code Marketplace](https://vsmarketplacebadges.dev/version/darshan.dsp-vsc-pss.svg
-)](https://marketplace.visualstudio.com/items?itemName=Darshan.dsp-vsc-pss)  [![License](https://img.shields.io/github/license/thisisthedarshan/vscode-pss)](LICENSE)
+)](https://marketplace.visualstudio.com/items?itemName=Darshan.dsp-vsc-pss)
+![Visual Studio Marketplace Downloads](https://img.shields.io/visual-studio-marketplace/d/Darshan.dsp-vsc-pss?label=VS%20Code%20Marketplace%20Downloads)
+[![PSS Langserver](https://img.shields.io/github/v/release/thisisthedarshan/pss-langserver?label=Based%20on%20pss-langserver)](https://github.com/thisisthedarshan/pss-langserver)
+[![License](https://img.shields.io/github/license/thisisthedarshan/vscode-pss)](LICENSE)
 
 Welcome to the **PSS Support for VS Code** extension, your comprehensive toolkit for working with Accellera's Portable Stimulus Standard (PSS) specifications in the VS Code editor. This extension brings the power of modern editor features to PSS development, enabling you to write, format, and explore PSS code effortlessly.
 
