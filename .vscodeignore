@@ -23,5 +23,5 @@ themes/**
 !node_modules/vscode-languageserver-types/**/*.j*
 !node_modules/{minimatch,brace-expansion,concat-map,balanced-match}/**/*.j*
 !node_modules/{semver,lru-cache,yallist}/**/*.j*
-!node_modules/vscode-languageserver/**/*.j*
-!node_modules/vscode-languageserver-textdocument/**/*.j*
+!node_modules/vscode-languageserver/**
+!node_modules/vscode-languageserver-textdocument/**
