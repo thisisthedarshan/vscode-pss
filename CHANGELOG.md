@@ -1,5 +1,19 @@
 # Change Log
 
+## [1.1.7] - 2025-03-03
+
+### Added
+
+### Changed
+
+- The highlighting priority is changed through textmate.
+
+## [1.1.6] - (unreleased)
+
+### Added
+
+- New formatting logic from LSP
+
 ## [1.1.5] - 2025-02-24
 
 ### Changed
