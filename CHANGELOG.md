@@ -1,8 +1,11 @@
 # Change Log
 
-## [1.1.7] - 2025-03-03
+## [1.2.0] - 2025-03-03
 
 ### Added
+
+- Semantic highlighting support through server
+- Goto definitions support
 
 ### Changed
 

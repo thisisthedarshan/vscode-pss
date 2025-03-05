@@ -81,8 +81,40 @@ export function activate(context: vscode.ExtensionContext) {
 			fileEvents: vscode.workspace.createFileSystemWatcher('**/.psswatcher')
 		},
 		middleware: {
+			provideDefinition: (document, position, token, next) => {
+				// Explicitly handle goto definition request
+				return next(document, position, token);
+			},
 			provideDocumentFormattingEdits: (document, options, token, next) => {
 				return next(document, options, token);
+			},
+			// Add semantic tokens handler
+			provideDocumentSemanticTokens: (document, token, next) => {
+				return next(document, token);
+			}
+		},
+		initializationOptions: {
+			capabilities: {
+				textDocument: {
+					definition: {
+						dynamicRegistration: true
+					},
+					semanticTokens: {
+						dynamicRegistration: true,
+						tokenTypes: [
+							"namespace", "type", "class", "enum", "interface", "struct",
+							"typeParameter", "parameter", "variable", "property",
+							"enumMember", "event", "function", "method", "macro",
+							"keyword", "modifier", "comment", "string", "number",
+							"regexp", "operator", "decorator"
+						],
+						tokenModifiers: [
+							"declaration", "definition", "readonly", "static", "deprecated",
+							"abstract", "async", "modification", "documentation", "defaultLibrary"
+						],
+						formats: ['relative']
+					}
+				}
 			}
 		}
 	};
