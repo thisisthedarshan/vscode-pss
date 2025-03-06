@@ -1,5 +1,17 @@
 # Change Log
 
+## [1.2.2] - 2025-03-06
+
+### Fixed
+
+- The goto definition logic was fixed to provide proper goto definitions.
+- The server also requests the client to refresh semantic tokens on document save.
+- Added typecheck to ensure that non-null objects aren't accidentally called
+
+### Changed
+
+- The server now scans for local folder of opened pss file, even if no workspace is provided. This is because PSS files can be dependent on other pss files. This only works once so, in later versions we will have an optimized version.
+
 ## [1.2.0] - 2025-03-03
 
 ### Added
