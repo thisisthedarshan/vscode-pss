@@ -1,5 +1,11 @@
 # Change Log
 
+## Unreleased
+
+### Added
+
+- Added highlighting for custom component names (user defined components with _c in them)
+
 ## [1.2.2] - 2025-03-06
 
 ### Fixed

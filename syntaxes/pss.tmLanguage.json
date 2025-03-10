@@ -189,9 +189,9 @@
       "name": "keyword.operator.comparison.pss"
     },
     {
-      "about": "User-Defined Enums and Typedefs",
+      "about": "User-Defined Components, Enums, Typedefs, Structs, Buffers",
       "name": "entity.name.type.user-defined.pss",
-      "match": "\\b\\w+_e\\b|\\b\\w+_t\\b|\\b\\w+_s\\b|\\b\\w+_b\\b"
+      "match": "\\b\\w+_c\\b|\\b\\w+_e\\b|\\b\\w+_t\\b|\\b\\w+_s\\b|\\b\\w+_b\\b"
     },
     {
       "about": "User-Defined Functions",
