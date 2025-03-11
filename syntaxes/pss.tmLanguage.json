@@ -446,7 +446,7 @@
     {
       "about": "Language Specific Constants",
       "name": "constant.language.pss",
-      "match": "\\b(null|true|false|disable|void|super)\\b"
+      "match": "\\b(null|true|false|READONLY|READWRITE|WRITEONLY|disable|void|super)\\b"
     },
     {
       "about": "Miscellaneous Keywords",
