@@ -100,6 +100,27 @@
           "type": "string",
           "default": "",
           "description": "The author name to be used in automated file headers"
+        },
+        "PSS.formatPatterns": {
+          "scope": "resource",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            ":",
+            "=",
+            "//"
+          ],
+          "description": "Format given patterns in the source files - neatly organizes them in a single line, if split across 2 or more lines.",
+          "markdownDescription": "## Pattern-Based Text Formatter\n\nThis feature formats text by aligning specific patterns within the content. It identifies instances of the given pattern and adjusts the surrounding text so that the patterns are neatly aligned across consecutive lines.\n### Example\n\nGiven the following text (with pattern `=`):\n\n```\n    int a = 10;\n    int test = 69;\n    int unique = 42*10;\n```\n\nAfter formatting, it produces:\n\n```\n    int a      = 10;\n    int test   = 69;\n    int unique = 42*10;\n```"
+        },
+        "PSS.autoFormatHeader": {
+          "scope": "resource",
+          "type": "boolean",
+          "default": false,
+          "description": "Auto-format pss file headers and add if it doesn't exist.",
+          "markdownDescription": "### Doxygen Header Generation\n\nWhen enabled, this tool automatically generates a Doxygen header for the specified file.The generated header includes:\n\n- **@file**: Specifies the file name.\n- **@author**: Specifies the author of the file (from settings).\n- **@brief**: Provides a placeholder for a brief description(initially empty).\n- **@date**: Records the file's creation date.\n- **Last Modified on**: Updates with the last modified date each time the file is modified.\n\n---\nThis header is either added to new files or updated on subsequent file modifications, ensuring that the file's metadata remains current."
         }
       }
     },

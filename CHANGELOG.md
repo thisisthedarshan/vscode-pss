@@ -5,6 +5,7 @@
 ### Added
 
 - Added highlighting for custom component names (user defined components with _c in them)
+- Added settings option to let user select what symbols to order with.
 
 ## [1.2.2] - 2025-03-06
 
