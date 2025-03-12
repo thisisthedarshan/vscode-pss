@@ -153,7 +153,7 @@
     "vscode-languageserver-textdocument": "^1.0.12"
   },
   "scripts": {
-    "update-server": "git submodule init && git submodule update --remote && cd ./server && git pull && cd ..",
+    "update-server": "git submodule init && git submodule update --remote && cd ./server && git pull && make grammar && cd ..",
     "compile-esbuild": "npm run check-types && node esbuild.js",
     "compile": "tsc -b && cp -r ./server/dist/* ./dist/ && rm -fr ./server/dist/* ",
     "check-types": "tsc --noEmit",
