@@ -99,17 +99,31 @@
       "`"
     ]
   ],
-  "wordPattern": "(-?\\d*\\.\\d\\w*)|([^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\'\\\"\\,\\.\\<\\>\\/\\?\\s]+)",
+  "wordPattern": "(-?\\d*\\.\\d\\w*)|([^\\`\\~\\!\\@\\#\\%\\^\\&\\*\\(\\)\\-\\=\\+\\[\\{\\]\\}\\\\\\|\\;\\:\\'\\\"\\,\\.\\<\\>\\/\\?\\s]+)|(\\.\\w+)",
   "indentationRules": {
-    "increaseIndentPattern": "^((?!\\/\\/).)*(\\{[^}\"'`]*|\\([^)\"'`]*|\\[[^\\]\"'`]*)$",
+    "increaseIndentPattern": "^((?!\\/\\/|.*?\\/\\*.*\\*\\/\\s*$).)*(\\{[^}\"'`]*|\\([^)\"'`]*|\\[[^\\]\"'`]*)$",
     "decreaseIndentPattern": "^((?!.*?\\/\\*).*\\*/)?\\s*[\\)\\}\\]].*$"
   },
   "onEnterRules": [
     {
       "beforeText": "^\\s*/\\*\\*.*$",
+      "afterText": "\\s*\\*/$",
+      "action": {
+        "indent": "none"
+      }
+    },
+    {
+      "beforeText": "^\\s*/\\*\\*.*$",
       "action": {
         "indent": "indentOutdent",
         "appendText": " * "
+      }
+    },
+    {
+      "beforeText": "^\\s*\\* .*$",
+      "afterText": "\\s*\\*/$",
+      "action": {
+        "indent": "none"
       }
     },
     {
@@ -121,10 +135,17 @@
     },
     {
       "beforeText": "^\\s*/\\*.*$",
+      "afterText": "\\s*\\*/$",
+      "action": {
+        "indent": "none"
+      }
+    },
+    {
+      "beforeText": "^\\s*/\\*.*$",
       "action": {
         "indent": "indentOutdent",
         "appendText": " * "
       }
     }
-  ]
+  ],
 }

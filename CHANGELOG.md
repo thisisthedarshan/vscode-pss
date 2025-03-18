@@ -8,6 +8,11 @@
 - Added settings option to let user select what symbols to order with.
 - Added highlighting for register access constants and struct endianness constant keywords
 
+### Fixed
+
+- Updated language config to not add additional asterisk when pressing enter on multiline comment.
+- Updated word-patterns and indentation rules for better handling
+
 ## [1.2.2] - 2025-03-06
 
 ### Fixed
