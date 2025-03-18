@@ -8,14 +8,14 @@
 - Added settings option to let user select what symbols to order with.
 - Added highlighting for register access constants and struct endianness constant keywords
 - Added highlighting for custom action names (user defined actions with _a in them)
+- **Finally** Added server to git repo - was missing from previous releases 😅
 
 ### Fixed
 
 - Updated language config to not add additional asterisk when pressing enter on multiline comment.
 - Updated word-patterns and indentation rules for better handling
 - Fixed non-highlighting of functions with keywords like do.
-- Updated scope for user-defined component, action, enum, typedef, structs, buffers types.
-- Updated default alignment patterns to skip colons.
+- Updated scope for user-defined component, action, enum, typedef, structs, buffers types
 
 ## [1.2.2] - 2025-03-06
 
