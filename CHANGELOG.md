@@ -12,6 +12,7 @@
 
 - Updated language config to not add additional asterisk when pressing enter on multiline comment.
 - Updated word-patterns and indentation rules for better handling
+- Fixed non-highlighting of functions with keywords like do.
 
 ## [1.2.2] - 2025-03-06
 

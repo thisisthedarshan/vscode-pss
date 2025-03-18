@@ -196,7 +196,7 @@
     {
       "about": "User-Defined Functions",
       "name": "meta.function.user-defined.pss",
-      "match": "\\b(?!if|while|foreach|for|switch|return|do|else|case|match|default\\b)(\\w+)(\\s*\\()(([^)]*))(\\))",
+      "match": "\\b(?!if\\b|while\\b|foreach\\b|for\\b|switch\\b|return\\b|do\\b|else\\b|case\\b|match\\b|default\\b)(\\w+)(\\s*\\()(([^)]*))(\\))",
       "captures": {
         "1": {
           "name": "entity.name.function.user-defined.pss"
