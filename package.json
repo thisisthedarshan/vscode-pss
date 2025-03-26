@@ -68,6 +68,13 @@
           "meta.embedded.block.c": "c",
           "meta.embedded.block.sv": "systemverilog"
         }
+      },
+      {
+        "scopeName": "markdown.pss.codeblock",
+        "path": "syntaxes/pss.markdownHighlighting.json",
+        "injectTo": [
+          "text.html.markdown"
+        ]
       }
     ],
     "commands": [

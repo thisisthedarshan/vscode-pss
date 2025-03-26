@@ -9,6 +9,7 @@
 - Added highlighting for register access constants and struct endianness constant keywords
 - Added highlighting for custom action names (user defined actions with _a in them)
 - **Finally** Added server to git repo - was missing from previous releases 😅
+- Added markdown highlighting for PSS code in markdown!
 
 ### Fixed
 
