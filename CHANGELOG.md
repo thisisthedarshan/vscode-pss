@@ -10,6 +10,8 @@
 - Added highlighting for custom action names (user defined actions with _a in them)
 - **Finally** Added server to git repo - was missing from previous releases 😅
 - Added markdown highlighting for PSS code in markdown!
+- The parser structure is changed from the server with more enhancements such as hierarchial ast building, capturing of user-defined data types, assignments, etc.
+- Added hover provider to the server
 
 ### Fixed
 
@@ -17,6 +19,7 @@
 - Updated word-patterns and indentation rules for better handling
 - Fixed non-highlighting of functions with keywords like do.
 - Updated scope for user-defined component, action, enum, typedef, structs, buffers types
+- Updated the keywords and their descriptions to add more info and missing data.
 
 ## [1.2.2] - 2025-03-06
 
