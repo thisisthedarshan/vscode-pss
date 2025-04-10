@@ -83,6 +83,8 @@ This is a work-in-progress project and my first extension! I welcome feedback, s
 
 This extension is released under the [MIT License](LICENSE).
 
+The [Server](server/) is released under the [GPL-3.0 License](LICENSE-SERVER).
+
 ---
 
 ### Thank You for Using PSS Support for VS Code! 🎉
