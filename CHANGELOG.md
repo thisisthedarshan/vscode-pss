@@ -1,5 +1,11 @@
 # Change Log
 
+## [1.3.1] - 2025-04-10
+
+### Fixed
+
+- Dependency issue for a new server library
+
 ## [1.3.0] - 2025-04-09
 
 ### Added

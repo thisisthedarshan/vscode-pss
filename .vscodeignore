@@ -29,3 +29,4 @@ antlr.jar
 !node_modules/universalify/**/*.*j*
 !node_modules/graceful-fs/**/*.j*
 !node_modules/jsonfile/**/*.*j*
+!node_modules/lodash*/**/*.*j*
