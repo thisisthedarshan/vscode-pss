@@ -11,6 +11,7 @@ import {
 } from 'vscode-languageclient/node';
 
 import { getCreationDate, formatFileHeader } from './providers/formattingProvider';
+import { DoxygenGenerationRequest, RequestDoxygenGeneration } from './types';
 
 let client: LanguageClient;
 
@@ -51,6 +52,38 @@ export function activate(context: vscode.ExtensionContext) {
 			editor.edit((editBuilder) => {
 				editBuilder.replace(fullRange, updatedContent);
 			});
+		})
+	);
+
+	/* Command to get doxygen comments from server on user's request */
+	context.subscriptions.push(
+		vscode.commands.registerCommand('pss.generateDoxygenComment', async () => {
+			const editor = vscode.window.activeTextEditor;
+			if (!editor) { return; }
+
+			/* Get info on current position, line and fileURI */
+			const position = editor.selection.active;
+			const line = editor.document.lineAt(position.line);
+			const fileURI = editor.document.uri.toString();
+
+			/* Create params */
+			const request: DoxygenGenerationRequest = {
+				line: line.text,
+				lineNumber: position.line + 1,
+				fileURI: fileURI
+			};
+
+			/* Send a request to server */
+			const response = await client.sendRequest(RequestDoxygenGeneration, request);
+
+			/* Once we have our response, add it to the window, only when it has a valid keyword */
+			if (response.keyword.length > 0 && response.keyword !== 'unknown') {
+				await editor.edit(editBuilder => {
+					const insertPos = new vscode.Position(position.line + 1, 0);
+					editBuilder.insert(insertPos, response.content + '\n');
+				});
+				vscode.window.showInformationMessage(`Added doxygen comment for ${response.keyword}`);
+			}
 		})
 	);
 

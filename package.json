@@ -81,6 +81,10 @@
       {
         "command": "pss.addFileHeader",
         "title": "Add/Update File Header"
+      },
+      {
+        "command": "pss.generateDoxygenComment",
+        "title": "Generate Doxygen comments for a keyword on current line"
       }
     ],
     "keybindings": [
@@ -88,6 +92,12 @@
         "command": "pss.addFileHeader",
         "key": "ctrl+shift+h",
         "mac": "cmd+shift+h",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "pss.generateDoxygenComment",
+        "key": "ctrl+shift+c",
+        "mac": "cmd+shift+c",
         "when": "editorTextFocus"
       }
     ],
