@@ -55,7 +55,6 @@ export function activate(context: vscode.ExtensionContext) {
 		})
 	);
 
-	/* Command to get doxygen comments from server on user's request */
 	context.subscriptions.push(
 		vscode.commands.registerCommand('pss.generateDoxygenComment', async () => {
 			const editor = vscode.window.activeTextEditor;
@@ -78,11 +77,14 @@ export function activate(context: vscode.ExtensionContext) {
 
 			/* Once we have our response, add it to the window, only when it has a valid keyword */
 			if (response.keyword.length > 0 && response.keyword !== 'unknown') {
+				/* Get indentation from the current line */
+				const indentation = line.text.match(/^\s*/)[0];
+
 				await editor.edit(editBuilder => {
-					const insertPos = new vscode.Position(position.line + 1, 0);
-					editBuilder.insert(insertPos, response.content + '\n');
+					const insertPos = new vscode.Position(position.line, 0);
+					editBuilder.insert(insertPos, indentation + response.content + '\n');
 				});
-				vscode.window.showInformationMessage(`Added doxygen comment for ${response.keyword}`);
+				/* vscode.window.showInformationMessage(`Added doxygen comment for ${response.keyword}`); */
 			}
 		})
 	);
