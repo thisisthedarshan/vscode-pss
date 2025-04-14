@@ -107,31 +107,38 @@ export function activate(context: vscode.ExtensionContext) {
 
 	// Options to control the language client
 	const clientOptions: LanguageClientOptions = {
-		/* Set workspace capabilities */
-		/* Register the server for pss code files */
 		documentSelector: [{ scheme: 'file', language: 'pss' }],
 		workspaceFolder: vscode.workspace.workspaceFolders?.[0],
 		synchronize: {
-			/* Notify the server about file changes to '.psswatcher files contained in the workspace */
 			fileEvents: vscode.workspace.createFileSystemWatcher('**/.psswatcher')
 		},
 		middleware: {
 			provideDefinition: (document, position, token, next) => {
-				// Explicitly handle goto definition request
 				return next(document, position, token);
 			},
 			provideDocumentFormattingEdits: (document, options, token, next) => {
 				return next(document, options, token);
 			},
-			// Add semantic tokens handler
 			provideDocumentSemanticTokens: (document, token, next) => {
 				return next(document, token);
+			},
+			provideReferences: (document, position, context, token, next) => {
+				return next(document, position, context, token);
+			},
+			provideDeclaration: (document, position, token, next) => {
+				return next(document, position, token);
 			}
 		},
 		initializationOptions: {
 			capabilities: {
 				textDocument: {
 					definition: {
+						dynamicRegistration: true
+					},
+					references: {
+						dynamicRegistration: true
+					},
+					declaration: {
 						dynamicRegistration: true
 					},
 					semanticTokens: {
