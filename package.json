@@ -140,13 +140,14 @@
         },
         "PSS.wrapAt": {
           "scope": "resource",
-          "type": "number",
-          "default": 0,
-          "description": "Wrap code at this character limit - 0 meaning no wrap. Expects width to be at least 69 characters if wrapping is enabled.",
+          "type": [
+            null,
+            "number"
+          ],
+          "default": null,
+          "description": "Wrap code at this character limit - 0/null meaning no wrap. Expects width to be at least 69 characters if wrapping is enabled.",
           "markdownDescription": "Controls the maximum number of characters per line before wrapping code. Set to `0` to disable wrapping. If enabled, the value must be at least 69 characters to ensure readable formatting.\n\n**Example**:\n- **Setting**: `80`\n- **Before**:\n  ```typescript\n  let veryLongVariableName = someVeryLongFunctionCall(withMultipleParameters, toDemonstrate, wrappingBehavior);\n  ```\n- **After**:\n  ```typescript\n  let veryLongVariableName = someVeryLongFunctionCall(withMultipleParameters,\n      toDemonstrate, wrappingBehavior);\n  ```\nWrapped lines are indented twice the normal level for clarity.",
-          "minimum": 0,
-          "exclusiveMinimum": 0,
-          "minimumExclusiveMinimum": 69
+          "minimum": null
         }
       }
     },
