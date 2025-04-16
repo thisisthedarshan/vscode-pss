@@ -106,45 +106,51 @@
   },
   "onEnterRules": [
     {
-      "beforeText": "^\\s*/\\*\\*.*$",
-      "afterText": "\\s*\\*/$",
-      "action": {
-        "indent": "none"
-      }
-    },
-    {
-      "beforeText": "^\\s*/\\*\\*.*$",
+      "beforeText": "^\\s*/\\*\\*(?!.*\\*/$).*",
       "action": {
         "indent": "indentOutdent",
         "appendText": " * "
       }
     },
     {
-      "beforeText": "^\\s*\\* .*$",
+      "beforeText": "^\\s*/\\*\\*.*$",
       "afterText": "\\s*\\*/$",
       "action": {
-        "indent": "none"
+        "indent": "outdent"
       }
     },
     {
-      "beforeText": "^\\s*\\* .*$",
+      "beforeText": "^\\s*\\* (?!.*\\*/$).*",
       "action": {
         "indent": "none",
         "appendText": "* "
       }
     },
     {
-      "beforeText": "^\\s*/\\*.*$",
+      "beforeText": "^\\s*\\* .*$",
       "afterText": "\\s*\\*/$",
       "action": {
-        "indent": "none"
+        "indent": "outdent"
+      }
+    },
+    {
+      "beforeText": "^\\s*/\\*(?!.*\\*/$).*",
+      "action": {
+        "indent": "indentOutdent",
+        "appendText": " * "
       }
     },
     {
       "beforeText": "^\\s*/\\*.*$",
+      "afterText": "\\s*\\*/$",
       "action": {
-        "indent": "indentOutdent",
-        "appendText": " * "
+        "indent": "outdent"
+      }
+    },
+    {
+      "beforeText": "^\\s*\"\"\".*$",
+      "action": {
+        "indent": "none"
       }
     }
   ],
