@@ -83,6 +83,8 @@ This is a work-in-progress project and my first extension! I welcome feedback, s
 
 This extension is released under the [MIT License](LICENSE).
 
+The [Formatting Providers](./client/providers/) are a part of the [PSS Langserver](https://github.com/thisisthedarshan/pss-langserver) project, released under the same license as the server.
+
 The [Server](server/) is released under the [GPL-3.0 License](LICENSE-SERVER).
 
 ---

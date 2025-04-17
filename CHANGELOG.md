@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+
+- A new Header formatter for the client
+
 ### Fixed
 
 - Updated the language configuration to properly handle adding of the asterisk when using multiline comments.

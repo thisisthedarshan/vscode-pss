@@ -10,8 +10,9 @@ import {
 	TransportKind
 } from 'vscode-languageclient/node';
 
-import { getCreationDate, formatFileHeader } from './providers/formattingProvider';
 import { DoxygenGenerationRequest, RequestDoxygenGeneration } from './types';
+import { statSync } from 'fs-extra';
+import { formatFileHeader, formatDate } from './providers/headerFormatter';
 
 let client: LanguageClient;
 
@@ -36,16 +37,20 @@ export function activate(context: vscode.ExtensionContext) {
 			// Fetch file metadata
 			let creationDate: string;
 			try {
-				const creationDateObj = await getCreationDate(document.fileName);
-				creationDate = creationDateObj.toISOString().split('T')[0]; // Format as YYYY-MM-DD
+				const stats = statSync(document.fileName);
+				creationDate = formatDate(stats.birthtime || stats.mtime); // Fallback to mtime if birthtime is unavailable
 			} catch (error) {
-				creationDate = new Date().toISOString().split('T')[0]; // Fallback to current date
+				creationDate = formatDate(new Date()); // Fallback to current date
 			}
 
-			const lastModifiedDate = new Date().toISOString().split('T')[0];
+			const lastModifiedDate = formatDate(new Date());
+
+			/* Fetch Author info */
+			const config = vscode.workspace.getConfiguration('PSS');
+			const authorName = config.get<string>('author');
 
 			// Format the content with the updated header
-			const updatedContent = formatFileHeader(content, fileName, creationDate, lastModifiedDate);
+			const updatedContent = formatFileHeader(content, fileName, creationDate, lastModifiedDate, authorName);
 
 			// Replace the content of the file
 			const fullRange = new vscode.Range(document.positionAt(0), document.positionAt(content.length));
