@@ -1,3 +1,5 @@
+// Copyright (c) 2024-25 Darshan(@thisisthedarshan)
+// Licensed under the MIT License. See LICENSE file for details.
 {
   "comments": {
     "lineComment": "//",
@@ -106,21 +108,21 @@
   },
   "onEnterRules": [
     {
-      "beforeText": "^\\s*/\\*\\*(?!.*\\*/$).*",
+      "beforeText": "^\\s*/\\*\\*$",
       "action": {
         "indent": "indentOutdent",
         "appendText": " * "
       }
     },
     {
-      "beforeText": "^\\s*/\\*\\*.*$",
-      "afterText": "\\s*\\*/$",
+      "beforeText": "^\\s*/\\*\\*(?!.*\\*/).*$",
       "action": {
-        "indent": "outdent"
+        "indent": "indentOutdent",
+        "appendText": " * "
       }
     },
     {
-      "beforeText": "^\\s*\\* (?!.*\\*/$).*",
+      "beforeText": "^\\s*\\* (?!.*\\*/).*$",
       "action": {
         "indent": "none",
         "appendText": "* "
@@ -128,23 +130,23 @@
     },
     {
       "beforeText": "^\\s*\\* .*$",
-      "afterText": "\\s*\\*/$",
+      "afterText": "^\\s*\\*/$",
       "action": {
         "indent": "outdent"
       }
     },
     {
-      "beforeText": "^\\s*/\\*(?!.*\\*/$).*",
+      "beforeText": "^\\s*/\\*$",
       "action": {
         "indent": "indentOutdent",
         "appendText": " * "
       }
     },
     {
-      "beforeText": "^\\s*/\\*.*$",
-      "afterText": "\\s*\\*/$",
+      "beforeText": "^\\s*/\\*(?!.*\\*/).*$",
       "action": {
-        "indent": "outdent"
+        "indent": "indentOutdent",
+        "appendText": " * "
       }
     },
     {
@@ -153,5 +155,5 @@
         "indent": "none"
       }
     }
-  ],
+  ]
 }
