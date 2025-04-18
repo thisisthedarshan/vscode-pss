@@ -108,35 +108,7 @@
   },
   "onEnterRules": [
     {
-      "beforeText": "^\\s*/\\*\\*$",
-      "action": {
-        "indent": "indentOutdent",
-        "appendText": " * "
-      }
-    },
-    {
       "beforeText": "^\\s*/\\*\\*(?!.*\\*/).*$",
-      "action": {
-        "indent": "indentOutdent",
-        "appendText": " * "
-      }
-    },
-    {
-      "beforeText": "^\\s*\\* (?!.*\\*/).*$",
-      "action": {
-        "indent": "none",
-        "appendText": "* "
-      }
-    },
-    {
-      "beforeText": "^\\s*\\* .*$",
-      "afterText": "^\\s*\\*/$",
-      "action": {
-        "indent": "outdent"
-      }
-    },
-    {
-      "beforeText": "^\\s*/\\*$",
       "action": {
         "indent": "indentOutdent",
         "appendText": " * "
@@ -147,6 +119,13 @@
       "action": {
         "indent": "indentOutdent",
         "appendText": " * "
+      }
+    },
+    {
+      "beforeText": "^\\s*\\* (?!.*\\*/).*$",
+      "action": {
+        "indent": "none",
+        "appendText": "* "
       }
     },
     {
