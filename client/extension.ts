@@ -107,6 +107,7 @@ export function activate(context: vscode.ExtensionContext) {
 		debug: {
 			module: serverModule,
 			transport: TransportKind.stdio,
+			args: ['--inspect=6009']
 		}
 	};
 
