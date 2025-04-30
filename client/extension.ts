@@ -100,6 +100,9 @@ export function activate(context: vscode.ExtensionContext) {
 		path.join('dist', 'pss-langserver.js')
 	);
 
+	/* Debug options */
+	const debugOptions = { execArgv: ['--nolazy', '--inspect=6969'] };
+
 	// If the extension is launched in debug mode then the debug server options are used
 	// Otherwise the run options are used
 	const serverOptions: ServerOptions = {
@@ -107,7 +110,7 @@ export function activate(context: vscode.ExtensionContext) {
 		debug: {
 			module: serverModule,
 			transport: TransportKind.stdio,
-			args: ['--inspect=6009']
+			options: debugOptions
 		}
 	};
 
