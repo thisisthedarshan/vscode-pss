@@ -101,7 +101,7 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 
 	/* Debug options */
-	const debugOptions = { execArgv: ['--nolazy', '--inspect=6969'] };
+	const debugOptions = { execArgv: ['--inspect=6969'] };
 
 	// If the extension is launched in debug mode then the debug server options are used
 	// Otherwise the run options are used
