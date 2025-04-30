@@ -101,12 +101,18 @@ export function activate(context: vscode.ExtensionContext) {
 	);
 
 	/* Debug options */
-	const debugOptions = { execArgv: ['--inspect=6969'] };
+	const debugOptions = { execArgv: ['--inspect=6969', '--max-old-space-size=4096'] };
 
 	// If the extension is launched in debug mode then the debug server options are used
 	// Otherwise the run options are used
 	const serverOptions: ServerOptions = {
-		run: { module: serverModule, transport: TransportKind.stdio },
+		run: {
+			module: serverModule,
+			transport: TransportKind.stdio,
+			options: {
+				execArgv: ['--max-old-space-size=4096']
+			}
+		},
 		debug: {
 			module: serverModule,
 			transport: TransportKind.stdio,
